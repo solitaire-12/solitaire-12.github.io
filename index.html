@@ -69,14 +69,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Hexo-图片相关" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-Server/内网穿透" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/03/18/Hexo-%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3/" class="article-date">
-  <time class="dt-published" datetime="2024-03-18T07:14:55.000Z" itemprop="datePublished">2024-03-18</time>
+    <a href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T09:05:07.000Z" itemprop="datePublished">2024-03-18</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
   </div>
 
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/03/18/Hexo-%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3/">Hexo|图片相关</a>
+      <a class="p-name article-title" href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
     </h1>
   
 
@@ -95,65 +95,57 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="1-相对路径挂载图片【文章显示】">1.相对路径挂载图片【文章显示】</h2>
+        <h2 id="环境：">环境：</h2>
 <ul>
-<li>
-<p>在 <code>_config.yml</code>文件中配置 <code>post_asset_folder</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure>
-<p>💬配置之后，当执行 <code>hexo new titleName</code>之后，会在该<code>titleName.md</code>文件夹的同级目录下生成一个同名文件夹用来存放图片资源。</p>
-<p><img src="/2024/03/18/Hexo-%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3/post_asset_folder_true.png" alt></p>
-</li>
-<li>
-<p><code>.md</code>文件中使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](photoName.jpg)</span><br></pre></td></tr></table></figure>
-<p>💬<code>hexo-renderer-marked</code>默认渲染引擎，通过<code>hexo g</code>之后，会将该图片路径渲染成绝对路径。<strong>在文章列表中，无法加载图片</strong>。</p>
-</li>
+<li>服务端阿里云： CentOS 8.5.2111</li>
+<li>客户端：windows 11 / windows 10</li>
+<li>frp 0.42</li>
 </ul>
-<h2 id="2-绝对路径挂载图片【主页显示】">2.绝对路径挂载图片【主页显示】</h2>
-<ul>
-<li>
-<p>在<code>source</code>文件夹下，创建一个<code>img</code>文件夹用来存放图片</p>
-</li>
-<li>
-<p><code>.md</code>文件中使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](/img/photoName.jpg)</span><br></pre></td></tr></table></figure>
-<p>💬<code>/img</code>代表根目录下的<code>img</code>文件夹，其中 <code>/</code>指代根目录【public文件夹】</p>
-</li>
-</ul>
-<h2 id="3-同时显示">3.同时显示</h2>
+<h2 id="第一步">第一步</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">官网下载frp软件</a></li>
+<li>笔者使用的版本：链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1cjmUiOY8iRIywx6whkhRdg">https://pan.baidu.com/s/1cjmUiOY8iRIywx6whkhRdg</a> 提取码：gatr</li>
+</ol>
+<h2 id="第二步">第二步</h2>
+<p><strong>服务端：</strong></p>
 <ol>
 <li>
-<p>安装 <code>hexo-asset-image</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+<p>将 <code>frp_0.42.0_linux_amd64.tar.gz</code>压缩包传给linux</p>
 </li>
 <li>
-<p>安装之后，发现图片路径都不显示了，<code>F12</code>查看图片路径变成了<code>/.io//xxx.xx</code>。</p>
-</li>
-<li>
-<p>修复上述bug。进入到<code>node_modules</code>找到<code>hexo-asset-image</code>插件，用下述代码替换掉<code>index.js</code>原有代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">&quot;cheerio&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getPosition</span>(<span class="params">str, m, i</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> str.<span class="title function_">split</span>(m, i).<span class="title function_">join</span>(m).<span class="property">length</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> version = <span class="title class_">String</span>(hexo.<span class="property">version</span>).<span class="title function_">split</span>(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">filter</span>.<span class="title function_">register</span>(<span class="string">&quot;after_post_render&quot;</span>, <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> config = hexo.<span class="property">config</span>;</span><br><span class="line">  <span class="keyword">if</span> (config.<span class="property">post_asset_folder</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> link = data.<span class="property">permalink</span>;</span><br><span class="line">    <span class="keyword">if</span> (version.<span class="property">length</span> &gt; <span class="number">0</span> &amp;&amp; <span class="title class_">Number</span>(version[<span class="number">0</span>]) == <span class="number">3</span>)</span><br><span class="line">      <span class="keyword">var</span> beginPos = <span class="title function_">getPosition</span>(link, <span class="string">&quot;/&quot;</span>, <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">var</span> beginPos = <span class="title function_">getPosition</span>(link, <span class="string">&quot;/&quot;</span>, <span class="number">3</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;.../about/index.html&quot;.</span></span><br><span class="line">    <span class="keyword">var</span> endPos = link.<span class="title function_">lastIndexOf</span>(<span class="string">&quot;/&quot;</span>) + <span class="number">1</span>;</span><br><span class="line">    link = link.<span class="title function_">substring</span>(beginPos, endPos);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> toprocess = [<span class="string">&quot;excerpt&quot;</span>, <span class="string">&quot;more&quot;</span>, <span class="string">&quot;content&quot;</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; toprocess.<span class="property">length</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> key = toprocess[i];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> $ = cheerio.<span class="title function_">load</span>(data[key], &#123;</span><br><span class="line">        <span class="attr">ignoreWhitespace</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">xmlMode</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">lowerCaseTags</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">decodeEntities</span>: <span class="literal">false</span>,</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      $(<span class="string">&quot;img&quot;</span>).<span class="title function_">each</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ($(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;src&quot;</span>)) &#123;</span><br><span class="line">          <span class="comment">// For windows style path, we replace &#x27;\&#x27; to &#x27;/&#x27;.</span></span><br><span class="line">          <span class="keyword">var</span> src = $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;src&quot;</span>).<span class="title function_">replace</span>(<span class="string">&quot;\\&quot;</span>, <span class="string">&quot;/&quot;</span>);</span><br><span class="line">          <span class="keyword">if</span> (!<span class="regexp">/http[s]*.*|\/\/.*/</span>.<span class="title function_">test</span>(src) &amp;&amp; !<span class="regexp">/^\s*\//</span>.<span class="title function_">test</span>(src)) &#123;</span><br><span class="line">            <span class="comment">// For &quot;about&quot; page, the first part of &quot;src&quot; can&#x27;t be removed.</span></span><br><span class="line">            <span class="comment">// In addition, to support multi-level local directory.</span></span><br><span class="line">            <span class="keyword">var</span> linkArray = link.<span class="title function_">split</span>(<span class="string">&quot;/&quot;</span>).<span class="title function_">filter</span>(<span class="keyword">function</span> (<span class="params">elem</span>) &#123;</span><br><span class="line">              <span class="keyword">return</span> elem != <span class="string">&quot;&quot;</span>;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="keyword">var</span> srcArray = src.<span class="title function_">split</span>(<span class="string">&quot;/&quot;</span>).<span class="title function_">filter</span>(<span class="keyword">function</span> (<span class="params">elem</span>) &#123;</span><br><span class="line">              <span class="keyword">return</span> elem != <span class="string">&quot;&quot;</span> &amp;&amp; elem != <span class="string">&quot;.&quot;</span>;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="keyword">if</span> (srcArray.<span class="property">length</span> &gt; <span class="number">1</span>) srcArray.<span class="title function_">shift</span>();</span><br><span class="line">            src = srcArray.<span class="title function_">join</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">            $(<span class="variable language_">this</span>).<span class="title function_">attr</span>(<span class="string">&quot;src&quot;</span>, config.<span class="property">root</span> + link + src);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="property">info</span> &amp;&amp;</span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;update link as:--&gt;&quot;</span> + config.<span class="property">root</span> + link + src);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="property">info</span> &amp;&amp; <span class="variable language_">console</span>.<span class="title function_">info</span>(<span class="string">&quot;no src attr, skipped...&quot;</span>);</span><br><span class="line">          <span class="variable language_">console</span>.<span class="property">info</span> &amp;&amp; <span class="variable language_">console</span>.<span class="title function_">info</span>($(<span class="variable language_">this</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      data[key] = $.<span class="title function_">html</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>替换之后，重新<code>hexo g</code>即可。</p>
+<p>进入到文件存放目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf frp_0.42.0_linux_amd64.tar.gz</span><br><span class="line">cd frp_0.42.0_linux_amd64/</span><br><span class="line">vi frps.ini</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/frps.ini%E6%96%87%E4%BB%B6.png" alt="frps.ini文件"></p>
+<p>💬<strong>提醒</strong>：只要<code>bind_port</code>的7000端口没被占用，一般不建议修改。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./frps <span class="literal">-c</span> frps.ini <span class="comment">#临时启动</span></span><br><span class="line">nohup ./frps <span class="literal">-c</span> frps.ini &amp; <span class="comment">#永久启动</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="4-支持emoji">4.支持emoji</h2>
-<p><code>hexo-renderer-marked</code>默认渲染引擎并不支持<code>emoji</code>，却换到可以支持的渲染引擎。笔者使用的是 <code>hexo-renderer-markdown-it</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm i hexo-renderer-markdown-it --save</span><br></pre></td></tr></table></figure>
-<p>在 <code>_config.yml</code>文件中配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"># hexo-renderer-markdown-it</span><br><span class="line">markdown:</span><br><span class="line">  preset: &quot;default&quot;</span><br><span class="line">  render:</span><br><span class="line">    html: true</span><br><span class="line">    xhtmlOut: false</span><br><span class="line">    langPrefix: &quot;language-&quot;</span><br><span class="line">    breaks: true</span><br><span class="line">    linkify: true</span><br><span class="line">    typographer: true</span><br><span class="line">    quotes: &quot;“”‘’&quot;</span><br><span class="line">  enable_rules:</span><br><span class="line">  disable_rules:</span><br><span class="line">  plugins:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-cjk-breaks</span><br><span class="line">    - markdown-it-deflist</span><br><span class="line">    - markdown-it-emoji</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-mark</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">    # - markdown-it-checkbox</span><br><span class="line">    # - markdown-it-imsize</span><br><span class="line">    # - markdown-it-expandable</span><br><span class="line">    - name: markdown-it-container</span><br><span class="line">      options: success</span><br><span class="line">    - name: markdown-it-container</span><br><span class="line">      options: tips</span><br><span class="line">    - name: markdown-it-container</span><br><span class="line">      options: warning</span><br><span class="line">    - name: markdown-it-container</span><br><span class="line">      options: danger</span><br><span class="line">  anchors:</span><br><span class="line">    level: 2</span><br><span class="line">    collisionSuffix: &quot;&quot;</span><br><span class="line">    permalink: false</span><br><span class="line">    permalinkClass: &quot;header-anchor&quot;</span><br><span class="line">    permalinkSide: &quot;left&quot;</span><br><span class="line">    permalinkSymbol: &quot;¶&quot;</span><br><span class="line">    case: 0</span><br><span class="line">    separator: &quot;-&quot;</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Aelous_dp/article/details/107643344">Hexo图片相关 - 文章显示、主页显示、修改fancybox_hexo 文章缩略-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42951560/article/details/123596899">【Hexo】选择更高级的Markdown渲染器_hexo-renderer-marked-CSDN博客</a></p>
+<p><strong>客户端：</strong></p>
+<ol>
+<li>
+<p>解压 <code>frp_0.42.0_windows_amd64.zip</code> ，注意关闭一下杀毒软件。</p>
+</li>
+<li>
+<p>打开之后，修改<code>frpc.ini</code>文件。</p>
+<p><img src="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/frpc.ini%E6%96%87%E4%BB%B6.png" alt="frpc.ini文件"></p>
+<p>💬<strong>解释</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ssh]定义一个使用 [type] 协议的url: [local_ip]:[local_port]被[server_addr]:[remote_port]代理了。</span><br><span class="line">即：用户访问 [server_addr]:[remote_port] 后，服务器&quot;跳转&quot;到 [local_ip]:[local_port]</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入cmd</span></span><br><span class="line">frpc.exe -c frpc.ini</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>⚠️<strong>注意</strong>：假如你将<code>frpc.ini</code>中的<code>remote_port</code>和<code>frps.ini</code>中的<code>dashboard_port</code>配置成一样的话，启动客户端的时候，就会出现 <code>[ssh] start error: port unavailable</code>。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://solitaire-12.github.io/2024/03/18/Hexo-%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3/" data-id="cltwnnvcj00010kfm962c0xbd" data-title="Hexo|图片相关" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" data-id="cltwq98zf000wugfmg3u5cs5i" data-title="内网穿透" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
 
     </footer>
   </div>
@@ -163,14 +155,14 @@
 
 
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-Server/项目上线" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/03/14/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-03-14T05:00:15.235Z" itemprop="datePublished">2024-03-14</time>
+    <a href="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:25:07.000Z" itemprop="datePublished">2024-03-18</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%88%9D%E5%A7%8B/">初始</a>
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
   </div>
 
   </div>
@@ -181,7 +173,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/03/14/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/">linux|项目部署</a>
     </h1>
   
 
@@ -189,28 +181,703 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h3 id="环境">环境</h3>
+<p>系统：Centos 8.4.2105</p>
+<p>docker : 24.0.5</p>
+<p>nginx: nginx/1.25.1</p>
+<h3 id="后端">后端</h3>
+<h4 id="宿主机安装">宿主机安装</h4>
+<ol>
+<li>后端达成jar包上传到服务器</li>
+<li><code>ps -ef | grep java</code>查看有没有在运行的java项目，要是端口冲突的话，直接<code>kill</code></li>
+<li><code>java -jar</code>没有问题之后，<code>nohup java -jar x.jar &gt; x.log 2&gt;&amp;1 &amp; </code>就可以。</li>
+</ol>
+<h4 id="docker内部">docker内部</h4>
+<ol>
+<li>
+<p>创建Dockerfile</p>
+<p><img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/Dockerfile%E4%BD%8D%E7%BD%AE.png" alt></p>
+</li>
+<li>
+<p><code>vi Dockerfile</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:8</span><br><span class="line">ADD 18080.jar test.jar</span><br><span class="line">EXPOSE 18080</span><br><span class="line">ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;test.jar&quot;]</span><br></pre></td></tr></table></figure>
+<p>描述：</p>
+<p><code>FROM openjdk:8</code>:拉取基础镜像</p>
+<p><code>ADD 18080.jar test.jar</code>：将<code>18080.jar</code>复制到镜像中，重命名成<code>test.jar</code></p>
+<p><code>EXPOSE 18080</code>:声明端口，一般指定的是jar运行端口</p>
+<p><code>ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;test.jar&quot;]</code>：容器启动之后执行的命令</p>
+<p><code>MAINTAINER xx</code>: 添加作者信息</p>
+</li>
+<li>
+<p>构建镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t test .</span><br></pre></td></tr></table></figure>
+<p>描述：</p>
+<p><code>test</code>：镜像名称</p>
+<p><code>.</code>：表示<code>Dockerfile</code>在当前目录下</p>
+</li>
+<li>
+<p>查看镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>运行进行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always --name test -p 8080:18080 test</span><br></pre></td></tr></table></figure>
+<p>描述：</p>
+<p><code>-d</code>：表示后台运行容器</p>
+<p><code>--restart=always</code>：代表容器在停止或者服务器开机之后会自动重启</p>
+<p><code>--name test</code>:命名成test</p>
+<p><code>-p 8080:18080</code>：端口映射 [宿主机端口]:[容器端口]</p>
+<p><code>test</code>:运行的镜像</p>
+</li>
+<li>
+<p>更新jar包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp new.jar [容器id]:/test.jar</span><br></pre></td></tr></table></figure>
+<p>随后，重启容器</p>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/841076">Docker部署可执行jar包-阿里云开发者社区 (aliyun.com)</a></p>
+<h3 id="前端">前端</h3>
+<h4 id="项目打包">项目打包</h4>
+<p>打包之后将项目放在挂载的<code>html</code>目录下,详情查看<a href="docker%E5%AE%89%E8%A3%85nginx">docker安装nginx</a> | <a href="2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/">线上跳转↗️</a></p>
+<p>挂载项目：</p>
+<p><img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/%E6%8C%82%E8%BD%BD%E9%A1%B9%E7%9B%AE.png" alt></p>
+<p>将项目挂载到文件夹<code>a</code>里边</p>
+<p><img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/%E5%89%8D%E7%AB%AF%E6%89%93%E5%8C%85%E7%BB%93%E6%9E%9C.png" alt></p>
+<h4 id="配置nginx">配置nginx</h4>
+<p>修改前的配置文件：</p>
+<p><img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/%E4%BF%AE%E6%94%B9%E5%89%8Dnginx%E9%85%8D%E7%BD%AE.png" alt></p>
+<p>修改后的配置文件：<img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/%E4%BF%AE%E6%94%B9nginx%E9%85%8D%E7%BD%AE.png" alt></p>
+<h5 id="注意事项"><strong>注意事项</strong></h5>
+<ol>
+<li>
+<p>要是<code>jar</code>运行在宿主机(安装<code>dokcer</code>的服务器)上面的话，建议<code>server_name</code>修改成<code>172.17.0.1</code>(这个地址是安装<code>docker</code>之后，默认生成的网桥)。用<code>ifconfig -a</code>可以查看<code>Linux</code> 的<code>IP</code>地址</p>
+<p><img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/docker%E7%BD%91%E6%A1%A5.png" alt></p>
+</li>
+<li>
+<p>不要在 <code>localtion / &#123;&#125;</code>这块里边取写 <code>proxy_pass</code>，会网页都打不开。</p>
+</li>
+<li>
+<p>倘若有第二个前端项目的话，同样<code>html</code>目录下面创建挂载文件夹并把文件存放在内。然后在写一个<code>localtion</code>块，修改一下<code>listen</code>端口。例如：</p>
+<p><img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/%E5%A4%9A%E5%89%8D%E7%AB%AF%E9%85%8D%E7%BD%AE.png" alt></p>
+</li>
+</ol>
+<h2 id="问题排查：">问题排查：</h2>
+<h3 id="1-运行jar包服务器卡死">1.运行jar包服务器卡死</h3>
+<p><strong>环境：</strong></p>
+<ul>
+<li>
+<p>系统：8.5.2111</p>
+</li>
+<li>
+<p>配置：2核2G</p>
+</li>
+<li>
+<p>目标服务：</p>
+<p>Minio，frp，docker，nginx，redis，mysql，前端，后端</p>
+</li>
+</ul>
+<p><strong>场景：</strong></p>
+<blockquote>
+<p>服务器运行着Minio，frp，nginx，docker，redis-docker，mysql-docker，前端。将后端jar包上传服务器，<code>nohup java -jar xx &amp;</code>连接服务器的xshell敲命令执行卡顿，无法重连xshell，随后服务器卡死。</p>
+</blockquote>
+<p><strong>问题排查：</strong></p>
+<p>观察到xshell命令还是能敲上的，但是键盘敲击之后，xshell界面很久才能回显，执行也要很久很久，而且重连xshell也是很长时间连接不上。</p>
+<p><mark><strong>类似这种反应时间很长，系统出现&quot;死机&quot;的现象，多半是内存不足。</strong></mark></p>
+<p>为啥会内存不足呢？</p>
+<p>重启服务器之后，重新配置好需要的环境，不运行jar包。查看<code>top</code>命令：</p>
+<p><img src="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/top%E5%91%BD%E4%BB%A4.png" alt="图片是问题修复之后截的"></p>
+<p>观察其中的进程，注意到有个<code>mysqld</code>占用了22.4%的存，整台服务器的内存是2G，实际运行起来指定没有2048M的，以及其他一些系统支持的，算亏损10%，空闲内存实际约为1850M。刨去<code>mysqld</code>默认占用的1G，实际占用的450M。要想维系整个系统的开支，可用内存也就1G左右。</p>
+<p>将jar在开发环境上运行，观察到其占用了开发电脑1000-1300M的内存资源。</p>
+<p>解决方案也就呼之欲出了：</p>
+<ul>
+<li>
+<p>配置<code>java -jar</code>JVM的参数，限定其内存大小。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx512M -jar xxx.jar</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>从mysqld上解决，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46978507/article/details/129950706">参考1</a>   <a target="_blank" rel="noopener" href="https://blog.csdn.net/paulwang040/article/details/128580776">参考2</a></p>
+<p>它是Performance Schema 的大小，默认配置是1G。</p>
+</li>
+</ul>
+<p>此时基本解决内存不足问题。</p>
+<h3 id="2-jar包运行，CPU飙升至190">2.jar包运行，CPU飙升至190%</h3>
+<p><strong>环境：</strong></p>
+<ul>
+<li>
+<p>系统：8.5.2111</p>
+</li>
+<li>
+<p>配置：2核2G</p>
+</li>
+<li>
+<p>目标服务器任务进程：</p>
+<p>Minio，frp，docker，nginx，redis，mysql，前端，后端</p>
+</li>
+</ul>
+<p><strong>场景：</strong></p>
+<p>服务器运行着Minio，frp，nginx，docker，redis-docker，mysql-docker，前端。将后端jar包上传服务器，<code>nohup java -jar xx &amp;</code>后，top指令监测到cpu处在190%附近。</p>
+<p><strong>问题排查：</strong></p>
+<ol>
+<li>
+<p>通过 命令，查看该进程下的线程资源占用情况。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -mp pid -o THREAD,tid,time</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>将其中%CPU高的线程TID进行转码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print &quot;%x\n&quot; TID</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>通过查看cpu占用很高的线程状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jstack PID | grep [0xTID:第二部转码出来的tid]</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>如果线程还处在Runnable状态，那么通过<code>jstack</code>去找到详情。如果问题指向代码，那就去修改。</p>
+</li>
+<li>
+<p>到此基本解决。</p>
+</li>
+</ol>
+<p>当然，还有个情况就是，正常启动直接拉爆，随后又静默到1%的，查线程高占用的都停止了，这种情况下，倘若后期还有MQ什么的其他服务要用的话，建议将升级到4核cpu。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://solitaire-12.github.io/2024/03/14/hello-world/" data-id="cltwnnvcm00030kfm705n85jo" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/" data-id="cltwq98zg0010ugfm9dp671tx" data-title="linux|项目部署" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/docker安装RabbitMQ" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:23:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/">linux|docker安装RabbitMQ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>工欲善其事必先利其器：windows<a target="_blank" rel="noopener" href="https://erlang.org/download/">下载erlang</a>  <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/download.html">下载RabbitMQ</a>  <a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/rabbitmq-server/">下载RabbitMQ源码</a></p>
+<h2 id="Docker安装RabbitMQ">Docker安装RabbitMQ</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找rabbitmq镜像</span></span><br><span class="line">docker search rabbitmq</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pull镜像</span></span><br><span class="line">docker pull rabbitmq</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行mq</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># -p [暴露的宿主机端口]:[docker内部端口]</span></span></span><br><span class="line">docker run -d --hostname rabbit-test --name rabbit \</span><br><span class="line">-p 15672:15672 -p 5672:5672 rabbitmq</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入mq镜像</span></span><br><span class="line">docker exec -it [容器id] /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行</span></span><br><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">默认账号密码：guest：guest</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/" data-id="cltwq98zb000fugfmh2gb8oxx" data-title="linux|docker安装RabbitMQ" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/docker安装nginx" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:23:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/">linux|docker安装nginx</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>centos8.5.2111</p>
+<h3 id="拉取镜像">拉取镜像</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure>
+<h3 id="创建Nginx挂载目录">创建Nginx挂载目录</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p mytools/nginx/conf</span><br><span class="line"><span class="built_in">mkdir</span> -p mytools/nginx/log</span><br><span class="line"><span class="built_in">mkdir</span> -p mytools/nginx/html</span><br></pre></td></tr></table></figure>
+<h3 id="将容器中的配置复制到宿主机">将容器中的配置复制到宿主机</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成容器</span></span><br><span class="line">docker run --name nginx -p 9001:80 -d nginx</span><br><span class="line"><span class="comment"># 将容器nginx.conf文件复制到宿主机</span></span><br><span class="line">docker <span class="built_in">cp</span> nginx:/etc/nginx/nginx.conf /mytools/nginx/conf/nginx.conf</span><br><span class="line"><span class="comment"># 将容器conf.d文件夹下内容复制到宿主机</span></span><br><span class="line">docker <span class="built_in">cp</span> nginx:/etc/nginx/conf.d /mytools/nginx/conf/conf.d</span><br><span class="line"><span class="comment"># 将容器中的html文件夹复制到宿主机</span></span><br><span class="line">docker <span class="built_in">cp</span> nginx:/usr/share/nginx/html /mytools/nginx/</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/%E5%88%9D%E6%AC%A1%E5%90%AF%E5%8A%A8nginx%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png" alt></p>
+<h3 id="正式启动nginx">正式启动nginx</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">-p 9002:80 \</span><br><span class="line">--name nginx \</span><br><span class="line">-v /mytools/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \</span><br><span class="line">-v /mytools/nginx/conf/conf.d:/etc/nginx/conf.d \</span><br><span class="line">-v /mytools/nginx/log:/var/log/nginx \</span><br><span class="line">-v /mytools/nginx/html:/usr/share/nginx/html \</span><br><span class="line">-d nginx:latest</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/%E6%AD%A3%E5%BC%8F%E5%90%AF%E5%8A%A8nginx.png" alt></p>
+<h3 id="查看运行状态">查看运行状态</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:9002</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/%E6%9C%AC%E5%9C%B0%E8%AE%BF%E9%97%AEnginx.png" alt></p>
+<p><strong>公网IP访问</strong></p>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/%E5%85%AC%E7%BD%91ip%E8%AE%BF%E9%97%AEnginx.png" alt></p>
+<h3 id="修改html查看运行状态">修改html查看运行状态</h3>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/%E4%BF%AE%E6%94%B9index_html%E6%96%87%E4%BB%B6.png" alt></p>
+<h3 id="查看是否生效">查看是否生效</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart nginx</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/%E9%87%8D%E5%90%AF%E6%9F%A5%E7%9C%8B%E4%BF%AE%E6%94%B9%E6%98%AF%E5%90%A6%E7%94%9F%E6%95%88.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/" data-id="cltwq98ze000pugfmd992deqd" data-title="linux|docker安装nginx" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/docker安装redis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:22:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/">linux|docker安装redis</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>centos 8.5.2111</p>
+<h3 id="拉取redis镜像">拉取redis镜像</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/pull.png" alt></p>
+<h3 id="准备redis的配置文件">准备redis的配置文件</h3>
+<p>官网： <a target="_blank" rel="noopener" href="http://www.redis.cn/download.html">redis 6.0.6 下载 – Redis中国用户组（CRUG）</a></p>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BD%E4%B8%80%E4%B8%AAredis.png" alt></p>
+<p>把<code>redis.conf</code>上传到服务器redis安装的位置</p>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/%E5%A4%87%E4%BB%BDredis.conf%E6%96%87%E4%BB%B6.png" alt></p>
+<h3 id="配置redis-conf文件">配置redis.conf文件</h3>
+<blockquote>
+<p><code>bind 127.0.0.1</code> #注释掉这部分，使redis可以外部访问<br>
+<code>daemonize no</code>#用守护线程的方式启动<br>
+<code>requirepass 你的密码</code>#给redis设置密码<br>
+<code>appendonly yes</code>#redis持久化　　默认是no<br>
+<code>tcp-keepalive 300</code> #防止出现远程主机强迫关闭了一个现有的连接的错误 默认是300</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">注释掉这部分，使redis可以外部访问</span></span><br><span class="line">bind 127.0.0.1 </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">用守护线程的方式启动</span></span><br><span class="line">daemonize no</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">给redis设置密码</span></span><br><span class="line">requirepass 你的密码</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">redis持久化　　默认是no</span></span><br><span class="line">appendonly yes</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">防止出现远程主机强迫关闭了一个现有的连接的错误 默认是300</span></span><br><span class="line">tcp-keepalive 300 </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">:/[findword] 在vi命令中寻找文字，最好加个空格去找</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建本地与docker映射目录">创建本地与docker映射目录</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir mytools/redis</span><br><span class="line">mkdir mytools/redis/data</span><br></pre></td></tr></table></figure>
+<p><strong>把上述的redis.conf复制到redis目录下</strong></p>
+<h3 id="启动">启动</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -p 6379:6379 --name redis -v /mytools/redis/redis.conf:/etc/redis/redis.conf  -v /mytools/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-p 6379:6379</code>:把容器内的6379端口映射到宿主机6379端口<code>-v /data/redis/redis.conf:/etc/redis/redis.conf</code>：把宿主机配置好的redis.conf放到容器内的这个位置中<code>-v /data/redis/data:/data</code>：把redis持久化的数据在宿主机内显示，做数据备份<code>redis-server /etc/redis/redis.conf</code>：这个是关键配置，让redis不是无配置启动，而是按照这个redis.conf的配置启动<code>–appendonly yes</code>：redis启动后数据持久化</p>
+</blockquote>
+<p><strong>查看日志</strong>：<code>docker logs redis</code></p>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/redis%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/" data-id="cltwq98zd000lugfm8sr7eh7o" data-title="linux|docker安装redis" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/minio" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/minio/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:22:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/minio/">linux|docker安装minio</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>环境 centos 8.5</p>
+<h3 id="创建minio文件夹">创建minio文件夹</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mytools/minio</span><br><span class="line">cd /mytools/minio</span><br></pre></td></tr></table></figure>
+<h3 id="wget下载minio">wget下载minio</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.minio.io/server/minio/release/linux-amd64/minio</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/wgetMinIO.png" alt></p>
+<h3 id="创建日志，授权">创建日志，授权</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> minio.log</span><br><span class="line"><span class="built_in">chmod</span> 777 minio</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/%E6%8E%88%E6%9D%83+%E6%97%A5%E5%BF%97.png" alt></p>
+<h3 id="启动minio">启动minio</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 后面跟着的是静态文件挂载目录</span></span><br><span class="line">./minio server /opt/minio/data </span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF.png" alt></p>
+<p>**问题原因：**笔者编写文档之前，运行过minio，这里显示端口占用问题，kill一下进程就好了</p>
+<p><img src="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt="启动成功"></p>
+<p><strong>红字</strong>：警告:检测到默认凭据’minioadmin:minioadmin’，我们建议您使用’MINIO_ROOT_USER’和’MINIO_ROOT_PASSWORD’环境变量更改这些值</p>
+<h4 id="配置环境变量">配置环境变量</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line">	<span class="built_in">export</span> MINIO_ROOT_USER=fileadmin</span><br><span class="line">	<span class="built_in">export</span> MINIO_ROOT_PASSWORD=fileadmin</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+<h3 id="指定端口重启minio">指定端口重启minio</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 有需求自己换成自己的存放目录</span><br><span class="line">./minio server /opt/minio/data --console-address &quot;:9050&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/%E6%88%90%E5%8A%9F%E8%AE%BF%E9%97%AE.png" alt></p>
+<h3 id="设置后台启动">设置后台启动</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim start.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">nohup</span> /mytools/minio/minio server /opt/minio/data --console-address <span class="string">&quot;:9050&quot;</span> &gt; /opt/minio/minio.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">sh start.sh</span><br></pre></td></tr></table></figure>
+<h3 id="问题：">问题：</h3>
+<p>minio服务部署在云端时，配置服务网站要用公网ip，不然没办法回显</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/minio/" data-id="cltwq98zf000sugfmb81o7yts" data-title="linux|docker安装minio" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/docker安装mysql8" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:21:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/">linux|docker安装mysql8</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="拉取镜像">拉取镜像</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:8.0.23</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/%E6%8B%89%E5%8F%96MySQL8%E9%95%9C%E5%83%8F.png" alt></p>
+<h3 id="检查镜像">检查镜像</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8MySQL8%E9%95%9C%E5%83%8F.png" alt></p>
+<h3 id="启动镜像">启动镜像</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -p 3306:3306 --name mysql  \</span><br><span class="line">-v /usr/local/docker/mysql/mysql-files:/var/lib/mysql-files \</span><br><span class="line">-v /usr/local/docker/mysql/conf:/etc/mysql \</span><br><span class="line">-v /usr/local/docker/mysql/logs:/var/log/mysql \</span><br><span class="line">-v /usr/local/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=root \</span><br><span class="line">-d mysql:8.0.23</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/%E5%90%AF%E5%8A%A8mysql.png" alt></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f mysql #查看启动日志</span><br></pre></td></tr></table></figure>
+<h3 id="进入容器">进入容器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure>
+<h1>方法二</h1>
+<h3 id="下载mysql">下载mysql</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:8.0.23</span><br></pre></td></tr></table></figure>
+<h3 id="创建文件夹做挂载">创建文件夹做挂载</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//创建文件夹做挂载</span><br><span class="line">mkdir -p /mydata/mysql/conf</span><br><span class="line">mkdir /mydata/mysql/data</span><br><span class="line">//创建my.cnf配置文件</span><br><span class="line">vi /mydata/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+<h4 id="my-cnf添加如下内容">my.cnf添加如下内容</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">user=mysql</span><br><span class="line">character-set-server=utf8</span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line">secure_file_priv=/var/lib/mysql</span><br><span class="line">expire_logs_days=7</span><br><span class="line">sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br><span class="line">max_connections=1000</span><br><span class="line">lower_case_table_names=1</span><br><span class="line"> </span><br><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line"> </span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<p>你的数据库要是从本地windows上迁移到linux的话，<code>lower_case_table_names=1</code>,这个一定要加上，不然的话要重新部署，很麻烦</p>
+<h3 id="创建容器">创建容器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">--restart=always \</span><br><span class="line">--privileged=true \</span><br><span class="line">-p 3306:3306 --name mysql \</span><br><span class="line">-v /mydata/mysql/log:/var/log/mysql \</span><br><span class="line">-v /mydata/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /mydata/mysql/conf/my.cnf:/etc/mysql/my.cnf \</span><br><span class="line">-v /mydata/mysql/conf/conf.d:/etc/mysql/conf.d \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=root \</span><br><span class="line">-d mysql:8.0</span><br></pre></td></tr></table></figure>
+<h3 id="进入容器-2">进入容器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure>
+<h3 id="进入mysql">进入mysql</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line"># 查看数据库</span><br><span class="line">show databases</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/" data-id="cltwq98zb000iugfm0o9h5kpy" data-title="linux|docker安装mysql8" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/GitMaven" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/GitMaven/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:20:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/GitMaven/">linux|安装Git/Maven</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="安装Git">安装Git</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y git</span><br></pre></td></tr></table></figure>
+<p><strong>校验安装结果</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/GitMaven/git%E7%89%88%E6%9C%AC.png" alt></p>
+<h2 id="安装maven">安装maven</h2>
+<ol>
+<li>
+<p>创建存放maven的文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mytools/maven</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>将<code>maven.gz</code>上传到该文件夹</p>
+<p><img src="/2024/03/18/Server/GitMaven/%E4%B8%8A%E4%BC%A0maven.png" alt></p>
+</li>
+<li>
+<p>解压</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf apache-maven-3.9.4-bin.tar.gz</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>配置环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">    <span class="built_in">export</span> MAVEN_HOME=/mydata/maven/apache-maven-3.9.4</span><br><span class="line">    <span class="built_in">export</span> PATH=<span class="variable">$&#123;MAVEN_HOME&#125;</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/GitMaven/maven%E7%89%88%E6%9C%AC.png" alt></p>
+</li>
+<li>
+<p>配置阿里镜像(看情况)</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/GitMaven/" data-id="cltwq98z70006ugfm917745p3" data-title="linux|安装Git/Maven" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/docker" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/docker/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:20:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/docker/">linux|安装Docker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>环境 ： centos 8.4.2105</p>
+<h2 id="检查是否存在docker">检查是否存在docker</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br></pre></td></tr></table></figure>
+<h2 id="卸载docker">卸载docker</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">           docker-client \</span><br><span class="line">           docker-client-latest \</span><br><span class="line">           docker-common \</span><br><span class="line">           docker-latest \</span><br><span class="line">           docker-latest-logrotate \</span><br><span class="line">           docker-logrotate \</span><br><span class="line">           docker-selinux \</span><br><span class="line">           docker-engine-selinux \</span><br><span class="line">           docker-engine</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker-ce \</span><br><span class="line">           docker-ce-cli \</span><br><span class="line">           containerd</span><br></pre></td></tr></table></figure>
+<h2 id="设置仓库">设置仓库</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker/%E8%AE%BE%E7%BD%AE%E4%BB%93%E5%BA%93.png" alt></p>
+<h2 id="稳定仓库">稳定仓库</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">阿里云</span></span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清华镜像</span></span><br><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Docker-Engine-Community">安装 Docker Engine-Community</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
+<p>问题：</p>
+<p><img src="/2024/03/18/Server/docker/%E4%B8%8B%E8%BD%BDdocker%E9%94%99%E8%AF%AF.png" alt></p>
+<p>原因：CentOS-8于2021年12月31日停止了源的服务</p>
+<p><img src="/2024/03/18/Server/docker/%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC.png" alt></p>
+<p>解决步骤：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1</span></span><br><span class="line">cd /etc/yum.repos.d</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2</span></span><br><span class="line">mkdir bak</span><br><span class="line">cp * bak/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3</span></span><br><span class="line">vi root_.repo #把enabled=1，改成enable=0</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/docker/%E8%A7%A3%E5%86%B3-%E4%B8%8B%E8%BD%BDdocker%E9%94%99%E8%AF%AF.png" alt></p>
+<p><img src="/2024/03/18/Server/docker/%E4%B8%8B%E8%BD%BDdocker%E6%88%90%E5%8A%9F.png" alt></p>
+<p><strong>指定版本安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ yum list docker-ce --showduplicates | sort -r</span><br><span class="line"></span><br><span class="line">docker-ce.x86_64  3:18.09.1-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64  3:18.09.0-3.el7                     docker-ce-stable</span><br><span class="line">docker-ce.x86_64  18.06.1.ce-3.el7                    docker-ce-stable</span><br><span class="line">docker-ce.x86_64  18.06.0.ce-3.el7                    docker-ce-stable</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ sudo yum install docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io</span><br></pre></td></tr></table></figure>
+<h2 id="启动docker">启动docker</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hello-world镜像，查看是否安装成功</span></span><br><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+<h2 id="卸载docker-2">卸载docker</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除安装包</span></span><br><span class="line">yum remove docker-ce</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除镜像、容器、配置文件等内容</span></span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+<h2 id="centos-8-2安装问题">centos 8.2安装问题</h2>
+<p><strong>设置仓库时发生问题</strong>：</p>
+<p><img src="/2024/03/18/Server/docker/centos8.2%E5%AE%89%E8%A3%85%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98.png" alt></p>
+<p>解决：更新一下yum</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y update</span><br></pre></td></tr></table></figure>
+<p><strong>出现Failed to download metadata for repo ‘appstream’: Cannot prepare internal mirrorlist: No URLs in mirrorlist</strong></p>
+<blockquote>
+<p>问题原因： <em>因为centos8项目官方已于2021年底停止维护，相关源已无法使用，所以网上22年前的换源教程都已无法使用。</em></p>
+</blockquote>
+<p>解决：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入配置文件目录</span></span><br><span class="line">cd /etc/yum.repos.d/</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除旧的配置文件</span></span><br><span class="line">rm -rf *.repo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载可用的.repo文件</span></span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行 yum makecache 生成缓存</span></span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/docker/" data-id="cltwq98za000cugfm5exr87e8" data-title="linux|安装Docker" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Server/JDK" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/JDK/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:14:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/18/Server/JDK/">linux|安装JDK</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>清华云下载jdk ： <a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/">https://repo.huaweicloud.com/java/</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看是否安装过jdk</span></span><br><span class="line">rpm -qa | grep java</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">↑这里要是存在内容，执行删除</span></span><br><span class="line">rpm -qa | grep java | xargs rpm -e --nodeps</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看java版本</span></span><br><span class="line">java -version</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建存放java的文件</span></span><br><span class="line">mkdir /usr/java</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">cd</span>进入这一个文件夹</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">把下载好的jdk上传到这个文件夹下</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压</span></span><br><span class="line">tar -xvf jdk1.8.0_202ar.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置环境</span></span><br><span class="line">vi /etc/profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在文件末尾添加 【注意=附近不要有空格】</span></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_202</span><br><span class="line">export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/    </span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化配置 - 执行这条语句，可以让环境立即生效，不需要重启</span></span><br><span class="line">source /etc/profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看版本 (有信息的话，就安装成功了)</span></span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>如果上述中没有添加到环境中，尝试终端直接运行以下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/mytools/java/jdk1.8.0_202</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/JDK/" data-id="cltwq98z80009ugfm5gyl22hi" data-title="linux|安装JDK" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
     </footer>
   </div>
   
@@ -220,6 +887,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -229,7 +901,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%9D%E5%A7%8B/">初始</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%9D%E5%A7%8B/">初始</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a></li></ul>
     </div>
   </div>
 
@@ -239,7 +911,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
     </div>
   </div>
 
@@ -249,7 +921,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a>
+      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E5%AE%89%E8%A3%85/" style="font-size: 20px;">安装</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
     </div>
   </div>
 
@@ -271,11 +943,23 @@
       <ul>
         
           <li>
-            <a href="/2024/03/18/Hexo-%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3/">Hexo|图片相关</a>
+            <a href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
           </li>
         
           <li>
-            <a href="/2024/03/14/hello-world/">Hello World</a>
+            <a href="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/">linux|项目部署</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/">linux|docker安装RabbitMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/">linux|docker安装nginx</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/">linux|docker安装redis</a>
           </li>
         
       </ul>

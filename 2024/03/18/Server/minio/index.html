@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux|docker安装minio | 知秋个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="环境 centos 8.5 创建minio文件夹 12mkdir &#x2F;mytools&#x2F;miniocd &#x2F;mytools&#x2F;minio wget下载minio 1wget https:&#x2F;&#x2F;dl.minio.io&#x2F;server&#x2F;minio&#x2F;release&#x2F;linux-amd64&#x2F;minio  创建日志，授权 12touch minio.logchmod 777 minio  启动minio 12# 后面跟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux|docker安装minio">
+<meta property="og:url" content="https://solitaire-12.github.io/2024/03/18/Server/minio/index.html">
+<meta property="og:site_name" content="知秋个人博客">
+<meta property="og:description" content="环境 centos 8.5 创建minio文件夹 12mkdir &#x2F;mytools&#x2F;miniocd &#x2F;mytools&#x2F;minio wget下载minio 1wget https:&#x2F;&#x2F;dl.minio.io&#x2F;server&#x2F;minio&#x2F;release&#x2F;linux-amd64&#x2F;minio  创建日志，授权 12touch minio.logchmod 777 minio  启动minio 12# 后面跟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://solitaire-12.github.io/2024/03/18/Server/minio/wgetMinIO.png">
+<meta property="og:image" content="https://solitaire-12.github.io/2024/03/18/Server/minio/%E6%8E%88%E6%9D%83+%E6%97%A5%E5%BF%97.png">
+<meta property="og:image" content="https://solitaire-12.github.io/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF.png">
+<meta property="og:image" content="https://solitaire-12.github.io/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png">
+<meta property="og:image" content="https://solitaire-12.github.io/2024/03/18/Server/minio/%E6%88%90%E5%8A%9F%E8%AE%BF%E9%97%AE.png">
+<meta property="article:published_time" content="2024-03-18T08:22:07.000Z">
+<meta property="article:modified_time" content="2024-03-18T09:10:40.271Z">
+<meta property="article:author" content="solitaire-12">
+<meta property="article:tag" content="安装">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://solitaire-12.github.io/2024/03/18/Server/minio/wgetMinIO.png">
+  
+    <link rel="alternate" href="/atom.xml" title="知秋个人博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">知秋个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://solitaire-12.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Server/minio" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/Server/minio/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T08:22:07.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux|docker安装minio
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>环境 centos 8.5</p>
+<h3 id="创建minio文件夹">创建minio文件夹</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mytools/minio</span><br><span class="line">cd /mytools/minio</span><br></pre></td></tr></table></figure>
+<h3 id="wget下载minio">wget下载minio</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.minio.io/server/minio/release/linux-amd64/minio</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/wgetMinIO.png" alt></p>
+<h3 id="创建日志，授权">创建日志，授权</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> minio.log</span><br><span class="line"><span class="built_in">chmod</span> 777 minio</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/%E6%8E%88%E6%9D%83+%E6%97%A5%E5%BF%97.png" alt></p>
+<h3 id="启动minio">启动minio</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 后面跟着的是静态文件挂载目录</span></span><br><span class="line">./minio server /opt/minio/data </span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF.png" alt></p>
+<p>**问题原因：**笔者编写文档之前，运行过minio，这里显示端口占用问题，kill一下进程就好了</p>
+<p><img src="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt="启动成功"></p>
+<p><strong>红字</strong>：警告:检测到默认凭据’minioadmin:minioadmin’，我们建议您使用’MINIO_ROOT_USER’和’MINIO_ROOT_PASSWORD’环境变量更改这些值</p>
+<h4 id="配置环境变量">配置环境变量</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line">	<span class="built_in">export</span> MINIO_ROOT_USER=fileadmin</span><br><span class="line">	<span class="built_in">export</span> MINIO_ROOT_PASSWORD=fileadmin</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+<h3 id="指定端口重启minio">指定端口重启minio</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 有需求自己换成自己的存放目录</span><br><span class="line">./minio server /opt/minio/data --console-address &quot;:9050&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/18/Server/minio/%E6%88%90%E5%8A%9F%E8%AE%BF%E9%97%AE.png" alt></p>
+<h3 id="设置后台启动">设置后台启动</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim start.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">nohup</span> /mytools/minio/minio server /opt/minio/data --console-address <span class="string">&quot;:9050&quot;</span> &gt; /opt/minio/minio.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">sh start.sh</span><br></pre></td></tr></table></figure>
+<h3 id="问题：">问题：</h3>
+<p>minio服务部署在云端时，配置服务网站要用公网ip，不然没办法回显</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://solitaire-12.github.io/2024/03/18/Server/minio/" data-id="cltwq98zf000sugfmb81o7yts" data-title="linux|docker安装minio" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          linux|docker安装redis
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">linux|docker安装mysql8</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%9D%E5%A7%8B/">初始</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E8%A3%85/" rel="tag">安装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E5%AE%89%E8%A3%85/" style="font-size: 20px;">安装</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/">linux|项目部署</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/">linux|docker安装RabbitMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/">linux|docker安装nginx</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/">linux|docker安装redis</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 solitaire-12<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
