@@ -41,7 +41,7 @@
 <meta property="og:title" content="linux|docker安装minio">
 <meta property="og:url" content="https://solitaire-12.github.io/2024/03/18/Server/minio/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="环境 centos 8.5 创建minio文件夹 12mkdir &#x2F;mytools&#x2F;miniocd &#x2F;mytools&#x2F;minio wget下载minio 1wget https:&#x2F;&#x2F;dl.minio.io&#x2F;server&#x2F;minio&#x2F;release&#x2F;linux-amd64&#x2F;minio  创建日志，授权 12touch minio.logchmod 777 minio  启动minio 12# 后面跟">
+<meta property="og:description" content="环境 centos 8.5  创建minio文件夹 12mkdir &#x2F;mytools&#x2F;miniocd &#x2F;mytools&#x2F;minio  wget下载minio 1wget https:&#x2F;&#x2F;dl.minio.io&#x2F;server&#x2F;minio&#x2F;release&#x2F;linux-amd64&#x2F;minio   创建日志，授权 12touch minio.logchmod 777 minio   启动minio 12#">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-03-18T08:22:07.000Z">
@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1710836226635),
+    lastupdate: new Date(1710841136685),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2443,28 +2443,28 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
     <p>环境 centos 8.5</p>
-<h3 id="创建minio文件夹">创建minio文件夹</h3>
+<h3 id="创建minio文件夹"><a class="markdownIt-Anchor" href="#创建minio文件夹"></a> 创建minio文件夹</h3>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mytools/minio</span><br><span class="line">cd /mytools/minio</span><br></pre></td></tr></table></figure>
-<h3 id="wget下载minio">wget下载minio</h3>
+<h3 id="wget下载minio"><a class="markdownIt-Anchor" href="#wget下载minio"></a> wget下载minio</h3>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.minio.io/server/minio/release/linux-amd64/minio</span><br></pre></td></tr></table></figure>
 <p><img src="/2024/03/18/Server/minio/wgetMinIO.png" class="lazyload" data-srcset="/2024/03/18/Server/minio/wgetMinIO.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h3 id="创建日志，授权">创建日志，授权</h3>
+<h3 id="创建日志授权"><a class="markdownIt-Anchor" href="#创建日志授权"></a> 创建日志，授权</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> minio.log</span><br><span class="line"><span class="built_in">chmod</span> 777 minio</span><br></pre></td></tr></table></figure>
 <p><img src="/2024/03/18/Server/minio/%E6%8E%88%E6%9D%83+%E6%97%A5%E5%BF%97.png" class="lazyload" data-srcset="/2024/03/18/Server/minio/%E6%8E%88%E6%9D%83+%E6%97%A5%E5%BF%97.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h3 id="启动minio">启动minio</h3>
+<h3 id="启动minio"><a class="markdownIt-Anchor" href="#启动minio"></a> 启动minio</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 后面跟着的是静态文件挂载目录</span></span><br><span class="line">./minio server /opt/minio/data </span><br></pre></td></tr></table></figure>
 <p><img src="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF.png" class="lazyload" data-srcset="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <p>**问题原因：**笔者编写文档之前，运行过minio，这里显示端口占用问题，kill一下进程就好了</p>
 <p><img src="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" class="lazyload" data-srcset="/2024/03/18/Server/minio/%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="启动成功"></p>
 <p><strong>红字</strong>：警告:检测到默认凭据’minioadmin:minioadmin’，我们建议您使用’MINIO_ROOT_USER’和’MINIO_ROOT_PASSWORD’环境变量更改这些值</p>
-<h4 id="配置环境变量">配置环境变量</h4>
+<h4 id="配置环境变量"><a class="markdownIt-Anchor" href="#配置环境变量"></a> 配置环境变量</h4>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line">	<span class="built_in">export</span> MINIO_ROOT_USER=fileadmin</span><br><span class="line">	<span class="built_in">export</span> MINIO_ROOT_PASSWORD=fileadmin</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
-<h3 id="指定端口重启minio">指定端口重启minio</h3>
+<h3 id="指定端口重启minio"><a class="markdownIt-Anchor" href="#指定端口重启minio"></a> 指定端口重启minio</h3>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 有需求自己换成自己的存放目录</span><br><span class="line">./minio server /opt/minio/data --console-address &quot;:9050&quot;</span><br></pre></td></tr></table></figure>
 <p><img src="/2024/03/18/Server/minio/%E6%88%90%E5%8A%9F%E8%AE%BF%E9%97%AE.png" class="lazyload" data-srcset="/2024/03/18/Server/minio/%E6%88%90%E5%8A%9F%E8%AE%BF%E9%97%AE.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h3 id="设置后台启动">设置后台启动</h3>
+<h3 id="设置后台启动"><a class="markdownIt-Anchor" href="#设置后台启动"></a> 设置后台启动</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim start.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">nohup</span> /mytools/minio/minio server /opt/minio/data --console-address <span class="string">&quot;:9050&quot;</span> &gt; /opt/minio/minio.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">sh start.sh</span><br></pre></td></tr></table></figure>
-<h3 id="问题：">问题：</h3>
+<h3 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题：</h3>
 <p>minio服务部署在云端时，配置服务网站要用公网ip，不然没办法回显</p>
 
   </div>
@@ -2590,28 +2590,24 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>linux|docker安装redis</p>
-          <p class='content'>centos 8.5.2111
-拉取redis镜像
-1docker pull redis
-
-准备redis的配置文件
-官网： redis 6.0.6 下载 – Redis中国用户组（CRUG）
-...</p>
+        <a class='prev' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>linux|docker安装nginx</p>
+          <p class='content'>centos8.5.2111
+ 拉取镜像
+1docker pull nginx
+ 创建Nginx挂载目录
+123mkdir -p mytools/nginx/confmkdir -p mytoo...</p>
         </a>
       
       
-        <a class='next' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/'>
-          <p class='title'>linux|docker安装mysql8<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>拉取镜像
-1docker pull mysql:8.0.23
+        <a class='next' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/'>
+          <p class='title'>linux|docker安装redis<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>centos 8.5.2111
+ 拉取redis镜像
+1docker pull redis
 
-检查镜像
-1docker images
-
-启动镜像
-1234567891011sudo docker run -p 3306:33...</p>
+ 准备redis的配置文件
+官网： redis 6.0.6 下载 – Redis中国用户组（CRUG...</p>
         </a>
       
     </div>
@@ -2669,7 +2665,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAminio%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">创建minio文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wget%E4%B8%8B%E8%BD%BDminio"><span class="toc-text">wget下载minio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%97%A5%E5%BF%97%EF%BC%8C%E6%8E%88%E6%9D%83"><span class="toc-text">创建日志，授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8minio"><span class="toc-text">启动minio</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">配置环境变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E9%87%8D%E5%90%AFminio"><span class="toc-text">指定端口重启minio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8"><span class="toc-text">设置后台启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-text">问题：</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAminio%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text"> 创建minio文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wget%E4%B8%8B%E8%BD%BDminio"><span class="toc-text"> wget下载minio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%97%A5%E5%BF%97%E6%8E%88%E6%9D%83"><span class="toc-text"> 创建日志，授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8minio"><span class="toc-text"> 启动minio</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text"> 配置环境变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E9%87%8D%E5%90%AFminio"><span class="toc-text"> 指定端口重启minio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8"><span class="toc-text"> 设置后台启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text"> 问题：</span></a></li></ol>
     </div>
   </section>
 

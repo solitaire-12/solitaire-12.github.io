@@ -1626,7 +1626,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1710836226635),
+    lastupdate: new Date(1710841136685),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2393,6 +2393,256 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/19/algorithm/数据结构/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="织秋个人博客">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="织秋个人博客">
+    <meta itemprop="description" content="座右铭">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/03/19/algorithm/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"  itemprop="url">
+        算法|数据结构(Java)
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+         线性表
+ 数组和矩阵
+
+优点
+
+读取速度快
+
+
+缺点
+
+事先必须直到数组的长度
+插入删除元素很慢，效率很低
+空间通常是有限制的
+需要大块连续的内存块
+
+
+
+
+ArrayList源码解析
+相关题目
+
+ 链表
+
+
+优点
+
+空间没有限制
+插入删除元素很快
+
+
+
+缺点
+
+存取速度很慢
+
+
+
+分类
+
+单向链表（每个节点，存在一个指向下一个节点的指针）
+双向链表（每个节点，存在一个指针指向下一个节点，...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-03-19T16:49:57+08:00">2024-03-19</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url"><span itemprop="name">算法</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/03/19/algorithm/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/19/Java/集合/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="织秋个人博客">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="织秋个人博客">
+    <meta itemprop="description" content="座右铭">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/03/19/Java/%E9%9B%86%E5%90%88/"  itemprop="url">
+        Java|集合特性测试
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        
+ 小结
+
+Collection 接口的接口 对象的集合（单列集合）
+
+List 接口：元素按进入先后有序保存，可重复
+
+LinkedList：链表， 插入删除， 没有同步， 线程不安全
+ArrayList：数组， 随机访问， 没有同步， 线程不安全
+Vector ：数组， 同步， 线程安全
+
+Stack：是Vector类的实现类
+
+
+
+
+Set 接口： 仅接收一次，不可重复，并做内部排序
+...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-03-19T16:40:55+08:00">2024-03-19</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Java/">Java</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/Java/" itemprop="url"><span itemprop="name">Java</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/03/19/Java/%E9%9B%86%E5%90%88/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/19/Java/泛型/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="织秋个人博客">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="织秋个人博客">
+    <meta itemprop="description" content="座右铭">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/03/19/Java/%E6%B3%9B%E5%9E%8B/"  itemprop="url">
+        Java|泛型
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+         为啥引入泛型
+进入话题前，先看一段代码：
+123456private static Integer add(Integer a,Integer b)&#123;    return a+b;&#125;private static Double add(Double a,Double b)&#123;    return a+b;&#125;
+
+通常情况下，我们给一个方法设定形参时，会直接...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-03-19T16:10:55+08:00">2024-03-19</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Java/">Java</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/Java/" itemprop="url"><span itemprop="name">Java</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/03/19/Java/%E6%B3%9B%E5%9E%8B/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
   <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/19/algorithm/sort/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
@@ -2419,9 +2669,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='md article-desc' itemprop="articleBody">
     
       
-        认识位运算符
-获取整数的二进制32位字符
-123456public static void print(int num) &#123;    for (byte i = 31; i &gt;= 0; i--) &#123;        System.out.print((num &amp; (1 &lt;&lt; i)) == 0 ? &quot;0&quot; : &quot;1&quo...
+         认识位运算符
+ 获取整数的二进制32位字符
+123456public static void print(int num) &#123;    for (byte i = 31; i &gt;= 0; i--) &#123;        System.out.print((num &amp; (1 &lt;&lt; i)) == 0 ? &quot;0&quot; : &quot;1&q...
       
     
   </div>
@@ -2484,11 +2734,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='md article-desc' itemprop="articleBody">
     
       
-        java8实战汇总
-Lambda表达式
+         java8实战汇总
+ Lambda表达式
 Lambda表达式有三个部分，参数-&gt;主体
 12(parameters) -&gt; expression(parameters) -&gt;&#123; statements; &#125;
-123456789() -&gt; &#123;&#125; () -&gt; &quot;Raoul&quot;() -&gt; &#123;retur...
+123456789() -&gt; &#123;&#125; () -&gt; &quot;Raoul&quot;() -&gt; &#123;ret...
       
     
   </div>
@@ -2551,14 +2801,14 @@ Lambda表达式有三个部分，参数-&gt;主体
   <div class='md article-desc' itemprop="articleBody">
     
       
-        类加载
-加载过程
+         类加载
+ 加载过程
 
 将java文件编译成class字节码文件，通过类加载器写入到JVM虚拟机运行时数据区中。
 
 
-类加载流程
-​	类加载需要经历五个阶段，分别是加载，验证，准备，解析，初始化。其中加载，验证，准备，初始化这四个阶段发生的顺序时确定的，而解析阶段时不一定的。它在某些情况下可以在初始化阶段之后开始，这是为了支持java的运行时绑定（也称做动态绑定）。另外，这些阶段都是按顺序开始，...
+ 类加载流程
+​	类加载需要经历五个阶段，分别是加载，验证，准备，解析，初始化。其中加载，验证，准备，初始化这四个阶段发生的顺序时确定的，而解析阶段时不一定的。它在某些情况下可以在初始化阶段之后开始，这是为了支持java的运行时绑定（也称做动态绑定）。另外，这些阶段都是按顺序...
       
     
   </div>
@@ -2621,22 +2871,22 @@ Lambda表达式有三个部分，参数-&gt;主体
   <div class='md article-desc' itemprop="articleBody">
     
       
-        环境：
+         环境：
 
 服务端阿里云： CentOS 8.5.2111
 客户端：windows 11 / windows 10
 frp 0.42
 
-第一步
+ 第一步
 
 官网下载frp软件
 笔者使用的版本：链接：https://pan.baidu.com/s/1cjmUiOY8iRIywx6whkhRdg 提取码：gatr
 
-第二步
+ 第二步
 服务端：
 
 
-将 frp_0.42.0_linux_amd64.tar.gz压缩包传...
+将 frp_0.42.0_linux_amd64.tar.gz压...
       
     
   </div>
@@ -2699,16 +2949,16 @@ frp 0.42
   <div class='md article-desc' itemprop="articleBody">
     
       
-        环境
+         环境
 系统：Centos 8.4.2105
 docker : 24.0.5
 nginx: nginx/1.25.1
-后端
-宿主机安装
+ 后端
+ 宿主机安装
 
 后端达成jar包上传到服务器
 ps -ef | grep java查看有没有在运行的java项目，要是端口冲突的话，直接kill
-java -jar没有问题之后，nohup java -jar x.jar &gt; x.log 2&gt;&amp;1 &am...
+java -jar没有问题之后，nohup java -jar x.jar &gt; x.log 2&gt;&amp;1 ...
       
     
   </div>
@@ -2772,8 +3022,8 @@ java -jar没有问题之后，nohup java -jar x.jar &gt; x.log 2&gt;&amp;1 &am..
     
       
         工欲善其事必先利其器：windows下载erlang  下载RabbitMQ  下载RabbitMQ源码
-Docker安装RabbitMQ
-12345678910111213# 查找rabbitmq镜像docker search rabbitmq# pull镜像docker pull rabbitmq# 运行mq ## -p [暴露的宿主机端口]:[docker内部端口]docker run...
+ Docker安装RabbitMQ
+12345678910111213# 查找rabbitmq镜像docker search rabbitmq# pull镜像docker pull rabbitmq# 运行mq ## -p [暴露的宿主机端口]:[docker内部端口]docker ru...
       
     
   </div>
@@ -2837,12 +3087,12 @@ Docker安装RabbitMQ
     
       
         centos8.5.2111
-拉取镜像
+ 拉取镜像
 1docker pull nginx
-创建Nginx挂载目录
+ 创建Nginx挂载目录
 123mkdir -p mytools/nginx/confmkdir -p mytools/nginx/logmkdir -p mytools/nginx/html
-将容器中的配置复制到宿主机
-12345678# 生成容器docker run --name nginx -p 9001:80...
+ 将容器中的配置复制到宿主机
+12345678# 生成容器docker run --name nginx -p 9001...
       
     
   </div>
@@ -2864,224 +3114,6 @@ Docker安装RabbitMQ
       
         <div>
           <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装redis/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/"  itemprop="url">
-        linux|docker安装redis
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        centos 8.5.2111
-拉取redis镜像
-1docker pull redis
-
-准备redis的配置文件
-官网： redis 6.0.6 下载 – Redis中国用户组（CRUG）
-
-把redis.conf上传到服务器redis安装的位置
-
-配置redis.conf文件
-
-bind 127.0.0.1 #注释掉这部分，使redis可以外部访问
-daemonize no#用守护线程...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/minio/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/minio/"  itemprop="url">
-        linux|docker安装minio
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境 centos 8.5
-创建minio文件夹
-12mkdir /mytools/miniocd /mytools/minio
-wget下载minio
-1wget https://dl.minio.io/server/minio/release/linux-amd64/minio
-
-创建日志，授权
-12touch minio.logchmod 777 minio
-
-启动minio
-12# ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/minio/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装mysql8/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/"  itemprop="url">
-        linux|docker安装mysql8
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        拉取镜像
-1docker pull mysql:8.0.23
-
-检查镜像
-1docker images
-
-启动镜像
-1234567891011sudo docker run -p 3306:3306 --name mysql  \-v /usr/local/docker/mysql/mysql-files:/var/lib/mysql-files \-v /usr/local/docker/...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:21:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/' itemprop="url">
             阅读全文
           </a>
         </div>
@@ -3204,7 +3236,7 @@ wget下载minio
           <li><a class="flat-box"
             title="/categories/Java/" href="/categories/Java/"
             active-action="action-categoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(2)</div></a></li>
+            ><div class='name'>Java</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%88%9D%E5%A7%8B/" href="/categories/%E5%88%9D%E5%A7%8B/"
@@ -3224,7 +3256,7 @@ wget下载minio
           <li><a class="flat-box"
             title="/categories/%E7%AE%97%E6%B3%95/" href="/categories/%E7%AE%97%E6%B3%95/"
             active-action="action-categoriesE7AE97E6B395"
-            ><div class='name'>算法</div><div class='badge'>(1)</div></a></li>
+            ><div class='name'>算法</div><div class='badge'>(2)</div></a></li>
         
       </ul>
     </div>
@@ -3249,7 +3281,7 @@ wget下载minio
 
 
     <div class='content'>
-      <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/%E5%AE%89%E8%A3%85/" style="font-size: 24px; color: #555">安装</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a>
+      <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 19px; color: #777">Java基础</a> <a href="/tags/%E5%AE%89%E8%A3%85/" style="font-size: 24px; color: #555">安装</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a>
     </div>
   </section>
 
@@ -3275,7 +3307,7 @@ wget下载minio
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>16 篇</div>
+          <div>19 篇</div>
         </div>
       
 
@@ -3316,7 +3348,7 @@ wget下载minio
 
 
   <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/03/19/algorithm/sort/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|排序</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"><div class="item"><time>2024-03-19</time><span>服务器</span></div><span>内网穿透</span></a></li><li><a class="widget-last" href="/2024/03/18/Java/JVM/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|JVM</span></a></li><li><a class="widget-last" href="/2024/03/18/Java/Java8/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|Java8</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/dms/"><div class="item"><time>2024-03-18</time><span>服务器</span></div><span>数据管理DMS</span></a></li></ul>
+    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/03/19/algorithm/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|数据结构(Java)</span></a></li><li><a class="widget-last" href="/2024/03/19/Java/%E9%9B%86%E5%90%88/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|集合特性测试</span></a></li><li><a class="widget-last" href="/2024/03/19/Java/%E6%B3%9B%E5%9E%8B/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|泛型</span></a></li><li><a class="widget-last" href="/2024/03/19/algorithm/sort/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|排序</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"><div class="item"><time>2024-03-19</time><span>服务器</span></div><span>内网穿透</span></a></li></ul>
   </div>
 </section>
 

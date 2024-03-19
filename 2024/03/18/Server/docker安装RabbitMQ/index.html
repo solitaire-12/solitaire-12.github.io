@@ -41,7 +41,7 @@
 <meta property="og:title" content="linux|docker安装RabbitMQ">
 <meta property="og:url" content="https://solitaire-12.github.io/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="工欲善其事必先利其器：windows下载erlang  下载RabbitMQ  下载RabbitMQ源码 Docker安装RabbitMQ 12345678910111213# 查找rabbitmq镜像docker search rabbitmq# pull镜像docker pull rabbitmq# 运行mq ## -p [暴露的宿主机端口]:[docker内部端口]docker run -d">
+<meta property="og:description" content="工欲善其事必先利其器：windows下载erlang  下载RabbitMQ  下载RabbitMQ源码  Docker安装RabbitMQ 12345678910111213# 查找rabbitmq镜像docker search rabbitmq# pull镜像docker pull rabbitmq# 运行mq ## -p [暴露的宿主机端口]:[docker内部端口]docker run -">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-03-18T08:23:07.000Z">
@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1710836226635),
+    lastupdate: new Date(1710841136685),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2443,7 +2443,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
     <p>工欲善其事必先利其器：windows<a target="_blank" rel="noopener" href="https://erlang.org/download/">下载erlang</a>  <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/download.html">下载RabbitMQ</a>  <a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/rabbitmq-server/">下载RabbitMQ源码</a></p>
-<h2 id="Docker安装RabbitMQ">Docker安装RabbitMQ</h2>
+<h2 id="docker安装rabbitmq"><a class="markdownIt-Anchor" href="#docker安装rabbitmq"></a> Docker安装RabbitMQ</h2>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找rabbitmq镜像</span></span><br><span class="line">docker search rabbitmq</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pull镜像</span></span><br><span class="line">docker pull rabbitmq</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行mq</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># -p [暴露的宿主机端口]:[docker内部端口]</span></span></span><br><span class="line">docker run -d --hostname rabbit-test --name rabbit \</span><br><span class="line">-p 15672:15672 -p 5672:5672 rabbitmq</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入mq镜像</span></span><br><span class="line">docker exec -it [容器id] /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行</span></span><br><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">默认账号密码：guest：guest</span></span><br></pre></td></tr></table></figure>
 
   </div>
@@ -2571,25 +2571,25 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='prev' href='/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/'>
           <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>linux|项目部署</p>
-          <p class='content'>环境
+          <p class='content'> 环境
 系统：Centos 8.4.2105
 docker : 24.0.5
 nginx: nginx/1.25.1
-后端
-宿主机安装
+ 后端
+ 宿主机安装
 
 后端达成jar包上传到服务器
-ps -ef | grep ...</p>
+ps -ef | gr...</p>
         </a>
       
       
         <a class='next' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/'>
           <p class='title'>linux|docker安装nginx<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>centos8.5.2111
-拉取镜像
+ 拉取镜像
 1docker pull nginx
-创建Nginx挂载目录
-123mkdir -p mytools/nginx/confmkdir -p mytools...</p>
+ 创建Nginx挂载目录
+123mkdir -p mytools/nginx/confmkdir -p mytoo...</p>
         </a>
       
     </div>
@@ -2647,7 +2647,7 @@ ps -ef | grep ...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">Docker安装RabbitMQ</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E5%AE%89%E8%A3%85rabbitmq"><span class="toc-text"> Docker安装RabbitMQ</span></a></li></ol>
     </div>
   </section>
 
