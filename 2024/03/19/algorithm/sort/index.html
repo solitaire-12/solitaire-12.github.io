@@ -5,8 +5,8 @@
   <meta name="Volantis" content="5.8.0">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="https://solitaire-12.github.io/categories/服务器/"/>
+  
+  <link rel="canonical" href="https://solitaire-12.github.io/2024/03/19/algorithm/sort/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -33,18 +33,21 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>分类：服务器 - 织秋个人博客</title>
-  <meta name="keywords" content="null">
+  <title>算法|排序 - 织秋个人博客</title>
+  <meta name="keywords" content="排序,null">
   <meta desc name="description" content="座右铭 - solitaire-12 - 织秋个人博客">
   
-<meta property="og:type" content="website">
-<meta property="og:title" content="织秋个人博客">
-<meta property="og:url" content="https://solitaire-12.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法|排序">
+<meta property="og:url" content="https://solitaire-12.github.io/2024/03/19/algorithm/sort/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="座右铭">
+<meta property="og:description" content="认识位运算符 获取整数的二进制32位字符 123456public static void print(int num) &#123;    for (byte i &#x3D; 31; i &gt;&#x3D; 0; i--) &#123;        System.out.print((num &amp; (1 &lt;&lt; i)) &#x3D;&#x3D; 0 ? &quot;0&quot; : &quot;1&quot;)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2024-03-19T07:33:11.324Z">
+<meta property="article:modified_time" content="2024-03-19T08:13:17.393Z">
 <meta property="article:author" content="solitaire-12">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2323,7 +2326,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper  search' style="display: ;">
+      <div id="half" class='cover-wrapper post search' style="display: ;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://gcore.jsdelivr.net/gh/MHG-LAB/cron@gh-pages/bing/bing.jpg"></div>
 
@@ -2359,43 +2362,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="safearea">
         <div class="body-wrapper">
           
-
 <div id="l_main" class=''>
-  
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/内网穿透/">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/19/algorithm/sort/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
   </span>
@@ -2404,735 +2373,320 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="座右铭">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"  itemprop="url">
-        内网穿透
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
     
-      
-        环境：
-
-服务端阿里云： CentOS 8.5.2111
-客户端：windows 11 / windows 10
-frp 0.42
-
-第一步
-
-官网下载frp软件
-笔者使用的版本：链接：https://pan.baidu.com/s/1cjmUiOY8iRIywx6whkhRdg 提取码：gatr
-
-第二步
-服务端：
-
-
-将 frp_0.42.0_linux_amd64.tar.gz压缩包传...
-      
     
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+      <h1 class="title" itemprop="name headline">
+        算法|排序
+      </h1>
+      <div class='new-meta-box'>
         
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T17:05:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
           
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/about/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">织秋</p>
+  </a>
 </div>
 
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url"><span itemprop="name">算法</span></a>
+      </span>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-03-19T15:33:11+08:00">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2024年3月19日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h2 id="认识位运算符">认识位运算符</h2>
+<h3 id="获取整数的二进制32位字符">获取整数的二进制32位字符</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">byte</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">31</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        System.out.print((num &amp; (<span class="number">1</span> &lt;&lt; i)) == <span class="number">0</span> ? <span class="string">&quot;0&quot;</span> : <span class="string">&quot;1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">43</span>;</span><br><span class="line"><span class="type">byte</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">120</span>;</span><br><span class="line">System.out.print(<span class="string">&quot;a  :&quot;</span>);print(a); 			<span class="comment">//a  :00101011</span></span><br><span class="line">System.out.print(<span class="string">&quot;b  :&quot;</span>);print(b);			<span class="comment">//b  :01111000</span></span><br><span class="line">System.out.print(<span class="string">&quot;a|b:&quot;</span>);print(a | b);		<span class="comment">//a|b:01111011</span></span><br><span class="line">System.out.print(<span class="string">&quot;a&amp;b:&quot;</span>);print(a &amp; b);		<span class="comment">//a&amp;b:00101000</span></span><br><span class="line">System.out.print(<span class="string">&quot;a^b:&quot;</span>);print(a ^ b);		<span class="comment">//a^b:01010011</span></span><br><span class="line">System.out.print(<span class="string">&quot; ~b:&quot;</span>);print(~b);			<span class="comment">// ~b:10000111</span></span><br><span class="line">System.out.print(<span class="string">&quot;135:&quot;</span>);print(<span class="number">135</span>);		<span class="comment">//135:10000111</span></span><br><span class="line">System.out.print(<span class="string">&quot;a  :&quot;</span>);print(a);			<span class="comment">//a  :00101011</span></span><br><span class="line">System.out.print(<span class="string">&quot;&lt;&lt;3:&quot;</span>);print(a&lt;&lt;<span class="number">3</span>);		<span class="comment">//&lt;&lt;3:01011000</span></span><br><span class="line">System.out.print(<span class="string">&quot;&gt;&gt;1:&quot;</span>);print(a&gt;&gt;<span class="number">1</span>);		<span class="comment">//&gt;&gt;1:00010101</span></span><br><span class="line">System.out.print(<span class="string">&quot;&gt;&gt;&gt;1:&quot;</span>);print(a&gt;&gt;&gt;<span class="number">1</span>);		<span class="comment">//&gt;&gt;&gt;1:00010101</span></span><br><span class="line">System.out.println(~b);						<span class="comment">//-121</span></span><br><span class="line">print(~b&gt;&gt;<span class="number">7</span>);								<span class="comment">//11111111</span></span><br></pre></td></tr></table></figure>
+<h3 id="：或">|：或</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//00101011</span></span><br><span class="line"><span class="comment">//01111000</span></span><br><span class="line"><span class="comment">//01111011</span></span><br><span class="line">print(<span class="number">43</span> | <span class="number">120</span>);	<span class="comment">//01111011</span></span><br></pre></td></tr></table></figure>
+<p>有1为1</p>
+<h3 id="：与">&amp;：与</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//00101011</span></span><br><span class="line"><span class="comment">//01111000</span></span><br><span class="line"><span class="comment">//00101000</span></span><br><span class="line">print(<span class="number">43</span> &amp; <span class="number">120</span>);	<span class="comment">//00101000</span></span><br></pre></td></tr></table></figure>
+<p>有0为0</p>
+<h3 id="：亦或">^：亦或</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//00101011</span></span><br><span class="line"><span class="comment">//01111000</span></span><br><span class="line"><span class="comment">//01010011</span></span><br><span class="line">print(<span class="number">43</span> ^ <span class="number">120</span>);	<span class="comment">//01010011</span></span><br></pre></td></tr></table></figure>
+<p>无进位相加</p>
+<h3 id="：非">~：非</h3>
+<p>取反</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//01111000</span></span><br><span class="line"><span class="comment">//10000111</span></span><br><span class="line">print(~<span class="number">120</span>);	<span class="comment">//10000111</span></span><br><span class="line">print(<span class="number">135</span>);		<span class="comment">//10000111</span></span><br></pre></td></tr></table></figure>
+<p><code>~120</code>和<code>135</code>的字符是一样的，为什么它是<code>-121</code>不是<code>135</code>呢？</p>
+<blockquote>
+<p>首先理解，byte 占 8位（-128-127），其中[符号位]占一位，其余数据占用</p>
+<p>其次当一个数是负数的时候，符号位以及其左边的位置，均为1。也就是说，<code>-121</code>是<code>//1111....110000111</code>，而<code>135</code>是<code>//0000.....010000111</code></p>
+<p>最后，~操作可以理解成在一条直线上，从[0和-1的中间位置]反方向去找到第n个点</p>
+<p>注意：在程序中，0算正数。后文会验证这一结论。</p>
+</blockquote>
+<h3 id="：左移">&lt;&lt;：左移</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">43</span>);			<span class="comment">//00101011</span></span><br><span class="line">print(<span class="number">43</span>&lt;&lt;<span class="number">3</span>);		<span class="comment">//01011000</span></span><br></pre></td></tr></table></figure>
+<h3 id="：右移">&gt;&gt;：右移</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">43</span>);			<span class="comment">//00101011</span></span><br><span class="line">print(<span class="number">43</span>&gt;&gt;<span class="number">1</span>);		<span class="comment">//00010101</span></span><br></pre></td></tr></table></figure>
+<h3 id="：无符号右移">&gt;&gt;&gt;：无符号右移</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(43&gt;&gt;&gt;1);		//00010101</span><br><span class="line">print(~120);		//10000111</span><br><span class="line">print(~120&gt;&gt;7);		//11111111</span><br></pre></td></tr></table></figure>
+<p>正数&gt;&gt;&gt; 等价 &gt;&gt;</p>
+<h3 id="常见使用">常见使用</h3>
+<ol>
+<li>
+<p>判断奇偶性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(num &amp; <span class="number">1</span>) == <span class="number">1</span> ? <span class="string">&quot;奇数&quot;</span> : <span class="string">&quot;偶数&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>两个数做交换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = a ^ b;</span><br><span class="line">b = a ^ b;</span><br><span class="line">a = a ^ b;</span><br><span class="line"><span class="comment">// 注意：在数组操作中时，切记不能进行用位置亦或，不然数据会丢失</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//可以简化成</span></span><br><span class="line">a ^= b;</span><br><span class="line">b ^= a;</span><br><span class="line">a ^= b;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>取绝对值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> -<span class="number">327</span></span><br><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> (b ^ (b&gt;&gt;<span class="number">31</span>)) - (b&gt;&gt;<span class="number">31</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>判断两个数是否异号</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">f</span> <span class="operator">=</span> ((x ^ y) &lt; <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 同号false，异号true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// boolean f = ((0 ^ 1) &lt; 0);</span></span><br><span class="line"><span class="comment">// System.out.println(f);</span></span><br><span class="line"><span class="comment">// 结果是false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>大小写转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (&#x27;A&#x27; | &#x27; &#x27;) = &#x27;a&#x27;</span></span><br><span class="line"><span class="comment">// (&#x27;a&#x27; | &#x27; &#x27;) = &#x27;a&#x27;</span></span><br><span class="line"><span class="comment">// (&#x27;A&#x27; &amp; &#x27;_&#x27;) = &#x27;A&#x27;</span></span><br><span class="line"><span class="comment">// (&#x27;a&#x27; &amp; &#x27;_&#x27;) = &#x27;A&#x27;</span></span><br><span class="line"><span class="comment">// (&#x27;A&#x27; ^ &#x27; &#x27;) = &#x27;a&#x27;</span></span><br><span class="line"><span class="comment">// (&#x27;a&#x27; ^ &#x27; &#x27;) = &#x27;A&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>+1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">n = -~n;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>-1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">n = ~-n;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="排序">排序</h2>
+<p><a target="_blank" rel="noopener" href="https://visualgo.net/zh/sorting">排序动态展示（冒泡排序，选择排序，插入排序，归并排序，快速排序，计数排序，基数排序） - VisuAlgo</a></p>
+<h3 id="打印">打印</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.stream(arr).forEach(a-&gt; System.out.print(a + <span class="string">&quot; &quot;</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="交换">交换</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> arr[j];</span><br><span class="line">    arr[j] = arr[i];</span><br><span class="line">    arr[i] = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="选择排序">选择排序</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">selectSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">N</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">minValueIndex</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; N; j++) &#123;</span><br><span class="line">            minValueIndex = arr[j] &lt; arr[minValueIndex] ? j : minValueIndex;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, i, minValueIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="冒泡排序">冒泡排序</h3>
+<p><img src="/2024/03/19/algorithm/sort/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.gif" class="lazyload" data-srcset="/2024/03/19/algorithm/sort/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.gif" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">bubbleSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">N</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> N - <span class="number">1</span>; end &gt;= <span class="number">0</span>; end--) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">second</span> <span class="operator">=</span> <span class="number">1</span>; second &lt;= end; second++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[second - <span class="number">1</span>] &gt; arr[second]) &#123;</span><br><span class="line">                swap(arr, second - <span class="number">1</span>, second);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入排序">插入排序</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">insertSort1</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">N</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> <span class="number">1</span>; end &lt; N; end++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">newNumIndex</span> <span class="operator">=</span> end;</span><br><span class="line">        <span class="keyword">while</span> (newNumIndex - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; arr[newNumIndex - <span class="number">1</span>] &gt; arr[newNumIndex]) &#123;</span><br><span class="line">            swap(arr, newNumIndex - <span class="number">1</span>, newNumIndex);</span><br><span class="line">            newNumIndex--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">insertSort2</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">N</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> <span class="number">1</span>; end &lt; N; end++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">pre</span> <span class="operator">=</span> end - <span class="number">1</span>; pre &gt;= <span class="number">0</span> &amp;&amp; arr[pre] &gt; arr[pre + <span class="number">1</span>]; pre--) &#123;</span><br><span class="line">            swap(arr, pre, pre + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="归并排序">归并排序</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mergeSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> left, <span class="type">int</span> right)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left == right) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//分成两半</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + (right-left)/<span class="number">2</span>;</span><br><span class="line">    <span class="comment">//左边排序</span></span><br><span class="line">    mergeSort(arr, left, mid);</span><br><span class="line">    <span class="comment">//右边排序</span></span><br><span class="line">    mergeSort(arr, mid+<span class="number">1</span>, right);</span><br><span class="line"></span><br><span class="line">    merge(arr, left, mid+<span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> leftPtr, <span class="type">int</span> rightPtr, <span class="type">int</span> rightBound)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> rightPtr - <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span>[] temp = <span class="keyword">new</span> <span class="title class_">int</span>[rightBound - leftPtr + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> leftPtr; </span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> rightPtr;</span><br><span class="line">    <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= rightBound) &#123;</span><br><span class="line">        temp[k++] = arr[i] &lt;= arr[j] ? arr[i++] : arr[j++];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid) temp[k++] = arr[i++];</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=rightBound) temp[k++] = arr[j++];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> m=<span class="number">0</span>; m&lt;temp.length; m++) arr[leftPtr +m] = temp[m];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="快速排序">快速排序</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> leftBound, <span class="type">int</span> rightBound)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(leftBound &gt;= rightBound) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> partition(arr, leftBound, rightBound);</span><br><span class="line">    quickSort(arr, leftBound, mid-<span class="number">1</span>);</span><br><span class="line">    quickSort(arr, mid+<span class="number">1</span>, rightBound);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span> <span class="title function_">partition</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> leftBound, <span class="type">int</span> rightBound)</span> &#123;</span><br><span class="line">    <span class="comment">//adding the following code blocks is the random quick sort</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">random</span> <span class="operator">=</span> leftBound + (<span class="type">int</span>) (Math.random() * (rightBound - leftBound + <span class="number">1</span>));</span><br><span class="line">        swap(arr, random, rightBound);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">pivot</span> <span class="operator">=</span> arr[rightBound];</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> leftBound;</span><br><span class="line">    <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> rightBound - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right &amp;&amp; arr[left] &lt;= pivot) left ++;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right &amp;&amp; arr[right] &gt; pivot) right --;</span><br><span class="line">        <span class="keyword">if</span>(left &lt; right) BaseCoding.swap(arr, left, right);</span><br><span class="line">    &#125;</span><br><span class="line">    BaseCoding.swap(arr, left, rightBound);</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="计数排序">计数排序</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计数排序：</span></span><br><span class="line"><span class="comment"> * 遍历源数组找到最大值，通过这最大值创建一个计数数组；</span></span><br><span class="line"><span class="comment"> * 遍历源数组，在计数数组，源数组值位置，++；</span></span><br><span class="line"><span class="comment"> * 遍历计数数组，将数值大于0位置，以此写入源数组。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr 原数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">countSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        max = Math.max(max, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] bucket = <span class="keyword">new</span> <span class="title class_">int</span>[max + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        bucket[arr[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; bucket.length; j++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (bucket[j]-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            arr[i++] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序">堆排序</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 堆排序:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr 源数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">heapSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// O(N*logN)</span></span><br><span class="line">    <span class="comment">// for (int i = 0; i &lt; arr.length; i++) &#123;</span></span><br><span class="line">    <span class="comment">//	 heapInsert(arr, i);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// O(N)</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> arr.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        heapify(arr, i, arr.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">heapSize</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    swap(arr, <span class="number">0</span>, --heapSize);</span><br><span class="line">    <span class="comment">// O(N*logN)</span></span><br><span class="line">    <span class="keyword">while</span> (heapSize &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        heapify(arr, <span class="number">0</span>, heapSize);</span><br><span class="line">        swap(arr, <span class="number">0</span>, --heapSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">heapify</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> index, <span class="type">int</span> heapSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> (index &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; heapSize) &#123; <span class="comment">// 下方还有孩子的时候</span></span><br><span class="line">        <span class="comment">// 两个孩子中，谁的值大，把下标给largest</span></span><br><span class="line">        <span class="comment">// 1）只有左孩子，left -&gt; largest</span></span><br><span class="line">        <span class="comment">// 2) 同时有左孩子和右孩子，右孩子的值&lt;= 左孩子的值，left -&gt; largest</span></span><br><span class="line">        <span class="comment">// 3) 同时有左孩子和右孩子并且右孩子的值&gt; 左孩子的值， right -&gt; largest</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">largest</span> <span class="operator">=</span> left + <span class="number">1</span> &lt; heapSize &amp;&amp; arr[left + <span class="number">1</span>] &gt; arr[left] ? left + <span class="number">1</span> : left;</span><br><span class="line">        <span class="comment">// 父和较大的孩子之间，谁的值大，把下标给largest</span></span><br><span class="line">        largest = arr[largest] &gt; arr[index] ? largest : index;</span><br><span class="line">        <span class="keyword">if</span> (largest == index) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, largest, index);</span><br><span class="line">        index = largest;</span><br><span class="line">        left = (index &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">heapInsert</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (arr[index] &gt; arr[(index - <span class="number">1</span>) / <span class="number">2</span>]) &#123;</span><br><span class="line">        swap(arr, index, (index - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">        index = (index - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="基数排序">基数排序</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基数排序</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">radixSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr == <span class="literal">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    radixSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>, maxbits(arr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">maxbits</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        max = Math.max(max, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (max != <span class="number">0</span>) &#123;</span><br><span class="line">        res++;</span><br><span class="line">        max /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">radixSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> L, <span class="type">int</span> R, <span class="type">int</span> digit)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">int</span> <span class="variable">radix</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span>[] help = <span class="keyword">new</span> <span class="title class_">int</span>[R - L + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">1</span>; d &lt;= digit; d++) &#123;</span><br><span class="line">        <span class="type">int</span>[] count = <span class="keyword">new</span> <span class="title class_">int</span>[radix]; <span class="comment">// count[0..9]</span></span><br><span class="line">        <span class="keyword">for</span> (i = L; i &lt;= R; i++) &#123;</span><br><span class="line">            j = getDigit(arr[i], d);</span><br><span class="line">            count[j]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; radix; i++) &#123;</span><br><span class="line">            count[i] = count[i] + count[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = R; i &gt;= L; i--) &#123;</span><br><span class="line">            j = getDigit(arr[i], d);</span><br><span class="line">            help[count[j] - <span class="number">1</span>] = arr[i];</span><br><span class="line">            count[j]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = L, j = <span class="number">0</span>; i &lt;= R; i++, j++) &#123;</span><br><span class="line">            arr[i] = help[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">getDigit</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> d)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ((x / ((<span class="type">int</span>) Math.pow(<span class="number">10</span>, d - <span class="number">1</span>))) % <span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+        
+          <div class='copyright'>
+            <blockquote>
+              
+                
+                  <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+                
+              
+                
+                  <p>本文永久链接是：<a href="https://solitaire-12.github.io/2024/03/19/algorithm/sort/">https://solitaire-12.github.io/2024/03/19/algorithm/sort/</a></p>
+                
+              
+            </blockquote>
           </div>
         
       
+      <!-- 打赏组件 -->
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/项目上线/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-19T16:13:17+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2024年3月19日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%8E%92%E5%BA%8F/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>排序</p></a></div>
+  <span hidden itemprop="keywords">排序</span>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://solitaire-12.github.io/2024/03/19/algorithm/sort/&title=算法|排序 - 织秋个人博客&summary="
+          
+          >
+          
+            <img src="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://solitaire-12.github.io/2024/03/19/algorithm/sort/&title=算法|排序 - 织秋个人博客&summary="
+          
+          >
+          
+            <img src="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://solitaire-12.github.io/2024/03/19/algorithm/sort/&title=算法|排序 - 织秋个人博客&summary="
+          
+          >
+          
+            <img src="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
   
   
+
   
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2024/03/18/Java/Java8/'>
+          <p class='title'>Java|Java8<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>java8实战汇总
+Lambda表达式
+Lambda表达式有三个部分，参数-&gt;主体
+12(parameters) -&gt; expression(parameters) -&gt;&#1...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+      <meta itemprop="discussionUrl" content="/2024/03/19/algorithm/sort/index.html#comments">
     </span>
-  
-  
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/"  itemprop="url">
-        linux|项目部署
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境
-系统：Centos 8.4.2105
-docker : 24.0.5
-nginx: nginx/1.25.1
-后端
-宿主机安装
 
-后端达成jar包上传到服务器
-ps -ef | grep java查看有没有在运行的java项目，要是端口冲突的话，直接kill
-java -jar没有问题之后，nohup java -jar x.jar &gt; x.log 2&gt;&amp;1 &am...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:25:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
+    <div id="layoutHelper-comments"></div>
 
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装RabbitMQ/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/"  itemprop="url">
-        linux|docker安装RabbitMQ
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        工欲善其事必先利其器：windows下载erlang  下载RabbitMQ  下载RabbitMQ源码
-Docker安装RabbitMQ
-12345678910111213# 查找rabbitmq镜像docker search rabbitmq# pull镜像docker pull rabbitmq# 运行mq ## -p [暴露的宿主机端口]:[docker内部端口]docker run...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:23:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装nginx/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/"  itemprop="url">
-        linux|docker安装nginx
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        centos8.5.2111
-拉取镜像
-1docker pull nginx
-创建Nginx挂载目录
-123mkdir -p mytools/nginx/confmkdir -p mytools/nginx/logmkdir -p mytools/nginx/html
-将容器中的配置复制到宿主机
-12345678# 生成容器docker run --name nginx -p 9001:80...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:23:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装redis/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/"  itemprop="url">
-        linux|docker安装redis
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        centos 8.5.2111
-拉取redis镜像
-1docker pull redis
-
-准备redis的配置文件
-官网： redis 6.0.6 下载 – Redis中国用户组（CRUG）
-
-把redis.conf上传到服务器redis安装的位置
-
-配置redis.conf文件
-
-bind 127.0.0.1 #注释掉这部分，使redis可以外部访问
-daemonize no#用守护线程...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/minio/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/minio/"  itemprop="url">
-        linux|docker安装minio
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境 centos 8.5
-创建minio文件夹
-12mkdir /mytools/miniocd /mytools/minio
-wget下载minio
-1wget https://dl.minio.io/server/minio/release/linux-amd64/minio
-
-创建日志，授权
-12touch minio.logchmod 777 minio
-
-启动minio
-12# ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/minio/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装mysql8/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/"  itemprop="url">
-        linux|docker安装mysql8
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        拉取镜像
-1docker pull mysql:8.0.23
-
-检查镜像
-1docker images
-
-启动镜像
-1234567891011sudo docker run -p 3306:3306 --name mysql  \-v /usr/local/docker/mysql/mysql-files:/var/lib/mysql-files \-v /usr/local/docker/...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:21:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/GitMaven/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/GitMaven/"  itemprop="url">
-        linux|安装Git/Maven
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        安装Git
-1yum install -y git
-校验安装结果
-1git --version
-
-安装maven
-
-
-创建存放maven的文件夹
-1mkdir -p /mytools/maven
-
-
-将maven.gz上传到该文件夹
+  </article>
 
 
 
-解压
-1tar -xvf apache-maven-3.9.4-bin.tar.gz
 
 
-配置环境变量
-1234vim /etc/profile    e...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:20:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/GitMaven/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker/"  itemprop="url">
-        linux|安装Docker
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境 ： centos 8.4.2105
-检查是否存在docker
-1docker -v
-卸载docker
-12345678910yum remove docker \           docker-client \           docker-client-latest \           docker-common \           docker-latest \  ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:20:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/JDK/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/JDK/"  itemprop="url">
-        linux|安装JDK
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        清华云下载jdk ： https://repo.huaweicloud.com/java/
-12345678910111213141516171819202122# 查看是否安装过jdkrpm -qa | grep java# ↑这里要是存在内容，执行删除rpm -qa | grep java | xargs rpm -e --nodeps# 查看java版本java -version# 创...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:14:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/JDK/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-        <p class="current">
-          1 / 2
-        </p>
-        
-          <a class="next" rel="next" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/page/2/">
-            <section class="post next white-box shadow floatable blur">
-              &nbsp;下一页&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
-
-
-    
-  
 </div>
 <aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
@@ -3141,211 +2695,56 @@ wget下载minio
     
     
       
-<section class="widget blogger desktop mobile pjax">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box circle' href='/about/'>
-          <img no-lazy src='https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/Logo-NavBar@3x.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>织秋</h2>
-        
-        
-        
-          <p><span id="jinrishici-sentence">织秋个人博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:#"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://gitee.com/twj2021"
-              class="social fa-solid fa-g flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget category desktop pjax">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Java/" href="/categories/Java/"
-            active-action="action-categoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%88%9D%E5%A7%8B/" href="/categories/%E5%88%9D%E5%A7%8B/"
-            active-action="action-categoriesE5889DE5A78B"
-            ><div class='name'>初始</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%8D%9A%E5%AE%A2/" href="/categories/%E5%8D%9A%E5%AE%A2/"
-            active-action="action-categoriesE58D9AE5AEA2"
-            ><div class='name'>博客</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"
-            active-action="action-categoriesE69C8DE58AA1E599A8"
-            ><div class='name'>服务器</div><div class='badge'>(11)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%AE%97%E6%B3%95/" href="/categories/%E7%AE%97%E6%B3%95/"
-            active-action="action-categoriesE7AE97E6B395"
-            ><div class='name'>算法</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget tagcloud desktop mobile pjax">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/%E5%AE%89%E8%A3%85/" style="font-size: 24px; color: #555">安装</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-<section class="widget desktop pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>16 篇</div>
-        </div>
-      
-
-      
-
-
-      
-
-      
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          <div id="last-update-show">2024-03-19 日</div>
-        </div>
-      
-    </div>
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-
-<section class="widget desktop mobile pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-clock WISTERIA fa-fw" aria-hidden="true"></i><span class='name'>最近更新</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/03/19/algorithm/sort/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|排序</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"><div class="item"><time>2024-03-19</time><span>服务器</span></div><span>内网穿透</span></a></li><li><a class="widget-last" href="/2024/03/18/Java/JVM/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|JVM</span></a></li><li><a class="widget-last" href="/2024/03/18/Java/Java8/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|Java8</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/dms/"><div class="item"><time>2024-03-18</time><span>服务器</span></div><span>数据管理DMS</span></a></li></ul>
-  </div>
-</section>
-
     
   
 
 
 <div class="widget-sticky pjax">
 
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">认识位运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B4%E6%95%B0%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B632%E4%BD%8D%E5%AD%97%E7%AC%A6"><span class="toc-text">获取整数的二进制32位字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%9A%E6%88%96"><span class="toc-text">|：或</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%9A%E4%B8%8E"><span class="toc-text">&amp;：与</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%9A%E4%BA%A6%E6%88%96"><span class="toc-text">^：亦或</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%9A%E9%9D%9E"><span class="toc-text">~：非</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%9A%E5%B7%A6%E7%A7%BB"><span class="toc-text">&lt;&lt;：左移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%9A%E5%8F%B3%E7%A7%BB"><span class="toc-text">&gt;&gt;：右移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%9A%E6%97%A0%E7%AC%A6%E5%8F%B7%E5%8F%B3%E7%A7%BB"><span class="toc-text">&gt;&gt;&gt;：无符号右移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E4%BD%BF%E7%94%A8"><span class="toc-text">常见使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8D%B0"><span class="toc-text">打印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2"><span class="toc-text">交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-text">选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-text">插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="toc-text">归并排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-text">快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-text">计数排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="toc-text">堆排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F"><span class="toc-text">基数排序</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+  
+
 </div>
 
 
 <!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
 
   <div class="pjax">
     <!-- pjax占位 -->
@@ -3365,13 +2764,14 @@ wget下载minio
 </aside>
 
 
+
           <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -3878,7 +3278,7 @@ wget下载minio
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/服务器/","name":"服务器"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/算法/","name":"算法"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/03/19/algorithm/sort/","name":"算法|排序"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"算法|排序","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/03/19/algorithm/sort/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/03/19/algorithm/sort/","wordCount":0,"datePublished":"2024-03-19T07:33:11.324Z","dateModified":"2024-03-19T08:13:17.393Z","articleSection":"算法","keywords":"排序","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
