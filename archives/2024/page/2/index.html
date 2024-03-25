@@ -1626,7 +1626,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1710841136685),
+    lastupdate: new Date(1711332660534),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2369,79 +2369,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/minio/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/minio/"  itemprop="url">
-        linux|docker安装minio
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境 centos 8.5
- 创建minio文件夹
-12mkdir /mytools/miniocd /mytools/minio
- wget下载minio
-1wget https://dl.minio.io/server/minio/release/linux-amd64/minio
-
- 创建日志，授权
-12touch minio.logchmod 777 minio
-
- 启动minio
-...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/minio/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
   <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装redis/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
@@ -2469,18 +2396,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         centos 8.5.2111
- 拉取redis镜像
+拉取redis镜像
 1docker pull redis
 
- 准备redis的配置文件
+准备redis的配置文件
 官网： redis 6.0.6 下载 – Redis中国用户组（CRUG）
 
 把redis.conf上传到服务器redis安装的位置
 
- 配置redis.conf文件
+配置redis.conf文件
 
 bind 127.0.0.1 #注释掉这部分，使redis可以外部访问
-daemonize no#用守...
+daemonize no#用守护线程...
       
     
   </div>
@@ -2502,6 +2429,79 @@ daemonize no#用守...
       
         <div>
           <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/minio/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="织秋个人博客">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="织秋个人博客">
+    <meta itemprop="description" content="座右铭">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/03/18/Server/minio/"  itemprop="url">
+        linux|docker安装minio
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        环境 centos 8.5
+创建minio文件夹
+12mkdir /mytools/miniocd /mytools/minio
+wget下载minio
+1wget https://dl.minio.io/server/minio/release/linux-amd64/minio
+
+创建日志，授权
+12touch minio.logchmod 777 minio
+
+启动minio
+12# ...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/03/18/Server/minio/' itemprop="url">
             阅读全文
           </a>
         </div>
@@ -2543,14 +2543,14 @@ daemonize no#用守...
   <div class='md article-desc' itemprop="articleBody">
     
       
-         拉取镜像
+        拉取镜像
 1docker pull mysql:8.0.23
 
- 检查镜像
+检查镜像
 1docker images
 
- 启动镜像
-1234567891011sudo docker run -p 3306:3306 --name mysql  \-v /usr/local/docker/mysql/mysql-files:/var/lib/mysql-files \-v /usr/local/dock...
+启动镜像
+1234567891011sudo docker run -p 3306:3306 --name mysql  \-v /usr/local/docker/mysql/mysql-files:/var/lib/mysql-files \-v /usr/local/docker/...
       
     
   </div>
@@ -2613,12 +2613,12 @@ daemonize no#用守...
   <div class='md article-desc' itemprop="articleBody">
     
       
-         安装Git
+        安装Git
 1yum install -y git
 校验安装结果
 1git --version
 
- 安装maven
+安装maven
 
 
 创建存放maven的文件夹
@@ -2634,7 +2634,7 @@ daemonize no#用守...
 
 
 配置环境变量
-1234vim /etc/profile   ...
+1234vim /etc/profile    e...
       
     
   </div>
@@ -2698,10 +2698,10 @@ daemonize no#用守...
     
       
         环境 ： centos 8.4.2105
- 检查是否存在docker
+检查是否存在docker
 1docker -v
- 卸载docker
-12345678910yum remove docker \           docker-client \           docker-client-latest \           docker-common \           docker-latest \...
+卸载docker
+12345678910yum remove docker \           docker-client \           docker-client-latest \           docker-common \           docker-latest \  ...
       
     
   </div>
@@ -2828,12 +2828,12 @@ daemonize no#用守...
   <div class='md article-desc' itemprop="articleBody">
     
       
-         1.相对路径挂载图片【文章显示】
+        1.相对路径挂载图片【文章显示】
 
 
 在 _config.yml文件中配置 post_asset_folder
 1234post_asset_folder: truemarked:  prependRoot: true  postAsset: true
-💬配置之后，当执行 hexo new titleName之后，会在该titleName.md文件夹的同级目录下生成一个同名文件夹用来存放...
+💬配置之后，当执行 hexo new titleName之后，会在该titleName.md文件夹的同级目录下生成一个同名文件夹用来存放图...
       
     
   </div>
@@ -2897,9 +2897,9 @@ daemonize no#用守...
     
       
         下载：数据管理DMS–下载中心 (aliyun.com)
- 本地部署：
+本地部署：
 安装好之后，登录实例即可。
- 问题：内网IP链接失败
+问题：内网IP链接失败
 
 解决方法：【本地数据库是MySQL】
 
@@ -2911,7 +2911,7 @@ daemonize no#用守...
 
 
 修改root用户的host
-1update u...
+1update use...
       
     
   </div>
@@ -2974,8 +2974,17 @@ daemonize no#用守...
   <div class='md article-desc' itemprop="articleBody">
     
       
-        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
- Q...
+        $log_{}n$
+
+$$
+log_{}n
+$$
+😄
+$$
+\frac{m}{2}\leq k \leq m
+$$
+$log_{2}n$
+Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you ...
       
     
   </div>
@@ -3206,7 +3215,7 @@ daemonize no#用守...
       
         <div class="webinfo-item">
           <div>最后活动时间：</div>
-          <div id="last-update-show">2024-03-19 日</div>
+          <div id="last-update-show">2024-03-25 日</div>
         </div>
       
     </div>
@@ -3231,7 +3240,7 @@ daemonize no#用守...
 
 
   <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/03/19/algorithm/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|数据结构(Java)</span></a></li><li><a class="widget-last" href="/2024/03/19/Java/%E9%9B%86%E5%90%88/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|集合特性测试</span></a></li><li><a class="widget-last" href="/2024/03/19/Java/%E6%B3%9B%E5%9E%8B/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|泛型</span></a></li><li><a class="widget-last" href="/2024/03/19/algorithm/sort/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|排序</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"><div class="item"><time>2024-03-19</time><span>服务器</span></div><span>内网穿透</span></a></li></ul>
+    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/03/14/hello-world/"><div class="item"><time>2024-03-25</time><span>初始</span></div><span>Hello World</span></a></li><li><a class="widget-last" href="/2024/03/19/algorithm/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|数据结构(Java)</span></a></li><li><a class="widget-last" href="/2024/03/19/Java/%E9%9B%86%E5%90%88/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|集合特性测试</span></a></li><li><a class="widget-last" href="/2024/03/19/Java/%E6%B3%9B%E5%9E%8B/"><div class="item"><time>2024-03-19</time><span>Java</span></div><span>Java|泛型</span></a></li><li><a class="widget-last" href="/2024/03/19/algorithm/sort/"><div class="item"><time>2024-03-19</time><span>算法</span></div><span>算法|排序</span></a></li></ul>
   </div>
 </section>
 

@@ -41,7 +41,7 @@
 <meta property="og:title" content="Java|JVM">
 <meta property="og:url" content="https://solitaire-12.github.io/2024/03/18/Java/JVM/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="类加载  加载过程  将java文件编译成class字节码文件，通过类加载器写入到JVM虚拟机运行时数据区中。    类加载流程 ​	类加载需要经历五个阶段，分别是加载，验证，准备，解析，初始化。其中加载，验证，准备，初始化这四个阶段发生的顺序时确定的，而解析阶段时不一定的。它在某些情况下可以在初始化阶段之后开始，这是为了支持java的运行时绑定（也称做动态绑定）。另外，这些阶段都是按顺序开始，">
+<meta property="og:description" content="类加载 加载过程  将java文件编译成class字节码文件，通过类加载器写入到JVM虚拟机运行时数据区中。   类加载流程 ​	类加载需要经历五个阶段，分别是加载，验证，准备，解析，初始化。其中加载，验证，准备，初始化这四个阶段发生的顺序时确定的，而解析阶段时不一定的。它在某些情况下可以在初始化阶段之后开始，这是为了支持java的运行时绑定（也称做动态绑定）。另外，这些阶段都是按顺序开始，而非按">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-03-18T12:10:55.000Z">
@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1710841136685),
+    lastupdate: new Date(1711332660534),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2442,20 +2442,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <h1 id="类加载"><a class="markdownIt-Anchor" href="#类加载"></a> 类加载</h1>
-<h2 id="加载过程"><a class="markdownIt-Anchor" href="#加载过程"></a> 加载过程</h2>
+    <h1>类加载</h1>
+<h2 id="加载过程">加载过程</h2>
 <blockquote>
 <p>将<code>java</code>文件<strong>编译</strong>成<code>class</code>字节码文件，通过<strong>类加载器</strong>写入到<code>JVM</code>虚拟机<strong>运行时数据区</strong>中。</p>
 </blockquote>
 <p><img src="/2024/03/18/Java/JVM/%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h2 id="类加载流程"><a class="markdownIt-Anchor" href="#类加载流程"></a> 类加载流程</h2>
+<h2 id="类加载流程">类加载流程</h2>
 <p>​	类加载需要经历<strong>五个</strong>阶段，分别是<strong>加载，验证，准备，解析，初始化</strong>。其中加载，验证，准备，初始化这四个阶段发生的顺序时确定的，而解析阶段时不一定的。它在某些情况下可以在初始化阶段之后开始，这是为了支持<code>java</code>的运行时绑定（也称做动态绑定）。另外，这些阶段都是按<strong>顺序开始</strong>，而非按顺序进行或者完成。</p>
 <p><img src="/2024/03/18/Java/JVM/%E7%B1%BB%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B).png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E7%B1%BB%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F(%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B).png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h2 id="类加载器"><a class="markdownIt-Anchor" href="#类加载器"></a> 类加载器</h2>
+<h2 id="类加载器">类加载器</h2>
 <p><strong>双亲委派机制</strong>：</p>
 <p>​	当某个类加载器需要加载某个<code>class</code>文件时，它首先会把这个任务委派给它的父级加载器，递归到顶级加载器。随后进行加载，倘若加载失败，由子类加载器进行加载。可以保证同一个<code>class</code>只被加载一次。</p>
 <p><img src="/2024/03/18/Java/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h1 id="运行时数据区"><a class="markdownIt-Anchor" href="#运行时数据区"></a> 运行时数据区</h1>
+<h1>运行时数据区</h1>
 <p>绿色线程共享，蓝色线程私有</p>
 <p><img src="/2024/03/18/Java/JVM/jdk6.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/jdk6.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt><br>
 <img src="/2024/03/18/Java/JVM/jdk7.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/jdk7.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt><br>
@@ -2466,31 +2466,31 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li><code>JDK7</code>：有永久代，但是已经把运行时常量池，常量池存放在方法区中了，逐渐的减少永久代的使用。</li>
 <li><code>JDK8</code>：无永久代，运行是常量池、类常量池都保存在元数据区，也就是<strong>元空间</strong> 。但是字符串常量池任然放在堆上。需要注意的是：元空间占用的是<strong>本地内存</strong>。</li>
 </ul>
-<h2 id="内存模型"><a class="markdownIt-Anchor" href="#内存模型"></a> 内存模型</h2>
-<h3 id="程序计数器"><a class="markdownIt-Anchor" href="#程序计数器"></a> 程序计数器</h3>
+<h2 id="内存模型">内存模型</h2>
+<h3 id="程序计数器">程序计数器</h3>
 <p><strong>线程私有</strong>。Java虚拟机执行多线程时，由于CPU时间片限制，线程执行具有随机性，操作系统会一直切换执行不同指令，我们需要把切换时候线程执行的位置存入到PC寄存器中，等切回来的时候能够回到原来的位置继续执行。 任何时候，每个Java虚拟机都在执行单个方法的代码，即该线程的当前方法。如果该方法不是<code>Native</code>方法，即PC寄存器会记录当前正在执行的<code>java</code>虚拟机指令的地址，如果线程当前执行的方法是本地的，那么<code>java</code>虚拟机的PC寄存器的值就是<code>Undefined</code>。 <strong>程序计数器是唯一一个不会出现<code>OOM</code>的区域。</strong></p>
-<h3 id="本地方法栈"><a class="markdownIt-Anchor" href="#本地方法栈"></a> 本地方法栈</h3>
+<h3 id="本地方法栈">本地方法栈</h3>
 <p><strong>线程私有</strong>。提供虚拟机使用到本地<code>Native</code>方法，本地方法栈和虚拟机栈在有的虚拟机是合在一起的，例如Hot Spot虚拟机。</p>
-<h3 id="栈"><a class="markdownIt-Anchor" href="#栈"></a> 栈</h3>
+<h3 id="栈">栈</h3>
 <p><strong>线程私有</strong>，每个线程都有一个与线程同时创建的私有的虚拟机栈。虚拟机栈中存储栈帧，每个被线程调用的方法都会产生一个栈帧，栈帧中保存一个方法的状态信息，例如<strong>局部变量</strong>(存储方法内的局部变量)、<strong>操作数帧</strong>(用来计算临时存放变量)、<strong>方法出口</strong>(记录哪个方法的本方法)、<strong>动态链接</strong>(存放方法的元信息)等。调用一个方法就是执行一个栈帧的过程，一个方法调用完成，对应的栈帧就会出栈。</p>
 <ul>
 <li>如果线程执行所需栈深度大于Java虚拟机栈深度，就会抛出<code>StackOverFlowError</code>，其实方法调用的过程就是入栈和出栈的过程，如果一致入栈不出栈，就容易发生异常（递归调用）</li>
 <li>如果Java虚拟机栈可以动态扩展，但是扩展大小的时候无法申请到足够的内存，则会抛出<code>OutOfMemoryError</code>。</li>
 </ul>
-<h3 id="堆"><a class="markdownIt-Anchor" href="#堆"></a> 堆</h3>
+<h3 id="堆">堆</h3>
 <p><strong>线程共享</strong>。堆是<code>java</code>虚拟机管理内存最大的一块，在虚拟机启动时创建，所有线程共享，堆中的对象永远不会被显式释放，必须由<code>GC</code>回收，所以<code>GC</code>也主要回收堆中的对象实例，我们平常讨论的垃圾回收就是回收堆内存。堆可以处于物理上不连续的空间，可以固定大小，也可以动态扩展，通过参数<code>-Xms</code>和<code>-Xmx</code>两个参数控制堆的最小值和最大值。这里是**<code>OOM</code>异常的易发区**</p>
 <p>分成新生代和老年代。</p>
 <p>新生代又分成1个<code>Eden</code>区和2个<code>Survivor</code>区，默认比例<code>8:1:1</code></p>
 <p>绝大多数对象在<code>Eden</code>区生成，**当Eden区填满，或者不满足新建一个对象时，触发<code>Young GC</code>。**将存活的对象放进<code>Survivor</code>。<code>Survivor</code>分成两块，用于每次<code>Young GC</code>时，将存活的对象统统复制进空的幸存区，将有数据的那块清空。</p>
 <p>当一个对象在两个survivor区之间交换了一定次数之后，将对象拷贝到老年代。<strong>这个数量用<code>-XX:MaxTenuringThreshold</code>配置，默认值是15</strong></p>
-<h3 id="方法区"><a class="markdownIt-Anchor" href="#方法区"></a> 方法区</h3>
+<h3 id="方法区">方法区</h3>
 <p><strong>线程共享</strong>，在虚拟机启动时创建，存储已经被虚拟机加载的类信息、常量、静态变量，即经编译器之后的数据(运行时常量池[存放<code>class</code>文件元信息描述，编译后的代码数据，引用类型数据，类文件常量池]、属性和方法数据)，以及方法和构造函数的代码，包括在类和实例初始化以及接口初始化使用的特殊方法，方法区在逻辑上是堆的一部分，但是它又有另一个别名叫非堆，目的是与堆区分开。方法区可以是固定大小，也可以根据计算需要进行扩展。如果方法区的内存无法满足分配请求时也会抛出<code>OutOfMemoryError</code>。</p>
 <p><strong>永久代</strong></p>
-<h3 id="元空间"><a class="markdownIt-Anchor" href="#元空间"></a> 元空间</h3>
+<h3 id="元空间">元空间</h3>
 <p><code>JDK8</code>使用元空间代替永久代（类元信息，字段，静态属性，方法，常量），同时运行时常量池等都移动到了元空间，字符串常量池在堆中。</p>
 <p>元空间在<strong>本地内存</strong>中，它独立于运行时数据区，也不是Java虚拟机规范中定义的内存区域，它直接从操作系统中分配，因此不受堆大小影响。但是会受到本机总内存大小以及处理器寻址空间的限制，因此它也可能抛出<code>OOM</code>异常。</p>
-<h1 id="垃圾回收"><a class="markdownIt-Anchor" href="#垃圾回收"></a> 垃圾回收</h1>
-<h2 id="找到垃圾"><a class="markdownIt-Anchor" href="#找到垃圾"></a> 找到垃圾</h2>
+<h1>垃圾回收</h1>
+<h2 id="找到垃圾">找到垃圾</h2>
 <p>​	两种方法判断对象是否需要销毁：</p>
 <ul>
 <li>
@@ -2504,55 +2504,54 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>​	解决了循环依赖问题。</p>
 </li>
 </ul>
-<h2 id="垃圾回收算法-gc"><a class="markdownIt-Anchor" href="#垃圾回收算法-gc"></a> 垃圾回收算法-<code>GC</code></h2>
-<h3 id="标记-清除算法"><a class="markdownIt-Anchor" href="#标记-清除算法"></a> 标记-清除算法</h3>
+<h2 id="垃圾回收算法-GC">垃圾回收算法-<code>GC</code></h2>
+<h3 id="标记-清除算法">标记-清除算法</h3>
 <p><img src="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%89%8D.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%89%8D.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <ol>
 <li>首先在堆内存扫描一遍，然后把灰色区域的对象标记</li>
-<li>继续扫描，扫描的同时将被标记的对象统一回收<br>
-回收后：</li>
+<li>继续扫描，扫描的同时将被标记的对象统一回收回收后：</li>
 </ol>
 <p><img src="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%90%8E-%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%90%8E-%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <ul>
 <li>回收之后，产生大量不连续的内存碎片。</li>
 <li>需要进行标记，清除两个过程，效率不高。</li>
 </ul>
-<h3 id="复制算法"><a class="markdownIt-Anchor" href="#复制算法"></a> 复制算法</h3>
+<h3 id="复制算法">复制算法</h3>
 <p>​	将内存区域分成大小一样的两块，每次只是用一块，<code>gc</code>之后将对象复制到另一块，然后一次性清理掉这块内存。</p>
 <p>回收前：</p>
 <p><img src="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%89%8D-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%89%8D-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <p>回收后：</p>
 <p><img src="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%90%8E-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%90%8E-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <p>复制算法的缺点是牺牲了一半的内存空间，有点浪费。复制算法在<code>JVM</code>中的体现就是：<code>java</code>堆内存做了几次划分，<code>Hot Spot</code>虚拟机中<code>Eden</code>和<code>Survivor</code>的比例是<code>Eden:S0:S1=8:1:1</code>，将<code>Survivor</code>分成了两个区域<code>S0</code>和<code>S1</code>来进行赋值，这种做法是为了弥补原始复制算法直接将一半空间作为空闲空间的浪费。IBM公司表示：<code>Young</code>区有98%的对象都是朝生夕死的，生命周期极短，所以说一次<code>GC</code>下来存活的对象很少，所以没必要用一半空间来复制。</p>
-<h3 id="标记-整理算法"><a class="markdownIt-Anchor" href="#标记-整理算法"></a> 标记-整理算法</h3>
+<h3 id="标记-整理算法">标记-整理算法</h3>
 <p>​	标记-整理算法就是为了老年代而设计的算法，标记-整理算法和标记-清除算法的区别在最后一步，标记-整理不会直接对对象清理，而是进行移动，将存活对象移动到一端，然后清理掉边界以外的对象。</p>
 <p>回收前：</p>
 <p><img src="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%89%8D.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%89%8D.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <p>回收后：</p>
 <p><img src="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%90%8E-%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%90%8E-%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h3 id="分代收集算法"><a class="markdownIt-Anchor" href="#分代收集算法"></a> 分代收集算法</h3>
+<h3 id="分代收集算法">分代收集算法</h3>
 <p>​	目前主流的商业虚拟机都是采用分代收集算法，这种算法就是上面三种算法的结合。新生代采用复制算法，老年代采用标记-整理或标记-清除算法。</p>
-<h2 id="垃圾收集器"><a class="markdownIt-Anchor" href="#垃圾收集器"></a> 垃圾收集器</h2>
-<h3 id="serial-和serial-old-收集器"><a class="markdownIt-Anchor" href="#serial-和serial-old-收集器"></a> Serial 和Serial Old 收集器</h3>
+<h2 id="垃圾收集器">垃圾收集器</h2>
+<h3 id="Serial-和Serial-Old-收集器">Serial 和Serial Old 收集器</h3>
 <p><img src="/2024/03/18/Java/JVM/Serial%E5%92%8CSerial_Old%E6%94%B6%E9%9B%86%E5%99%A8.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/Serial%E5%92%8CSerial_Old%E6%94%B6%E9%9B%86%E5%99%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <p>Serial 单线程，<code>GC</code>时Stop The World（<code>STW</code>），暂停所有用户线程。</p>
 <p>Serial Old 单线程，作用与老年代。标记整理算法</p>
 <p>​	<strong>优点</strong>：单线程收集效率高</p>
 <p>​	<strong>缺点</strong>：需要<code>STW</code>，暂停所有用户线程</p>
 <p>​	<strong>算法</strong>： Serial采用复制算法 ；Serial Old采用标记-整理算法</p>
-<h3 id="parnew收集器"><a class="markdownIt-Anchor" href="#parnew收集器"></a> ParNew收集器</h3>
+<h3 id="ParNew收集器">ParNew收集器</h3>
 <p><img src="/2024/03/18/Java/JVM/ParNew_GC%E6%94%B6%E9%9B%86%E5%99%A8.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/ParNew_GC%E6%94%B6%E9%9B%86%E5%99%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <p>​	<code>ParNew</code>收集器是Serial收集器的多线程版本，实现并行收集， 原理跟Serial一致（并行指的是多个<code>GC</code>线程并行，但是用户线程还是暂停，并发指的是用户线程和<code>GC</code>线程同时执行）。<code>ParNew</code>默认开启和CPU个数相同的线程数进行回收。</p>
 <p>​	<strong>优点</strong>：在多CPU时，比Serial的效率高。</p>
 <p>​	<strong>缺点</strong>：还是需要<code>STW</code>，单CPU时比Serial效率低</p>
 <p>​	<strong>算法</strong>：复制算法</p>
-<h3 id="parallel-scavenge-收集器"><a class="markdownIt-Anchor" href="#parallel-scavenge-收集器"></a> Parallel Scavenge 收集器</h3>
+<h3 id="Parallel-Scavenge-收集器">Parallel Scavenge 收集器</h3>
 <p>新生代收集器，也是<strong>复制算法</strong>，和<code>ParNew</code>一样并行的多线程收集器，更关注系统的吞吐量<br>[吞吐量=(运行用户代码的时间) / (运行用户代码的时间+ <code>GC</code> 时间) ]<br>Parallel Scavenge 提供了两个参数用于精确控制吞吐量：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-XX:MaxGCPauseMillis //GC最大停顿毫秒数，必须大于0</span><br><span class="line">-XX:GCTimeRation //设置吞吐量大小，大于0小于100，默认值为99</span><br><span class="line">-XX:+UseAdaptiveSizePolicy //开启自适应策略</span><br><span class="line"></span><br><span class="line">//你会不会觉得把MaxGCPauseMillis设置小点就会让GC速度变快？</span><br><span class="line">//答案是否定的，如果设置时间过小，Parallel Scavenge 会牺牲吞吐量和新生代空间来交换，</span><br><span class="line">//比如新生代400Mb需要GC时间为100ms，设置成50ms了，那么就会把新生代调小为200Mb，这样肯定时间就降下来了，</span><br><span class="line">//然而这种操作可能会降低吞吐量，原先10s触发一次GC，每次100ms，</span><br><span class="line">//	修改时间后变成5s触发一次GC，每次70ms，那么10ms触发两次GC的时间变成了140ms，吞吐量反而降低。</span><br></pre></td></tr></table></figure>
-<h3 id="parallel-old-收集器"><a class="markdownIt-Anchor" href="#parallel-old-收集器"></a> Parallel Old 收集器</h3>
+<h3 id="Parallel-Old-收集器">Parallel Old 收集器</h3>
 <p>是Parallel Scavenge 的老年代版本，使用<strong>标记-整理算法</strong>，因为Parallel Scavenge 无法和<code>CMS</code>搭配使用，所以只能和Serial Old。自从Parallel Old出现，就有了Parallel Scavenge +Parallel Old的组合，这是<code>JDK8</code>使用的，注重吞吐量的一组收集器。</p>
 <p><img src="/2024/03/18/Java/JVM/Parallel_Scavenge%E5%92%8CParallel_Old-GC%E6%94%B6%E9%9B%86%E5%99%A8.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/Parallel_Scavenge%E5%92%8CParallel_Old-GC%E6%94%B6%E9%9B%86%E5%99%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h3 id="cms收集器"><a class="markdownIt-Anchor" href="#cms收集器"></a> CMS收集器</h3>
+<h3 id="CMS收集器">CMS收集器</h3>
 <p><img src="/2024/03/18/Java/JVM/CMS%E6%94%B6%E9%9B%86%E5%99%A8.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/CMS%E6%94%B6%E9%9B%86%E5%99%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
 <p>这是优化<code>GC</code>停顿时间为目标的收集器，并发回收（仍然需要<code>STW</code>，但是时间很短）。通过<code>-XX:+UseMarkSweepGC</code>启用。<code>CMS</code>基于<strong>标记-清除算法</strong>实现。整个过程分为四步：</p>
 <ul>
@@ -2569,11 +2568,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 <p><strong>优点</strong>：并发收集，低停顿</p>
 <p><strong>缺点</strong>：产生大量碎片，并发阶段会降低吞吐量</p>
-<h3 id="g1收集器"><a class="markdownIt-Anchor" href="#g1收集器"></a> G1收集器</h3>
+<h3 id="G1收集器">G1收集器</h3>
 <p>​	<code>G1</code>是以优化<code>GC</code>停顿时间为目标的收集器，它尝试以高概率满足<code>GC</code>停顿时间为目标，同时实现高吞吐量。在<code>G1</code>中，将堆的整个内存布局做了修改，在<code>G1</code>中整个堆划分为多个大小相等的独立区域Region，虽然在逻辑上还保留了新生代和老年代，但是物理上已经隔离了，<code>G1</code>的堆内存布局如下<a target="_blank" rel="noopener" href="https://blog.csdn.net/java_beautiful/article/details/125483273">图</a> ：</p>
 <p><img src="/2024/03/18/Java/JVM/G1%E6%94%B6%E9%9B%86%E5%99%A8%E5%86%85%E5%AD%98%E5%9B%BE.png" class="lazyload" data-srcset="/2024/03/18/Java/JVM/G1%E6%94%B6%E9%9B%86%E5%99%A8%E5%86%85%E5%AD%98%E5%9B%BE.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p>上图智能柜被划分成一组大小相同的Region，每个Region都是连续的虚拟内存范围，<code>G1</code>可以知道哪个Region区域内大部分是空的，这样就可以在每次允许的收集时间内优先回收价值最大的Region区域（根据回收所获得的空间大小以及回收需要的时间综合考虑）所以这就是<code>G1</code>叫做Garbage-First的原因。<strong><code>G1</code>是<code>JDK8</code>默认的垃圾收集器</strong>。<br>
-<code>G1</code>的工作流程和<code>CMS</code>很相似，区别在最后的步骤。也有四步：</p>
+<p>上图智能柜被划分成一组大小相同的Region，每个Region都是连续的虚拟内存范围，<code>G1</code>可以知道哪个Region区域内大部分是空的，这样就可以在每次允许的收集时间内优先回收价值最大的Region区域（根据回收所获得的空间大小以及回收需要的时间综合考虑）所以这就是<code>G1</code>叫做Garbage-First的原因。<strong><code>G1</code>是<code>JDK8</code>默认的垃圾收集器</strong>。<code>G1</code>的工作流程和<code>CMS</code>很相似，区别在最后的步骤。也有四步：</p>
 <ul>
 <li>初始标记：需要<code>STW</code>，标记下<code>GC Roots</code>关联的对象，并且修改TAMS（Next Top at Mark Start）的值，使得下一阶段并发运行时，能在正确可用的Region中创建对象。</li>
 <li>并发标记：和<code>CMS</code>一样，主要是进行<code>GC Roots</code>的向下搜索，找出存活对象进行标记。</li>
@@ -2587,7 +2585,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>对象分配率或提升率差异很大</li>
 <li>当前应用程序<code>GC</code>停顿时间超过0.5秒，又想缩短停顿时间</li>
 </ul>
-<h3 id="各收集对比"><a class="markdownIt-Anchor" href="#各收集对比"></a> 各收集对比</h3>
+<h3 id="各收集对比">各收集对比</h3>
 <table>
 <thead>
 <tr>
@@ -2663,9 +2661,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>并行收集器【吞吐量优先】：Parallel Scavenge + Parallel Old，适用于科学计算、后台处理等场景。</li>
 <li>并发收集器【GC停顿时间优先】：CMS和G1，适用于对时间有要求的场景，例如Web应用。</li>
 </ul>
-<h2 id="调优"><a class="markdownIt-Anchor" href="#调优"></a> 调优</h2>
+<h2 id="调优">调优</h2>
 <p>所谓调优就是设置一个合理的JVM参数，适配当前系统运行。</p>
-<h3 id="参数"><a class="markdownIt-Anchor" href="#参数"></a> 参数</h3>
+<h3 id="参数">参数</h3>
 <p>可以分成三类：标准参数，-X参数，-XX参数</p>
 <ul>
 <li>
@@ -2697,7 +2695,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </ul>
 </li>
 </ul>
-<h4 id="常用参数"><a class="markdownIt-Anchor" href="#常用参数"></a> 常用参数</h4>
+<h4 id="常用参数">常用参数</h4>
 <table>
 <thead>
 <tr>
@@ -2748,7 +2746,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </tr>
 </tbody>
 </table>
-<h3 id="命令监控工具"><a class="markdownIt-Anchor" href="#命令监控工具"></a> 命令监控工具</h3>
+<h3 id="命令监控工具">命令监控工具</h3>
 <p>待续</p>
 <hr>
 <p>参考：</p>
@@ -2884,25 +2882,25 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='prev' href='/2024/03/18/Java/Java8/'>
           <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Java|Java8</p>
-          <p class='content'> java8实战汇总
- Lambda表达式
+          <p class='content'>java8实战汇总
+Lambda表达式
 Lambda表达式有三个部分，参数-&gt;主体
-12(parameters) -&gt; expression(parameters) -&gt;&...</p>
+12(parameters) -&gt; expression(parameters) -&gt;&#1...</p>
         </a>
       
       
         <a class='next' href='/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/'>
           <p class='title'>内网穿透<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'> 环境：
+          <p class='content'>环境：
 
 服务端阿里云： CentOS 8.5.2111
 客户端：windows 11 / windows 10
 frp 0.42
 
- 第一步
+第一步
 
 官网下载frp软件
-笔者使用的版本：链接：ht...</p>
+笔者使用的版本：链接：http...</p>
         </a>
       
     </div>
@@ -2960,7 +2958,7 @@ frp 0.42
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-text"> 加载过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B"><span class="toc-text"> 类加载流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-text"> 类加载器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-text"> 程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="toc-text"> 本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88"><span class="toc-text"> 栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86"><span class="toc-text"> 堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="toc-text"> 方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%A9%BA%E9%97%B4"><span class="toc-text"> 元空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E5%9E%83%E5%9C%BE"><span class="toc-text"> 找到垃圾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95-gc"><span class="toc-text"> 垃圾回收算法-GC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="toc-text"> 标记-清除算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="toc-text"> 复制算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="toc-text"> 标记-整理算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="toc-text"> 分代收集算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text"> 垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#serial-%E5%92%8Cserial-old-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text"> Serial 和Serial Old 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parnew%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text"> ParNew收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel-scavenge-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text"> Parallel Scavenge 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel-old-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text"> Parallel Old 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cms%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text"> CMS收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#g1%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text"> G1收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E6%94%B6%E9%9B%86%E5%AF%B9%E6%AF%94"><span class="toc-text"> 各收集对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E4%BC%98"><span class="toc-text"> 调优</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text"> 参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text"> 常用参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7"><span class="toc-text"> 命令监控工具</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="toc-text">加载过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B"><span class="toc-text">类加载流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-text">类加载器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-text">内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-text">程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88"><span class="toc-text">本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88"><span class="toc-text">栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86"><span class="toc-text">堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="toc-text">方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%A9%BA%E9%97%B4"><span class="toc-text">元空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E5%9E%83%E5%9C%BE"><span class="toc-text">找到垃圾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95-GC"><span class="toc-text">垃圾回收算法-GC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="toc-text">标记-清除算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="toc-text">复制算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="toc-text">标记-整理算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="toc-text">分代收集算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-%E5%92%8CSerial-Old-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">Serial 和Serial Old 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ParNew%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">ParNew收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parallel-Scavenge-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">Parallel Scavenge 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parallel-Old-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">Parallel Old 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMS%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">CMS收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#G1%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">G1收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E6%94%B6%E9%9B%86%E5%AF%B9%E6%AF%94"><span class="toc-text">各收集对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E4%BC%98"><span class="toc-text">调优</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text">参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text">常用参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7"><span class="toc-text">命令监控工具</span></a></li></ol></li></ol>
     </div>
   </section>
 
