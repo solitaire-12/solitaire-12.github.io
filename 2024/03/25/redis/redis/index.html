@@ -41,11 +41,11 @@
 <meta property="og:title" content="Redis|导航">
 <meta property="og:url" content="https://solitaire-12.github.io/2024/03/25/redis/redis/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="本文章是对黄健宏《Redis设计与实现》的总结以及摘录。  持久化导读：redis是内存数据库，它将自己的数据库状态储存在内存中。所以当redis服务进程退出时，服务器中的数据也将消失，故而需要将其数据保存到磁盘中。  RDB持久化  博客跳转↗️ AOF持久化  博客跳转↗️   高可用导读：高可用，也称HA（High Availability），是分布式系统架构设计中必须考虑的因素之一，通常指">
+<meta property="og:description" content="持久化 持久化导读：redis是内存数据库，它将自己的数据库状态储存在内存中。所以当redis服务进程退出时，服务器中的数据也将消失，故而需要将其数据保存到磁盘中。  RDB持久化  博客跳转↗️ AOF持久化  博客跳转↗️  RDB RDB（Redis DataBase）是redis默认的持久化方式。通过快照（snapshotting）完成。从上述的实现方式看，它所保存的数据是某一时刻的数据，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-03-25T02:14:55.000Z">
-<meta property="article:modified_time" content="2024-03-25T04:04:11.550Z">
+<meta property="article:modified_time" content="2024-03-25T06:12:39.853Z">
 <meta property="article:author" content="solitaire-12">
 <meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary">
@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1711339652098),
+    lastupdate: new Date(1711347260033),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2442,14 +2442,64 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <p><code>本文章是对黄健宏《Redis设计与实现》的总结以及摘录。</code></p>
-<hr>
+    <h2 id="持久化">持久化</h2>
 <p>持久化导读：redis是内存数据库，它将自己的数据库状态储存在<strong>内存</strong>中。所以当redis服务进程退出时，服务器中的数据也将消失，故而需要将其数据保存到磁盘中。</p>
 <ul>
 <li><a href="RDB%E6%8C%81%E4%B9%85%E5%8C%96.md">RDB持久化</a>  <a href="/2024/03/25/redis/RDB%E6%8C%81%E4%B9%85%E5%8C%96">博客跳转↗️</a></li>
 <li><a href="AOF%E6%8C%81%E4%B9%85%E5%8C%96.md">AOF持久化</a>  <a href="/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96">博客跳转↗️</a></li>
 </ul>
+<h3 id="RDB">RDB</h3>
+<p>RDB（Redis DataBase）是redis默认的持久化方式。通过快照（snapshotting）完成。从上述的实现方式看，它所保存的数据是某一时刻的数据，即<strong>RDB保存redis某一时刻的数据快照</strong>。</p>
+<h4 id="触发方式">触发方式</h4>
+<ul>
+<li>符合自定义配置的快照规则</li>
+<li>执行了save或者<code>bgsave</code>命令</li>
+<li>执行了<code>flushall</code>（清空）命令</li>
+<li>执行主从复制操作（第一次）</li>
+</ul>
+<h4 id="特点">特点</h4>
+<ul>
+<li><strong>优点</strong>：
+<ul>
+<li>RDB是二进制压缩文件，占用空间小，便于传输</li>
+<li>主进程fork子进程，可以最大化redis性能</li>
+<li>使用RDB文件来恢复数据较快</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：
+<ul>
+<li>不能保证数据的完整性，会丢失最后一次快照以后更改的数据</li>
+<li>父进程在fork子进程的时候，如果主进程较大，容易阻塞</li>
+</ul>
+</li>
+</ul>
+<h4 id="实现方式">实现方式</h4>
+<ul>
+<li>
+<p><strong>windows</strong>环境：</p>
+<p><strong>手动保存</strong></p>
+<blockquote>
+<ol>
+<li><code>pushd [your redis path]</code></li>
+<li><code>redis-cli.exe</code></li>
+<li><code>save</code></li>
+</ol>
+<p>保存之后，会在redis目录下，默认生成<code>dump.rdb</code>文件。</p>
+</blockquote>
+<p><strong>redis.conf 配置</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">900s后有1次更新，进行持久化</span></span><br><span class="line">save 900 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">300s后有10次更新，进行持久化</span></span><br><span class="line">save 300 10</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">60秒后有10_000次更新，进行持久化</span></span><br><span class="line">save 60 10000</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 配置默认文件名</span></span></span><br><span class="line">dbfilename dump.rdb</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 文件存储位置</span></span></span><br><span class="line">dir ./ #根目录下</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>Linux</strong>环境：</p>
+<p>待续</p>
+</li>
+</ul>
+<h3 id="AOF">AOF</h3>
+<p>AOF（append only file），redis默认情况下不开启。开启AOF持久化后，redis会将所有的<strong>写操作以及参数(RESP)记录到AOF文件中。</strong></p>
+<h4 id="实现方式-2">实现方式</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">redis.conf配置文件中</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 开启AOF的持久化</span></span></span><br><span class="line">appendonly yes</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># AOF文件的保存位置(RDB AOF共用)</span></span></span><br><span class="line">dir ./ </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 配置默认文件名</span></span></span><br><span class="line">appendfilename appendonly.aof</span><br></pre></td></tr></table></figure>
 <hr>
+<h2 id="高可用">高可用</h2>
 <p>高可用导读：高可用，也称HA（High Availability），是分布式系统架构设计中必须考虑的因素之一，通常指通过设计减少系统不提供服务的时间。</p>
 <p>在Redis中表现为，单一的Redis服务节点出现故障时，整个服务都不能提供服务。以下是Redis三种高可用模式：</p>
 <ul>
@@ -2458,10 +2508,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li><a href="%E9%9B%86%E7%BE%A4.md">集群</a>  <a href="/2024/03/25/redis/%E9%9B%86%E7%BE%A4">博客跳转↗️</a></li>
 </ul>
 <hr>
-<h1>Lua脚本</h1>
+<h2 id="Lua脚本">Lua脚本</h2>
 <p>Redis从2.6版本开始引入对Lua脚本的支持，通过在服务器中嵌入Lua环境，Redis客户端可以使用Lua脚本，直接在服务器端<strong>原子地执行</strong>多个Redis命令</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eval <span class="string">&quot;return &#x27;hello lua&#x27;&quot;</span> <span class="number">0</span></span><br><span class="line">script <span class="built_in">load</span> <span class="string">&quot;return 1+1&quot;</span> <span class="comment">-- 返回一串SHA1校验码</span></span><br><span class="line">evalsha <span class="string">&quot;sha1校验码&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="创建Lua环境">创建Lua环境</h2>
+<h3 id="创建Lua环境">创建Lua环境</h3>
 <p>redis服务器内嵌了一个Lua环境(<code>environ-ment</code>)，并对这个Lua环境进行了一系列的修改，从而确保Lua环境可以满足Redis服务器的使用。</p>
 <ol>
 <li>
@@ -2553,344 +2603,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </li>
 </ol>
 <hr>
-<hr>
-<h1>Sentinel</h1>
-<p>Sentinel是redis的高可用性(high availability)解决方案：由一个或者多个Sentinel实例(instance)组成的Sentinel系统，可以监视任意多个主服务器，以及这些主服务器属下的所用从服务器，并在被监视的主服务器进入下线状态时，自动将下线的主服务器属下的某个从服务器升级为新的主服务器，然后由新的主机服务器代替已下线的主服务器继续处理命令请求。</p>
-<h2 id="启动并初始化">启动并初始化</h2>
-<p>当一个Sentinel启动时，它需要执行以下步骤：</p>
-<ol>
-<li>初始化服务器。</li>
-<li>将普通Redis服务器使用的代码替换成Sentinel专用代码。</li>
-<li>初始化Sentinel状态。</li>
-<li>根据给定的配置文件，初始化Sentinel的监视主服务器列表。</li>
-<li>创建连向主服务器的网络连接。</li>
-</ol>
-<h3 id="初始化服务器">初始化服务器</h3>
-<p>sentinel本质上只是一个运行在特殊模式下的redis服务器，所以启动sentinel的第一步是初始化一个普通的redis服务器。只不过这个服务器不会载入RDB文件或者AOF文件。</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8A%9F%E8%83%BD%E5%AF%B9%E6%AF%94.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8A%9F%E8%83%BD%E5%AF%B9%E6%AF%94.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h3 id="使用专用代码">使用专用代码</h3>
-<p>例如<code>sentinel.c</code>文件中定义了默认的sentinel端口<code>#define REDIS_SENTINEL_PORT 26379</code>；</p>
-<p>除此之外：普通服务器使用的命令表（<code>service.c</code>文件中【6.0.6源码】）：</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E6%99%AE%E9%80%9Aredis%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%8C%87%E4%BB%A4%E8%A1%A8.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E6%99%AE%E9%80%9Aredis%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%8C%87%E4%BB%A4%E8%A1%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p><strong>sentinel</strong>中的指令表：<code>sentinel.c</code>文件中</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E6%8C%87%E4%BB%A4%E8%A1%A8.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E6%8C%87%E4%BB%A4%E8%A1%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h3 id="初始化sentinel">初始化sentinel</h3>
-<p>在应用了sentinel的专用代码之后，接下来，服务器会初始化一个<code>sentinel.c/sentinelState</code>，简称&quot;sentinel状态&quot;。这个结构保存了服务器中所有和sentinel功能有关的状态。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Main state. */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sentinelState</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> myid[CONFIG_RUN_ID_SIZE+<span class="number">1</span>]; <span class="comment">/* This sentinel ID. */</span></span><br><span class="line">    <span class="comment">// 用于实现故障转移</span></span><br><span class="line">    <span class="type">uint64_t</span> current_epoch;         <span class="comment">/* Current epoch. */</span></span><br><span class="line">    dict *masters;      <span class="comment">/* Dictionary of master sentinelRedisInstances.</span></span><br><span class="line"><span class="comment">                           Key is the instance name, value is the</span></span><br><span class="line"><span class="comment">                           sentinelRedisInstance structure pointer. */</span></span><br><span class="line">    <span class="type">int</span> tilt;           <span class="comment">/* Are we in TILT mode? */</span></span><br><span class="line">    <span class="type">int</span> running_scripts;    <span class="comment">/* Number of scripts in execution right now. */</span></span><br><span class="line">    <span class="type">mstime_t</span> tilt_start_time;       <span class="comment">/* When TITL started. */</span></span><br><span class="line">    <span class="type">mstime_t</span> previous_time;         <span class="comment">/* Last time we ran the time handler. */</span></span><br><span class="line">    <span class="comment">// 一个FIFO队列，包含所有需要执行的用户脚本</span></span><br><span class="line">    <span class="built_in">list</span> *scripts_queue;            <span class="comment">/* Queue of user scripts to execute. */</span></span><br><span class="line">    <span class="type">char</span> *announce_ip;  <span class="comment">/* IP addr that is gossiped to other sentinels if</span></span><br><span class="line"><span class="comment">                           not NULL. */</span></span><br><span class="line">    <span class="type">int</span> announce_port;  <span class="comment">/* Port that is gossiped to other sentinels if</span></span><br><span class="line"><span class="comment">                           non zero. */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> simfailure_flags; <span class="comment">/* Failures simulation. */</span></span><br><span class="line">    <span class="type">int</span> deny_scripts_reconfig; <span class="comment">/* Allow SENTINEL SET ... to change script</span></span><br><span class="line"><span class="comment">                                  paths at runtime? */</span></span><br><span class="line">&#125; sentinel;</span><br></pre></td></tr></table></figure>
-<h3 id="初始化masters属性">初始化masters属性</h3>
-<p>sentinel状态中的masters字典记录了所有被sentinel坚实的主服务器的相关信息，其中</p>
-<ul>
-<li>字典的键是被监视主服务器的名字</li>
-<li>而字典的值则是被监视主服务器对应的<code>sentinel.c/sentinelRedisInstance</code></li>
-</ul>
-<p>每个<code>sentinelRedisInstance</code>结构(实例结构)代表一个被sentinel监视的redis服务器实例(instance)，这个实例可以是主服务器、从服务器或者另外一个sentinel。</p>
-<p>实例结构包含的属性非常多，源码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sentinelRedisInstance</span> &#123;</span></span><br><span class="line">    <span class="comment">// 标记，记录了实例的类型以及该实例的当前状态</span></span><br><span class="line">    <span class="type">int</span> flags;      <span class="comment">/* See SRI_... defines */</span></span><br><span class="line">    <span class="comment">/* 实例名称</span></span><br><span class="line"><span class="comment">     * 主服务器的名字由用户在配置文件中设置</span></span><br><span class="line"><span class="comment">     * 从服务器以及sentinel的名字由sentinel自动设置，一般格式为IP:port,例		  </span></span><br><span class="line"><span class="comment">     *  如&#x27;127.0.0.1:26379&#x27;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">char</span> *name;     <span class="comment">/* Master name from the point of view of this sentinel. */</span></span><br><span class="line">    <span class="type">char</span> *runid;    <span class="comment">/* Run ID of this instance, or unique ID if is a Sentinel.*/</span></span><br><span class="line">    <span class="type">uint64_t</span> config_epoch;  <span class="comment">/* Configuration epoch. */</span></span><br><span class="line">    sentinelAddr *addr; <span class="comment">/* Master host. */</span></span><br><span class="line">    instanceLink *link; <span class="comment">/* Link to the instance, may be shared for Sentinels. */</span></span><br><span class="line">    <span class="type">mstime_t</span> last_pub_time;   <span class="comment">/* Last time we sent hello via Pub/Sub. */</span></span><br><span class="line">    <span class="type">mstime_t</span> last_hello_time; <span class="comment">/* Only used if SRI_SENTINEL is set. Last time</span></span><br><span class="line"><span class="comment">                                 we received a hello from this Sentinel</span></span><br><span class="line"><span class="comment">                                 via Pub/Sub. */</span></span><br><span class="line">    <span class="type">mstime_t</span> last_master_down_reply_time; <span class="comment">/* Time of last reply to</span></span><br><span class="line"><span class="comment">                                             SENTINEL is-master-down command. */</span></span><br><span class="line">    <span class="type">mstime_t</span> s_down_since_time; <span class="comment">/* Subjectively down since time. */</span></span><br><span class="line">    <span class="type">mstime_t</span> o_down_since_time; <span class="comment">/* Objectively down since time. */</span></span><br><span class="line">    <span class="comment">/* sentinel down-after-milliseconds &lt;master-name&gt; &lt;number&gt; 选项设置的值</span></span><br><span class="line"><span class="comment">     * 实例无响应多少毫秒之后才会被判断为主观下线(subjectively down)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">mstime_t</span> down_after_period; <span class="comment">/* Consider it down after that period. */</span></span><br><span class="line">    <span class="type">mstime_t</span> info_refresh;  <span class="comment">/* Time at which we received INFO output from it. */</span></span><br><span class="line">    dict *renamed_commands;     <span class="comment">/* Commands renamed in this instance:</span></span><br><span class="line"><span class="comment">                                   Sentinel will use the alternative commands</span></span><br><span class="line"><span class="comment">                                   mapped on this table to send things like</span></span><br><span class="line"><span class="comment">                                   SLAVEOF, CONFING, INFO, ... */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Role and the first time we observed it.</span></span><br><span class="line"><span class="comment">     * This is useful in order to delay replacing what the instance reports</span></span><br><span class="line"><span class="comment">     * with our own configuration. We need to always wait some time in order</span></span><br><span class="line"><span class="comment">     * to give a chance to the leader to report the new configuration before</span></span><br><span class="line"><span class="comment">     * we do silly things. */</span></span><br><span class="line">    <span class="type">int</span> role_reported;</span><br><span class="line">    <span class="type">mstime_t</span> role_reported_time;</span><br><span class="line">    <span class="type">mstime_t</span> slave_conf_change_time; <span class="comment">/* Last time slave master addr changed. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Master specific. */</span></span><br><span class="line">    dict *sentinels;    <span class="comment">/* Other sentinels monitoring the same master. */</span></span><br><span class="line">    dict *slaves;       <span class="comment">/* Slaves for this master instance. */</span></span><br><span class="line">    <span class="comment">/* 判断这个实例为客观下线(objectively down)所需的支持投票数</span></span><br><span class="line"><span class="comment">     * 由sentinel  monitor &lt;master-name&gt; &lt;ip&gt; &lt;port&gt; &lt;quorum&gt;设定</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> quorum;<span class="comment">/* Number of sentinels that need to agree on failure. */</span></span><br><span class="line">    <span class="comment">/* 在执行故障转移操作时，可以同时对新的主服务器进行同步的从服务器数量</span></span><br><span class="line"><span class="comment">     * 由sentinel  parallel_syncs &lt;master-name&gt; &lt;number&gt;设定</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">int</span> parallel_syncs; <span class="comment">/* How many slaves to reconfigure at same time. */</span></span><br><span class="line">    <span class="type">char</span> *auth_pass;    <span class="comment">/* Password to use for AUTH against master &amp; replica. */</span></span><br><span class="line">    <span class="type">char</span> *auth_user;    <span class="comment">/* Username for ACLs AUTH against master &amp; replica. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Slave specific. */</span></span><br><span class="line">    <span class="type">mstime_t</span> master_link_down_time; <span class="comment">/* Slave replication link down time. */</span></span><br><span class="line">    <span class="type">int</span> slave_priority; <span class="comment">/* Slave priority according to its INFO output. */</span></span><br><span class="line">    <span class="type">mstime_t</span> slave_reconf_sent_time; <span class="comment">/* Time at which we sent SLAVE OF &lt;new&gt; */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sentinelRedisInstance</span> *<span class="title">master</span>;</span> <span class="comment">/* Master instance if it&#x27;s slave. */</span></span><br><span class="line">    <span class="type">char</span> *slave_master_host;    <span class="comment">/* Master host as reported by INFO */</span></span><br><span class="line">    <span class="type">int</span> slave_master_port;      <span class="comment">/* Master port as reported by INFO */</span></span><br><span class="line">    <span class="type">int</span> slave_master_link_status; <span class="comment">/* Master link status as reported by INFO */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> slave_repl_offset; <span class="comment">/* Slave replication offset. */</span></span><br><span class="line">    <span class="comment">/* Failover */</span></span><br><span class="line">    <span class="type">char</span> *leader;       <span class="comment">/* If this is a master instance, this is the runid of</span></span><br><span class="line"><span class="comment">                           the Sentinel that should perform the failover. If</span></span><br><span class="line"><span class="comment">                           this is a Sentinel, this is the runid of the Sentinel</span></span><br><span class="line"><span class="comment">                           that this Sentinel voted as leader. */</span></span><br><span class="line">    <span class="type">uint64_t</span> leader_epoch; <span class="comment">/* Epoch of the &#x27;leader&#x27; field. */</span></span><br><span class="line">    <span class="type">uint64_t</span> failover_epoch; <span class="comment">/* Epoch of the currently started failover. */</span></span><br><span class="line">    <span class="type">int</span> failover_state; <span class="comment">/* See SENTINEL_FAILOVER_STATE_* defines. */</span></span><br><span class="line">    <span class="type">mstime_t</span> failover_state_change_time;</span><br><span class="line">    <span class="type">mstime_t</span> failover_start_time;   <span class="comment">/* Last failover attempt start time. */</span></span><br><span class="line">    <span class="comment">/* 刷新故障迁移状态的最大时限</span></span><br><span class="line"><span class="comment">     * 由sentinel failover_timeout &lt;master-name&gt; &lt;ms&gt;设定</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">mstime_t</span> failover_timeout;      <span class="comment">/* Max time to refresh failover state. */</span></span><br><span class="line">    <span class="type">mstime_t</span> failover_delay_logged; <span class="comment">/* For what failover_start_time value we</span></span><br><span class="line"><span class="comment">                                       logged the failover delay. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sentinelRedisInstance</span> *<span class="title">promoted_slave</span>;</span> <span class="comment">/* Promoted slave instance. */</span></span><br><span class="line">    <span class="comment">/* Scripts executed to notify admin or reconfigure clients: when they</span></span><br><span class="line"><span class="comment">     * are set to NULL no script is executed. */</span></span><br><span class="line">    <span class="type">char</span> *notification_script;</span><br><span class="line">    <span class="type">char</span> *client_reconfig_script;</span><br><span class="line">    sds info; <span class="comment">/* cached INFO output */</span></span><br><span class="line">&#125; sentinelRedisInstance;</span><br></pre></td></tr></table></figure>
-<p>其中<code>sentinelRedisInstance.addr</code>属性是一个指向<code>sentinel.c/sentinelAddr</code>结构的指针，这个结构保存着实例的IP地址和端口号：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Address object, used to describe an ip:port pair. */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sentinelAddr</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> *ip;</span><br><span class="line">    <span class="type">int</span> port;</span><br><span class="line">&#125; sentinelAddr;</span><br></pre></td></tr></table></figure>
-<p>对Sentinel状态的初始化将引发对masters字典的初始化，而masters字典的初始化是根据被载入的Sentinel配置文件来进行的。</p>
-<h3 id="创建连向主服务器的网络连接">创建连向主服务器的网络连接</h3>
-<p>初始化Sentinel的最后一步是创建连向被监视主服务器的网络连接，Sentinel将成为主服务器的客户端，它可以向主服务器发送命令，并从命令回复中获取相关的信息。</p>
-<p>初始化Sentinel的最后一步是创建连向被监视主服务器的网络连接，Sentinel将成为主服务器的客户端，它可以向主服务器发送命令，并从命令回复中获取相关的信息。</p>
-<ul>
-<li>一个是命令连接，这个连接专门用于向主服务器发送命令，并接收命令回复。</li>
-<li>另一个是订阅连接，这个连接专门用于订阅主服务器的<code>__sentinel__:hello</code>频道</li>
-</ul>
 <blockquote>
-<p>为什么有两个连接？在Redis目前的发布与订阅功能中，被发送的信息都不会保存在Redis服务器里面，如果在信息发送时，想要接收信息的客户端不在线或者断线，那么这个客户端就会丢失这条信息。因此，为了不丢失<code>__sentinel__:hello</code>频道的任何信息，Sentinel必须专门用一个订阅连接来接收该频道的信息。另一方面，除了订阅频道之外，Sentinel还必须向主服务器发送命令，以此来与主服务器进行通信，所以Sentinel还必须向主服务器创建命令连接。因为Sentinel需要与多个实例创建多个网络连接，所以Sentinel使用的是异步连接。</p>
+<p>本站（Redis|x标题）系列的文章是来源于站长阅读<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0">黄健宏《Redis设计与实现》</a>后的总结和摘录。</p>
 </blockquote>
-<h2 id="获取主服务信息">获取主服务信息</h2>
-<p>Sentinel默认会以每十秒一次的频率，通过命令连接向被监视的主服务器发送INFO命令，并通过分析INFO命令的回复来获取主服务器的当前信息。</p>
-<p>🔎<strong>例子</strong>：</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p>主服务器master有三个从服务器<code>slave0</code>、<code>slave1</code>和<code>slave2</code>，并且一个Sentinel正在连接主服务器，那么Sentinel将持续地向主服务器发送INFO命令，并获得类似于以下内容的回复：</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Server</span></span><br><span class="line">...</span><br><span class="line">run_id:<span class="number">7611</span>c59dc3a29aa6fa0609f841bb6a1019008a9c</span><br><span class="line">...</span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:master</span><br><span class="line">...</span><br><span class="line">slave<span class="number">0</span>:ip=<span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>,port=<span class="number">11111</span>,<span class="keyword">state</span>=online,offset=<span class="number">43</span>,lag=<span class="number">0</span></span><br><span class="line">slave1:ip=<span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>,port=<span class="number">22222</span>,<span class="keyword">state</span>=online,offset=<span class="number">43</span>,lag=<span class="number">0</span></span><br><span class="line">slave2:ip=<span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>,port=<span class="number">33333</span>,<span class="keyword">state</span>=online,offset=<span class="number">43</span>,lag=<span class="number">0</span></span><br><span class="line">...</span><br><span class="line"><span class="comment"># Other sections</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>通过分析主服务器返回的INFO命令回复，Sentinel可以获取以下两方面的信息：</p>
-<ul>
-<li>关于主服务器本身的信息，包括run_id域记录的服务器运行ID，以及role域记录的服务器角色；</li>
-<li>关于主服务器属下所有从服务器的信息，每个从服务器都由一个&quot;slave&quot;字符串开头的行记录，每行的ip=域记录了从服务器的IP地址，而port=域则记录了从服务器的端口号。根据这些IP地址和端口号，Sentinel无须用户提供从服务器的地址信息，就可以自动发现从服务器。</li>
-</ul>
-<p>根据run_id域和role域记录的信息，Sentinel将对主服务器的实例结构进行更新，例如，主服务器重启之后，它的运行ID就会和实例结构之前保存的运行ID不同，Sentinel检测到这一情况之后，就会对实例结构的运行ID进行更新。</p>
-<p>至于主服务器返回的从服务器信息，则会被用于更新主服务器实例结构的slaves字典，这个字典记录了主服务器属下从服务器的名单：</p>
-<ul>
-<li>字典的键是由Sentinel自动设置的从服务器名字，格式为<code>ip:port</code>：如对于IP地址为127.0.0.1，端口号为11111的从服务器来说，Sentinel为它设置的名字就是<code>127.0.0.1:11111</code>。</li>
-<li>至于字典的值则是从服务器对应的实例结构：比如说，如果键是<code>127.0.0.1:11111</code>，那么这个键的值就是IP地址为127.0.0.1，端口号为11111的从服务器的实例结构。</li>
-</ul>
-<p>Sentinel在分析INFO命令中包含的从服务器信息时，会检查从服务器对应的实例结构是否已经存在于slaves字典：</p>
-<ul>
-<li>如果从服务器对应的实例结构已经存在，那么Sentinel对从服务器的实例结构进行更新。</li>
-<li>如果从服务器对应的实例结构不存在，那么说明这个从服务器是新发现的从服务器，Sentinel会在slaves字典中为这个从服务器新创建一个实例结构。</li>
-</ul>
-<p>对于之前列举的主服务器master和三个从服务器<code>slave0</code>、<code>slave1</code>和<code>slave2</code>的例子来说，Sentinel将分别为三个从服务器创建它们各自的实例结构，并将这些结构保存到主服务器实例结构的slaves字典里面：</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p>注意对比图中主服务器实例结构和从服务器实例结构之间的区别：</p>
-<ul>
-<li>主服务器实例结构的flags属性的值为SRI_MASTER，而从服务器实例结构的flags属性的值为SRI_SLAVE。</li>
-<li>主服务器实例结构的name属性的值是用户使用Sentinel配置文件设置的，而从服务器实例结构的name属性的值则是Sentinel根据从服务器的IP地址和端口号自动设置的。</li>
-</ul>
-<h2 id="获取从服务器信息">获取从服务器信息</h2>
-<p>当Sentinel发现主服务器有新的从服务器出现时，Sentinel除了会为这个新的从服务器创建相应的实例结构之外，Sentinel还会创建连接到从服务器的命令连接和订阅连接。</p>
-<p>🔎<strong>例子</strong>：</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p>在创建命令连接之后，Sentinel在默认情况下，会以每十秒一次的频率通过命令连接向从服务器发送INFO命令，并获得类似于以下内容的回复：</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Server</span></span><br><span class="line">...</span><br><span class="line">run_id:<span class="number">32</span>be0699dd27b410f7c90dada3a6fab17f97899f</span><br><span class="line">...</span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:slave</span><br><span class="line">master_host:<span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span></span><br><span class="line">master_port:<span class="number">6379</span></span><br><span class="line">master_link_status:up</span><br><span class="line">slave_repl_offset:<span class="number">11887</span></span><br><span class="line">slave_priority:<span class="number">100</span></span><br><span class="line"><span class="comment"># Other sections</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>根据INFO命令的回复，Sentinel会提取出以下信息：</p>
-<ul>
-<li>从服务器的运行ID run_id。</li>
-<li>从服务器的角色role。</li>
-<li>主服务器的IP地址master_host，以及主服务器的端口号master_port。</li>
-<li>主从服务器的连接状态master_link_status。</li>
-<li>从服务器的优先级slave_priority。</li>
-<li>从服务器的复制偏移量slave_repl_offset。</li>
-</ul>
-<p>根据这些信息，Sentinel会对从服务器的实例结构进行更新，更新之后的结构样子：</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E8%8E%B7%E5%8F%96%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AD%98.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<h2 id="向主服务器和从服务器发送信息">向主服务器和从服务器发送信息</h2>
-<p>在默认情况下，Sentinel会以每两秒一次的频率，通过命令连接向所有被监视的主服务器和从服务器发送以下格式的命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUBLISH __sentinel__:hello &quot;＜s_ip＞,＜s_port＞,＜s_runid＞,＜s_epoch＞,＜m_name＞,＜m_ip＞,＜m_port＞,＜m_epoch＞&quot;</span><br></pre></td></tr></table></figure>
-<p>这条命令向服务器的<code>__sentinel__:hello</code>频道发送了一条信息，信息的内容由多个参数组成：</p>
-<ul>
-<li>以s_开头的参数记录的是Sentinel本身的信息</li>
-<li>m_开头的参数记录的则是主服务器的信息。如果Sentinel正在监视的是主服务器，那么这些参数记录的就是主服务器的信息；如果Sentinel正在监视的是从服务器，那么这些参数记录的就是从服务器正在复制的主服务器的信息</li>
-</ul>
-<p>参数表：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>a_ip</code></td>
-<td>Sentinel的IP地址</td>
-</tr>
-<tr>
-<td><code>a_port</code></td>
-<td>Sentinel的端口号</td>
-</tr>
-<tr>
-<td><code>s_runid</code></td>
-<td>Sentinel的运行ID</td>
-</tr>
-<tr>
-<td><code>s_epoch</code></td>
-<td>Sentinel当前的Configuration epoch【配置纪元】</td>
-</tr>
-<tr>
-<td><code>m_name</code></td>
-<td>主服务器的名字</td>
-</tr>
-<tr>
-<td><code>m_ip</code></td>
-<td>主服务器的IP地址</td>
-</tr>
-<tr>
-<td><code>m_port</code></td>
-<td>主服务器的端口号</td>
-</tr>
-<tr>
-<td><code>m_epoch</code></td>
-<td>主服务器当前的配置纪元</td>
-</tr>
-</tbody>
-</table>
-<h2 id="检查主观下线状态">检查主观下线状态</h2>
-<p>在默认情况下，Sentinel会以每秒一次的频率向所有与它创建了命令连接的实例（包括主服务器、从服务器、其他Sentinel在内）发送PING命令，并通过实例返回的PING命令回复来判断实例是否在线。</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E4%B8%BB%E8%A7%82%E4%B8%8B%E7%BA%BF%E7%8A%B6%E6%80%81.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E4%B8%BB%E8%A7%82%E4%B8%8B%E7%BA%BF%E7%8A%B6%E6%80%81.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p>如上图中，<code>Sentinel1</code>将向<code>Sentinel2</code>、主服务器master、从服务器<code>slave1</code>和<code>slave2</code>发送PING命令。<code>Sentinel2</code>将向<code>Sentinel1</code>、主服务器master、从服务器<code>slave1</code>和<code>slave2</code>发送PING命令。实例对ping命令的回复可以分成以下两种情况：</p>
-<ul>
-<li>有效回复：实例返回<code>+PONG、-LOADING、-MASTERDOWN</code>三种回复其中一种。</li>
-<li>无效回复：实例返回<code>+PONG、-LOADING、-MASTERDOWN</code>三种回复之外的其他回复，或者在指定时限内没有返回任何回复。</li>
-</ul>
-<p>Sentinel配置文件中的down-after-milliseconds选项指定了Sentinel判断实例进入主观下线所需的时间长度：如果一个实例在down-after-milliseconds毫秒内，连续向Sentinel返回无效回复，那么Sentinel会修改这个实例所对应的实例结构，在结构的flags属性中打开<code>SRI_S_DOWN</code>标识，以此来表示这个实例已经进入主观下线状态。</p>
-<p>用户设置的down-after-milliseconds选项的值，不仅会被Sentinel用来判断主服务器的主观下线状态，还会被用于判断主服务器属下的所有从服务器，以及所有同样监视这个主服务器的其他Sentinel的主观下线状态。举个例子，如果用户向Sentinel设置了以下配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sentinel monitor master 127.0.0.1 6379 2</span><br><span class="line">sentinel down-after-milliseconds master 50000</span><br></pre></td></tr></table></figure>
-<p>那么50000毫秒不仅会成为Sentinel判断master进入主观下线的标准，还会成为Sentinel判断master属下所有从服务器，以及所有同样监视master的其他Sentinel进入主观下线的标准。</p>
-<p><strong>多个Sentinel设置的主观下线时长可能不同</strong>：</p>
-<p>down-after-milliseconds选项另一个需要注意的地方是，对于监视同一个主服务器的多个Sentinel来说，这些Sentinel所设置的down-after-milliseconds选项的值也可能不同，因此，当一个Sentinel将主服务器判断为主观下线时，其他Sentinel可能仍然会认为主服务器处于在线状态。举个例子，如果<code>Sentinel1</code>载入了以下配置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sentinel</span> <span class="string">monitor</span> <span class="string">master</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">6379 </span><span class="number">2</span></span><br><span class="line"><span class="string">sentinel</span> <span class="string">down-after-milliseconds</span> <span class="string">master</span> <span class="number">50000</span></span><br></pre></td></tr></table></figure>
-<p>而<code>Sentinel2</code>则载入了以下配置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sentinel</span> <span class="string">monitor</span> <span class="string">master</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">6379 </span><span class="number">2</span></span><br><span class="line"><span class="string">sentinel</span> <span class="string">down-after-milliseconds</span> <span class="string">master</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-<p>那么当master的断线时长超过10000毫秒之后，<code>Sentinel2</code>会将master判断为主观下线，而<code>Sentinel1</code>却认为master仍然在线。只有当master的断线时长超过50000毫秒之后，<code>Sentinel1</code>和<code>Sentinel2</code>才会都认为master进入了主观下线状态。</p>
-<h2 id="检查客观下线状态">检查客观下线状态</h2>
-<p>当Sentinel将一个主服务器判断为主观下线之后，为了确认这个主服务器是否真的下线了，它会向同样监视这一主服务器的其他Sentinel进行询问，看它们是否也认为主服务器已经进入了下线状态（可以是主观下线或者客观下线）。当Sentinel从其他Sentinel那里接收到足够数量的已下线判断之后，Sentinel就会将从服务器判定为客观下线，并对主服务器执行故障转移操作。</p>
-<p>Sentinel使用 <code>SENTINEL is-master-down-by-addr ＜ip＞ ＜port＞ ＜current_epoch＞ ＜runid＞</code>命令询问其他Sentinel是否同意主服务器已下线。</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E5%AE%A2%E8%A7%82%E4%B8%8B%E7%BA%BF%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E5%AE%A2%E8%A7%82%E4%B8%8B%E7%BA%BF%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p>当目标Sentinel接收到源Sentinel发来的 <code>SENTINEL is-master-down-by</code>命令包时，目标Sentinel会分析并取出命令请求中包含的各个参数，并根据其中的主服务器IP和端口号，检查主服务器是否已下线，然后向源Sentinel返回一条包含三个三叔的<code>MultiBulk</code>回复。</p>
-<p><img src="/2024/03/25/redis/redis/sentinel-%E5%AE%A2%E8%A7%82%E4%B8%8B%E7%BA%BF%E5%91%BD%E4%BB%A4%E5%9B%9E%E5%A4%8D%E5%8F%82%E6%95%B0.png" class="lazyload" data-srcset="/2024/03/25/redis/redis/sentinel-%E5%AE%A2%E8%A7%82%E4%B8%8B%E7%BA%BF%E5%91%BD%E4%BB%A4%E5%9B%9E%E5%A4%8D%E5%8F%82%E6%95%B0.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
-<p>根据其他Sentinel发回的<code>SENTINEL is-master-down-by</code>命令回复，Sentinel将统计其他Sentinel同意主服务器已下线的数量，当这一数量达到配置指定的判断客观下线所需要的数量时，Sentinel鬼将主服务器实例结构flags属性的<code>SRI_O_DOWN</code>标识打开，标识主服务器已经进入客观下线状态。</p>
-<p><strong>客观下线状态的判断条件</strong>：</p>
-<p>当认为主服务器已经进入下线状态的Sentinel的数量，超过Sentinel配置中设置的quorum参数的值，那么该Sentinel就会认为主服务器已经进入客观下线状态。</p>
-<p>比如，sentinel启动时加载下述配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sentinel monitor master 127.0.0.1 6379 2</span><br></pre></td></tr></table></figure>
-<p>意味着 包括当前sentinel在内，只要总共有两个sentinel认为主服务器已经进入下线状态，那么当前sentinel就将主服务器判断为客观下线。</p>
-<p>在同一个sentinel服务系统中，<strong>不同的sentinel实例可以有不同的判断客观下线条件</strong>。</p>
-<h2 id="选举领头Sentinel">选举领头Sentinel</h2>
-<p>当一个主服务器被判断为客观下线时，监视这个下线主服务器的各个Sentinel会进行协商，选举出一个领头Sentinel，并由领头Sentinel对下线主服务器执行故障转移操作。</p>
-<h5 id="补充">&lt;补充&gt;</h5>
-<h2 id="故障转移">故障转移</h2>
-<p>在选举产生出领头Sentinel之后，领头Sentinel将对已下线的主服务器执行故障转移操作，该操作包含以下三个步骤：</p>
-<ol>
-<li>在已下线主服务器属下的所有从服务器里面，挑选出一个从服务器，并将其转换为主服务器。</li>
-<li>让已下线主服务器属下的所有从服务器改为复制新的主服务器。</li>
-<li>将已下线主服务器设置为新的主服务器的从服务器，当这个旧的主服务器重新上线时，它就会成为新的主服务器的从服务器。</li>
-</ol>
-<h5 id="补充-2">&lt;补充&gt;</h5>
-<h2 id="案例">案例</h2>
-<p>🔍环境：redis 3.2.1/windows；目标：构建一主二从三哨兵的哨兵系统。</p>
-<ul>
-<li>
-<p>准备redis windows版本 <a target="_blank" rel="noopener" href="https://github.com/MicrosoftArchive/redis/releases">redis windows社区</a>    <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14Vx0pahViXgrgMkTUqfwnA">🔗笔者提供 提取码：emj2</a>    <a target="_blank" rel="noopener" href="https://github.com/redis/redis/releases">redis官方</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/424272611">为啥redis官方没有提供windows版本呢</a></p>
-</li>
-<li>
-<p>复制三份代码，其中一份做master，另外两份做slave</p>
-</li>
-<li>
-<p>master配置</p>
-<ul>
-<li>
-<p><code>redis.windows.conf</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">port 6380</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>sentinel.conf</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">当前Sentinel服务运行的端口</span></span><br><span class="line">port 26380</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">master</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Sentinel去监视一个名为mymaster的主redis实例，这个主实例的IP地址为本机地址127.0.0.1，端口号为6379，</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">而将这个主实例判断为失效至少需要2个 Sentinel进程的同意，只要同意Sentinel的数量不达标，自动failover就不会执行</span></span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">指定了Sentinel认为Redis实例已经失效所需的毫秒数。当 实例超过该时间没有返回PING，或者直接返回错误，那么Sentinel将这个实例标记为主观下线。</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">只有一个 Sentinel进程将实例标记为主观下线并不一定会引起实例的自动故障迁移：只有在足够数量的Sentinel都将一个实例标记为主观下线之后，实例才会被标记为客观下线，这时自动故障迁移才会执行</span></span><br><span class="line">sentinel down-after-milliseconds mymaster 5000</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">指定了在执行故障转移时，最多可以有多少个从Redis实例在同步新的主实例，在从Redis实例较多的情况下这个数字越小，同步的时间越长，完成故障转移所需的时间就越长</span></span><br><span class="line">sentinel config-epoch mymaster 12</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果在该时间（ms）内未能完成failover操作，则认为该failover失败</span></span><br><span class="line">sentinel leader-epoch mymaster 13</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li>
-<p>slave配置</p>
-<ul>
-<li>
-<p><code>redis.windows.conf</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">另一台是6382</span></span><br><span class="line">port 6381</span><br><span class="line">slaveof 127.0.0.1 6380</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><code>sentinel.conf</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">slave1 哨兵运行的端口</span></span><br><span class="line">port 26381</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">slave2 哨兵运行的端口</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">port 26382</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">slave</span></span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 1</span><br><span class="line">sentinel down-after-milliseconds mymaster 5000</span><br><span class="line">sentinel config-epoch mymaster 12</span><br><span class="line">sentinel leader-epoch mymaster 13</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li>
-<p>运行</p>
-<ul>
-<li>
-<p>启动服务bat</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">假如你使用记事本来编写这个bat，中文会乱码；推荐使用notepad+，将编码格式改为ANSI</span></span><br><span class="line">title &quot;6380服务端&quot;</span><br><span class="line">redis-server.exe redis.windows.conf</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li>
-<p>哨兵启动bat</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">title sentinel-6380</span><br><span class="line">redis-server.exe sentinel.conf --sentinel</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>客户端启动bat</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">title &quot;6380客户端&quot;</span><br><span class="line">redis-cli.exe -h 127.0.0.1 -p 6380</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>连接到哨兵</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-cli.exe -h 127.0.0.1 -p 26381</span><br><span class="line">info replication</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>断开6380，可以观察到，某一台slave成为了主服务器；重新连接6380，变成从服务器</p>
-</li>
-</ul>
-<h2 id="头脑风暴">头脑风暴</h2>
-<p>❓假设现在有一套redis sentinel服务器，假设客户端向服务器发送了一条命令，这时服务器宕机了，这条命令会怎么样？</p>
-<blockquote>
-<p>在主服务器宕机期间，客户端可能会收到一些错误信息或超时提示，这是因为主服务器已经宕机无法处理请求。客户端可以选择等待一段时间后重新发送命令，或者连接到新的主服务器来继续执行操作</p>
-<ul>
-<li>
-<p>服务器宕机前完全接收到该命令</p>
-<p>在主服务器宕机后，哨兵模式会自动将新的主服务器与旧的从服务器进行同步，确保数据的一致性</p>
-</li>
-<li>
-<p>服务器已经处理完毕</p>
-<p>命令已经处理完，新的服务器就忽略这条命令</p>
-</li>
-<li>
-<p>服务器未处理完毕</p>
-<p>新选举出来的主服务器通过复制机制来获取到未完成的命令，然后执行。</p>
-</li>
-<li>
-<p>服务器宕机前未能介绍到该命令</p>
-</li>
-</ul>
-<p>这种情况，sentinel 是没办法处理的，这属于数据持久化的范畴。</p>
-</blockquote>
-<p>❓假设现有一套多哨兵的redis哨兵服务系统，假设客户端向服务器发送了一条命令，这时候，哨兵宕机，如何处理？</p>
-<blockquote></blockquote>
-<h1>集群</h1>
-<p>Redis集群是Redis提供的分布式数据库方案，集群通过分片（sharding）来进行数据共享，并提供复制和故障转移功能。</p>
-<h2 id="节点">节点</h2>
-<h5 id="补充-3">&lt;补充&gt;</h5>
-<h2 id="槽指派">槽指派</h2>
-<h5 id="补充-4">&lt;补充&gt;</h5>
-<h2 id="执行命令">执行命令</h2>
-<h5 id="补充-5">&lt;补充&gt;</h5>
-<h2 id="重新分片">重新分片</h2>
-<h5 id="补充-6">&lt;补充&gt;</h5>
-<h2 id="ASK错误">ASK错误</h2>
-<h5 id="补充-7">&lt;补充&gt;</h5>
-<h2 id="复制和转移">复制和转移</h2>
-<h5 id="补充-8">&lt;补充&gt;</h5>
-<h2 id="消息">消息</h2>
-<h5 id="补充-9">&lt;补充&gt;</h5>
-<hr>
-<h1>概述 - 持久化</h1>
-<h2 id="RDB">RDB</h2>
-<h3 id="实现方式">实现方式</h3>
-<ul>
-<li>
-<p><strong>windows</strong>环境：</p>
-<p><strong>手动保存</strong></p>
-<ol>
-<li><code>pushd [your redis path]</code></li>
-<li><code>redis-cli.exe</code></li>
-<li><code>save</code></li>
-</ol>
-<p>保存之后，会在redis目录下，默认生成<code>dump.rdb</code>文件。</p>
-<p><strong>redis.conf 配置</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">900s后有1次更新，进行持久化</span></span><br><span class="line">save 900 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">300s后有10次更新，进行持久化</span></span><br><span class="line">save 300 10</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">60秒后有10_000次更新，进行持久化</span></span><br><span class="line">save 60 10000</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 配置默认文件名</span></span></span><br><span class="line">dbfilename dump.rdb</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 文件存储位置</span></span></span><br><span class="line">dir ./ #根目录下</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p><strong>Linux</strong>环境：</p>
-</li>
-</ul>
-<h5 id="todo">todo</h5>
-<h3 id="理论">理论</h3>
-<p>RDB（Redis DataBase）是redis默认的持久化方式。通过快照（snapshotting）完成。从上述的实现方式看，它所保存的数据是某一时刻的数据，即<strong>RDB保存redis某一时刻的数据快照</strong>。</p>
-<h4 id="触发方式">触发方式</h4>
-<ul>
-<li>符合自定义配置的快照规则</li>
-<li>执行了save或者<code>bgsave</code>命令</li>
-<li>执行了<code>flushall</code>（清空）命令</li>
-<li>执行主从复制操作（第一次）</li>
-</ul>
-<h4 id="特点">特点</h4>
-<ul>
-<li><strong>优点</strong>：
-<ul>
-<li>RDB是二进制压缩文件，占用空间小，便于传输</li>
-<li>主进程fork子进程，可以最大化redis性能</li>
-<li>使用RDB文件来恢复数据较快</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：
-<ul>
-<li>不能保证数据的完整性，会丢失最后一次快照以后更改的数据</li>
-<li>父进程在fork子进程的时候，如果主进程较大，容易阻塞</li>
-</ul>
-</li>
-</ul>
-<h2 id="AOF">AOF</h2>
-<p>AOF（append only file），redis默认情况下不开启。开启AOF持久化后，redis会将所有的<strong>写操作以及参数(RESP)记录到AOF文件中。</strong></p>
-<h4 id="实现方式-2">实现方式</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">redis.conf配置文件中</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 开启AOF的持久化</span></span></span><br><span class="line">appendonly yes</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># AOF文件的保存位置(RDB AOF共用)</span></span></span><br><span class="line">dir ./ </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 配置默认文件名</span></span></span><br><span class="line">appendfilename appendonly.aof</span><br></pre></td></tr></table></figure>
 <hr>
 
   </div>
@@ -2933,7 +2648,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-25T12:04:11+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-25T14:12:39+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2024年3月25日</p>
@@ -3103,7 +2818,7 @@ ArrayList源码解析
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BALua%E7%8E%AF%E5%A2%83"><span class="toc-text">创建Lua环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">启动并初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">初始化服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%93%E7%94%A8%E4%BB%A3%E7%A0%81"><span class="toc-text">使用专用代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96sentinel"><span class="toc-text">初始化sentinel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96masters%E5%B1%9E%E6%80%A7"><span class="toc-text">初始化masters属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9E%E5%90%91%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5"><span class="toc-text">创建连向主服务器的网络连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%BB%E6%9C%8D%E5%8A%A1%E4%BF%A1%E6%81%AF"><span class="toc-text">获取主服务信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF"><span class="toc-text">获取从服务器信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E4%BF%A1%E6%81%AF"><span class="toc-text">向主服务器和从服务器发送信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E4%B8%BB%E8%A7%82%E4%B8%8B%E7%BA%BF%E7%8A%B6%E6%80%81"><span class="toc-text">检查主观下线状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%A2%E8%A7%82%E4%B8%8B%E7%BA%BF%E7%8A%B6%E6%80%81"><span class="toc-text">检查客观下线状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E4%B8%BE%E9%A2%86%E5%A4%B4Sentinel"><span class="toc-text">选举领头Sentinel</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="toc-text">故障转移</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-2"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4"><span class="toc-text">头脑风暴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9"><span class="toc-text">节点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-3"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A7%BD%E6%8C%87%E6%B4%BE"><span class="toc-text">槽指派</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-4"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-text">执行命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-5"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E5%88%86%E7%89%87"><span class="toc-text">重新分片</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-6"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASK%E9%94%99%E8%AF%AF"><span class="toc-text">ASK错误</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-7"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E5%92%8C%E8%BD%AC%E7%A7%BB"><span class="toc-text">复制和转移</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-8"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF"><span class="toc-text">消息</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-9"><span class="toc-text">&lt;补充&gt;</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RDB"><span class="toc-text">RDB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#todo"><span class="toc-text">todo</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%AE%BA"><span class="toc-text">理论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="toc-text">触发方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-text">特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOF"><span class="toc-text">AOF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F-2"><span class="toc-text">实现方式</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-text">RDB</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="toc-text">触发方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">实现方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-text">AOF</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F-2"><span class="toc-text">实现方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-text">高可用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lua%E8%84%9A%E6%9C%AC"><span class="toc-text">Lua脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BALua%E7%8E%AF%E5%A2%83"><span class="toc-text">创建Lua环境</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -3666,7 +3381,7 @@ ArrayList源码解析
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/Redis/","name":"Redis"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/03/25/redis/redis/","name":"Redis|导航"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Redis|导航","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/03/25/redis/redis/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/03/25/redis/redis/","wordCount":0,"datePublished":"2024-03-25T02:14:55.000Z","dateModified":"2024-03-25T04:04:11.550Z","articleSection":"Redis","keywords":"redis","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/Redis/","name":"Redis"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/03/25/redis/redis/","name":"Redis|导航"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Redis|导航","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/03/25/redis/redis/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/03/25/redis/redis/","wordCount":0,"datePublished":"2024-03-25T02:14:55.000Z","dateModified":"2024-03-25T06:12:39.853Z","articleSection":"Redis","keywords":"redis","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 

@@ -1626,7 +1626,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1711339652098),
+    lastupdate: new Date(1711347260033),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2393,7 +2393,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/25/redis/AOF持久化/">
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/25/redis/集群/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
   </span>
@@ -2411,22 +2411,25 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/"  itemprop="url">
-        Redis|AOF持久化
+      <a href="/2024/03/25/redis/%E9%9B%86%E7%BE%A4/"  itemprop="url">
+        Redis|集群
       </a>
     </h2>
   
   <div class='md article-desc' itemprop="articleBody">
     
       
-        AOF持久化
-AOF持久化是通过保存redis服务器所执行的写命令来记录数据库状态的。
+        未完成
+集群
+Redis集群是Redis提供的分布式数据库方案，集群通过分片（sharding）来进行数据共享，并提供复制和故障转移功能。
+节点
+槽指派
+执行命令
+重新分片
+ASK错误
+复制和转移
+消息
 
-写入到AOF文件的命令都是以redis的命令请求格式保存的，且redis的命令请求是纯文本格式，四亿可以直接打开AOF文件查看内容。
-具体实现
-AOF持久化功能的实现可以分为命令追加(append)、文件写入、文件同步(sync)三个步骤。
-命令追加
-当AOF持久化功能处于开启状态时，服务器在执行完一个...
       
     
   </div>
@@ -2434,7 +2437,7 @@ AOF持久化功能的实现可以分为命令追加(append)、文件写入、文
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time itemprop="dateCreated datePublished" datetime="2024-03-25T10:16:00+08:00">2024-03-25</time>
+        <time itemprop="dateCreated datePublished" datetime="2024-03-25T13:10:55+08:00">2024-03-25</time>
         
           <span class="dot"></span>
           <a class="category-link" href="/categories/Redis/">Redis</a>
@@ -2447,7 +2450,71 @@ AOF持久化功能的实现可以分为命令追加(append)、文件写入、文
       </div>
       
         <div>
-          <a class='readmore' href='/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/' itemprop="url">
+          <a class='readmore' href='/2024/03/25/redis/%E9%9B%86%E7%BE%A4/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/25/redis/哨兵/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="织秋个人博客">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="织秋个人博客">
+    <meta itemprop="description" content="座右铭">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/03/25/redis/%E5%93%A8%E5%85%B5/"  itemprop="url">
+        Redis|哨兵
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        Sentinel
+Sentinel是redis的高可用性(high availability)解决方案：由一个或者多个Sentinel实例(instance)组成的Sentinel系统，可以监视任意多个主服务器，以及这些主服务器属下的所用从服务器，并在被监视的主服务器进入下线状态时，自动将下线的主服务器属下的某个从服务器升级为新的主服务器，然后由新的主机服务器代替已下线的主服务器继续处理命令...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-03-25T13:10:00+08:00">2024-03-25</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Redis/">Redis</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/Redis/" itemprop="url"><span itemprop="name">Redis</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/03/25/redis/%E5%93%A8%E5%85%B5/' itemprop="url">
             阅读全文
           </a>
         </div>
@@ -2520,6 +2587,76 @@ AOF持久化功能的实现可以分为命令追加(append)、文件写入、文
       
         <div>
           <a class='readmore' href='/2024/03/25/redis/%E4%B8%BB%E4%BB%8E/' itemprop="url">
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/25/redis/AOF持久化/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="织秋个人博客">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="织秋个人博客">
+    <meta itemprop="description" content="座右铭">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/"  itemprop="url">
+        Redis|AOF持久化
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        AOF持久化
+AOF持久化是通过保存redis服务器所执行的写命令来记录数据库状态的。
+
+写入到AOF文件的命令都是以redis的命令请求格式保存的，且redis的命令请求是纯文本格式，四亿可以直接打开AOF文件查看内容。
+具体实现
+AOF持久化功能的实现可以分为命令追加(append)、文件写入、文件同步(sync)三个步骤。
+命令追加
+当AOF持久化功能处于开启状态时，服务器在执行完一个...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-03-25T10:15:00+08:00">2024-03-25</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/Redis/">Redis</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/Redis/" itemprop="url"><span itemprop="name">Redis</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/' itemprop="url">
             阅读全文
           </a>
         </div>
@@ -2631,15 +2768,14 @@ save命令
   <div class='md article-desc' itemprop="articleBody">
     
       
-        本文章是对黄健宏《Redis设计与实现》的总结以及摘录。
-
+        持久化
 持久化导读：redis是内存数据库，它将自己的数据库状态储存在内存中。所以当redis服务进程退出时，服务器中的数据也将消失，故而需要将其数据保存到磁盘中。
 
 RDB持久化  博客跳转↗️
 AOF持久化  博客跳转↗️
 
-
-高可用导读：高可用，也称HA（High Availability），是分布式系统架构设计中必须考虑的因素之一，...
+RDB
+RDB（Redis DataBase）是redis默认的持久化方式。通过快照（snapshotting）完成。从上述的实现方式看，它所保存的数据是某一时刻的...
       
     
   </div>
@@ -2989,143 +3125,6 @@ Set 接口： 仅接收一次，不可重复，并做内部排序
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Java/Java8/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Java/Java8/"  itemprop="url">
-        Java|Java8
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        java8实战汇总
-Lambda表达式
-Lambda表达式有三个部分，参数-&gt;主体
-12(parameters) -&gt; expression(parameters) -&gt;&#123; statements; &#125;
-123456789() -&gt; &#123;&#125; () -&gt; &quot;Raoul&quot;() -&gt; &#123;retur...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T20:14:55+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Java/">Java</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/Java/" itemprop="url"><span itemprop="name">Java</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Java/Java8/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Java/JVM/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Java/JVM/"  itemprop="url">
-        Java|JVM
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        类加载
-加载过程
-
-将java文件编译成class字节码文件，通过类加载器写入到JVM虚拟机运行时数据区中。
-
-
-类加载流程
-​	类加载需要经历五个阶段，分别是加载，验证，准备，解析，初始化。其中加载，验证，准备，初始化这四个阶段发生的顺序时确定的，而解析阶段时不一定的。它在某些情况下可以在初始化阶段之后开始，这是为了支持java的运行时绑定（也称做动态绑定）。另外，这些阶段都是按顺序开始，...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T20:10:55+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Java/">Java</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/Java/" itemprop="url"><span itemprop="name">Java</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Java/JVM/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -3241,7 +3240,7 @@ Lambda表达式有三个部分，参数-&gt;主体
           <li><a class="flat-box"
             title="/categories/Redis/" href="/categories/Redis/"
             active-action="action-categoriesRedis"
-            ><div class='name'>Redis</div><div class='badge'>(4)</div></a></li>
+            ><div class='name'>Redis</div><div class='badge'>(6)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%88%9D%E5%A7%8B/" href="/categories/%E5%88%9D%E5%A7%8B/"
@@ -3286,7 +3285,7 @@ Lambda表达式有三个部分，参数-&gt;主体
 
 
     <div class='content'>
-      <a href="/tags/DMS/" style="font-size: 14px; color: #999">DMS</a> <a href="/tags/Docker/" style="font-size: 14px; color: #999">Docker</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 19px; color: #777">Java基础</a> <a href="/tags/MySQL/" style="font-size: 14px; color: #999">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/minio/" style="font-size: 14px; color: #999">minio</a> <a href="/tags/redis/" style="font-size: 24px; color: #555">redis</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 14px; color: #999">内网穿透</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 19px; color: #777">持久化</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 19px; color: #777">环境</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a> <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/" style="font-size: 14px; color: #999">高可用</a>
+      <a href="/tags/DMS/" style="font-size: 14px; color: #999">DMS</a> <a href="/tags/Docker/" style="font-size: 14px; color: #999">Docker</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 17.33px; color: #828282">Java基础</a> <a href="/tags/MySQL/" style="font-size: 14px; color: #999">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/minio/" style="font-size: 14px; color: #999">minio</a> <a href="/tags/redis/" style="font-size: 24px; color: #555">redis</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 14px; color: #999">内网穿透</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 17.33px; color: #828282">持久化</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 17.33px; color: #828282">环境</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a> <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/" style="font-size: 20.67px; color: #6c6c6c">高可用</a>
     </div>
   </section>
 
@@ -3312,7 +3311,7 @@ Lambda表达式有三个部分，参数-&gt;主体
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>23 篇</div>
+          <div>25 篇</div>
         </div>
       
 
@@ -3353,7 +3352,7 @@ Lambda表达式有三个部分，参数-&gt;主体
 
 
   <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/03/25/redis/%E4%B8%BB%E4%BB%8E/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|主从</span></a></li><li><a class="widget-last" href="/2024/03/25/redis/RDB%E6%8C%81%E4%B9%85%E5%8C%96/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|RDB持久化</span></a></li><li><a class="widget-last" href="/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|AOF持久化</span></a></li><li><a class="widget-last" href="/2024/03/25/redis/redis/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|导航</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/"><div class="item"><time>2024-03-25</time><span>服务器</span></div><span>linux|项目部署</span></a></li></ul>
+    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/03/25/redis/redis/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|导航</span></a></li><li><a class="widget-last" href="/2024/03/25/redis/RDB%E6%8C%81%E4%B9%85%E5%8C%96/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|RDB持久化</span></a></li><li><a class="widget-last" href="/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|AOF持久化</span></a></li><li><a class="widget-last" href="/2024/03/25/redis/%E9%9B%86%E7%BE%A4/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|集群</span></a></li><li><a class="widget-last" href="/2024/03/25/redis/%E5%93%A8%E5%85%B5/"><div class="item"><time>2024-03-25</time><span>Redis</span></div><span>Redis|哨兵</span></a></li></ul>
   </div>
 </section>
 
