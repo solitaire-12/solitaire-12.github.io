@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <!-- SEO相关 -->
   <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="https://solitaire-12.github.io/tags/高可用/"/>
+  <link rel="canonical" href="https://solitaire-12.github.io/tags/nginx/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -33,13 +33,13 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>标签：高可用 - 织秋个人博客</title>
+  <title>标签：Nginx - 织秋个人博客</title>
   <meta name="keywords" content="null">
   <meta desc name="description" content="座右铭 - solitaire-12 - 织秋个人博客">
   
 <meta property="og:type" content="website">
 <meta property="og:title" content="织秋个人博客">
-<meta property="og:url" content="https://solitaire-12.github.io/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/index.html">
+<meta property="og:url" content="https://solitaire-12.github.io/tags/Nginx/index.html">
 <meta property="og:site_name" content="织秋个人博客">
 <meta property="og:description" content="座右铭">
 <meta property="og:locale" content="zh_CN">
@@ -2377,7 +2377,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/25/redis/主从/">
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装nginx/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
   </span>
@@ -2395,24 +2395,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/25/redis/%E4%B8%BB%E4%BB%8E/"  itemprop="url">
-        Redis|主从
+      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/"  itemprop="url">
+        linux|docker安装nginx
       </a>
     </h2>
   
   <div class='md article-desc' itemprop="articleBody">
     
       
-        主从复制
-在redis中，用户可以通过 slaveof命令或者设置slaveof选项，让一个服务器去复制(replicate)另一个服务器，我们将被复制的服务器称为主服务器(master)，而对主服务器进行复制的服务器称为从服务器(slave)。关系图如下：
-
-🔎基础案例：
-
-
-现在有两台redis服务器，分别是 127.0.0.1:6379和127.0.0.1:6380
-
-
-在6380服...
+        centos8.5.2111
+拉取镜像
+1docker pull nginx
+创建Nginx挂载目录
+123mkdir -p mytools/nginx/confmkdir -p mytools/nginx/logmkdir -p mytools/nginx/html
+将容器中的配置复制到宿主机
+12345678# 生成容器docker run --name nginx -p 9001:80...
       
     
   </div>
@@ -2420,20 +2417,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time itemprop="dateCreated datePublished" datetime="2024-03-25T10:16:00+08:00">2024-03-25</time>
+        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:23:07+08:00">2024-03-18</time>
         
           <span class="dot"></span>
-          <a class="category-link" href="/categories/Redis/">Redis</a>
+          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
           
             <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/Redis/" itemprop="url"><span itemprop="name">Redis</span></a>
+              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
             </span>
           
         
       </div>
       
         <div>
-          <a class='readmore' href='/2024/03/25/redis/%E4%B8%BB%E4%BB%8E/' itemprop="url">
+          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/' itemprop="url">
             阅读全文
           </a>
         </div>
@@ -3205,7 +3202,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/tags/高可用/","name":"高可用"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/tags/Nginx/","name":"Nginx"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
