@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1711356759235),
+    lastupdate: new Date(1711506568205),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2590,18 +2590,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>linux|docker安装nginx</p>
-          <p class='content'>centos8.5.2111
-拉取镜像
-1docker pull nginx
-创建Nginx挂载目录
-123mkdir -p mytools/nginx/confmkdir -p mytools...</p>
-        </a>
-      
-      
-        <a class='next' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/'>
-          <p class='title'>linux|docker安装redis<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+        <a class='prev' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>linux|docker安装redis</p>
           <p class='content'>centos 8.5.2111
 拉取redis镜像
 1docker pull redis
@@ -2609,6 +2599,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 准备redis的配置文件
 官网： redis 6.0.6 下载 – Redis中国用户组（CRUG）
 ...</p>
+        </a>
+      
+      
+        <a class='next' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/'>
+          <p class='title'>linux|docker安装mysql8<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>拉取镜像
+1docker pull mysql:8.0.23
+
+检查镜像
+1docker images
+
+启动镜像
+1234567891011sudo docker run -p 3306:33...</p>
         </a>
       
     </div>
