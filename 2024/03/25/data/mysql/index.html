@@ -45,7 +45,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-03-25T08:20:00.000Z">
-<meta property="article:modified_time" content="2024-03-27T02:24:18.861Z">
+<meta property="article:modified_time" content="2024-04-11T08:51:30.732Z">
 <meta property="article:author" content="solitaire-12">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1711506568205),
+    lastupdate: new Date(1712825725633),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2456,10 +2456,919 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>🌟想要操作数据表，需要使用<code>use database_name</code>指定操作在哪个数据库中执行。如果没有选择数据库，就会抛出<code>No database selected</code>的错误。</p>
 <h3 id="创建表">创建表</h3>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 创建数据表</span><br><span class="line">create table &lt;table_name&gt;(</span><br><span class="line">    column_1 data_type,</span><br><span class="line">    ...</span><br><span class="line">);</span><br><span class="line"># 查看数据表</span><br><span class="line">show tables;</span><br></pre></td></tr></table></figure>
-<h2 id="约束">约束</h2>
-<h3 id="主键约束">主键约束</h3>
+<h3 id="🌟约束">🌟约束</h3>
+<h4 id="⭐主键约束">⭐主键约束</h4>
 <p>主键，又称主码，是表中一列或多列的组合。主键约束（Primary Key Constraint）要求主键列的数据唯一，并且不允许为空。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 单字段主键</span><br><span class="line">字段名 数据类 primary key [默认值]</span><br><span class="line"># 多字段主键</span><br><span class="line">[constraint &lt;&gt;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 单字段主键</span><br><span class="line">字段名 数据类 primary key [默认值]</span><br><span class="line"># 多字段主键</span><br><span class="line">[constraint &lt;约束名&gt;] primary key [字段名1,字段名2...]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="外键约束">外键约束</h4>
+<p>外键，用来在两个表的数据之间的建立连接，可以是一列或者是多列，以确保引用数据的完整性。定义外键之后，不允许删除在另一张表中具有关联关系的行。</p>
+<blockquote>
+<p>主表（父表）：对于两个具有关联关系的表而言，相关联字段中主键所在的那个表即是主表。</p>
+<p>从表（子表）：对于两个具有关联关系的表而言，相关联字段中外键所在的那个表即是从表。</p>
+<p>优点：保证数据的完整性和一致性，级联操作方便，数据的一致性交给数据库，代码量小。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constraint &lt;外键约束名&gt; foreign key(外键名) references &lt;主表&gt; 主键列1 [,主键列2...]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>提示</strong></p>
+<p>子表的外键必须关联父表的主键，且关联字段的数据类型必须匹配，如果类型不一样，则创建子表时，就会出现错误<code>“ERROR 1005(HY000): Can't create table 'database.tablename'(errno: 150)”</code>。</p>
+</blockquote>
+<p>⚠️ <font color="red">【阿里规范-强制】不得使用外键与级联，一切外键概念在应用层解决。</font></p>
+<blockquote>
+<p>原因：外键约束每次做delete或者update都必须考虑外键约束，在开发测试时极为不便。</p>
+</blockquote>
+<h4 id="非空约束">非空约束</h4>
+<p>非空约束，指字段的值不能为空。用户添加数据未指定值，数据库系统报错。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 not null</span><br></pre></td></tr></table></figure>
+<h4 id="唯一性约束">唯一性约束</h4>
+<p>唯一性约束，要求该列唯一，允许为空，但只能出现一个空值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 方式一</span><br><span class="line">字段名 数据类型 unique</span><br><span class="line"># 方式二</span><br><span class="line">[constraint &lt;约束名&gt;] unique(&lt;字段名&gt;)</span><br></pre></td></tr></table></figure>
+<h4 id="默认值约束">默认值约束</h4>
+<p>默认值约束，指给某列设定默认值。当插入一条记录没有这个字段值时，系统自动赋值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 default 默认值</span><br></pre></td></tr></table></figure>
+<h4 id="自增">自增</h4>
+<p>在数据库应用中，经常希望在每次插入新记录时，系统自动生成字段的主键值。可以通过为表主键添加<code>auto_increment</code>关键字来实现。默认的，在MySQL中<code>auto_increment</code>的初始值是1，每新增一条记录，字段值自动加1。一个表只能有一个字段使用<code>auto_increment</code>约束，且该字段必须为主键的一部分。<code>auto_increment</code>约束的字段可以是任何整数类型（<code>tinyint</code>、<code>smallint</code>、<code>int</code>、<code>bigint</code>等）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字段名 数据类型 auto_increment</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>⚠️<font color="red">自增持久化</font>：</p>
+<p>在MySQL 8.0之前，自增主键<code>auto_increment</code>的值自增主键<code>auto_increment</code>的值如果大于max(primary key)+1，在MySQL重启后，会重置<code>auto_increment</code>=max(primary key)+1。</p>
+<p>原理是，在MySQL 5.7系统中，对于自增主键的分配规则，是由InnoDB数据字典内部一个计数器来决定的，而该计数器只在内存中维护，并不会持久化到磁盘中。当数据库重启时，该计数器会通过下面这种方式初始化。</p>
+<p>到了MySQL 8.0之后，将自增主键的计数器持久化到重做日志中。每次计数器发生改变，都会将其写入重做日志中。如果数据库重启，InnoDB会根据重做日志中的信息来初始化计数器的内存值。为了尽量减小对系统性能的影响，计数器写入到重做日志时并不会马上刷新数据库系统。</p>
+</blockquote>
+<h3 id="查看表结构">查看表结构</h3>
+<p><code>desc / describe</code>语句可以查看表的字段信息，其中包括字段名、字段数据类型、是否为主键、是否有默认值等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">desc (describe) 表名;</span><br><span class="line"># 查看表详细结构；\G 参数会使结果更加直观。</span><br><span class="line">show create table &lt;表名\G&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/25/data/mysql/desc%E8%A1%A8%E5%90%8D.png" class="lazyload" data-srcset="/2024/03/25/data/mysql/desc%E8%A1%A8%E5%90%8D.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<blockquote>
+<p>其中，各个字段的含义分别解释如下：</p>
+<ul>
+<li>NULL：表示该列是否可以存储NULL值</li>
+<li>Key：表示该列是否已编制索引。PRI表示该列是表主键的一部分；UNI表示该列是UNIQUE索引的一部分；MUL表示在列中某个给定值允许出现多次。</li>
+<li>Default：表示该列是否有默认值，有的话指定值是多少。</li>
+<li>Extra：表示可以获取的与给定列有关的附加信息，例如AUTO_INCREMENT等。</li>
+</ul>
+</blockquote>
+<h3 id="🌟修改表">🌟修改表</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 修改表名</span><br><span class="line">alter table &lt;旧表名&gt; rename [to] &lt;新表名&gt;;</span><br><span class="line"># 修改字段的数据类型</span><br><span class="line">alter table &lt;表名&gt; modify &lt;字段名&gt; &lt;数据类型&gt;;</span><br><span class="line"># 修改字段排列 first添加在最前面，after表示某字段之后，没有配置位置，默认添加在最后。</span><br><span class="line">alter table &lt;表名&gt; modify &lt;字段名&gt; &lt;数据类型&gt; &lt;first | after 已有字段&gt;;</span><br><span class="line"># 修改字段名</span><br><span class="line">alter table &lt;表名&gt; change &lt;旧字段名&gt; &lt;新字段名&gt; &lt;新数据类型&gt;;</span><br><span class="line"># 添加字段</span><br><span class="line">alter table &lt;表名&gt; add &lt;新字段名&gt; &lt;新数据类型&gt; [约束条件] [first | after &lt;已存在字段名&gt;];</span><br><span class="line"># 删除字段</span><br><span class="line">alter table &lt;表名&gt; drop &lt;字段名&gt;;</span><br><span class="line"># 删除表的外键约束</span><br><span class="line">alter table &lt;表名&gt; drop foreign key &lt;外键约束名&gt;;</span><br><span class="line"># 更换存储引擎</span><br><span class="line">alter table &lt;表名&gt; engine=&lt;更换后的存储引擎名称&gt;;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/25/data/mysql/mysql%E6%94%AF%E6%8C%81%E7%9A%84%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.png" class="lazyload" data-srcset="/2024/03/25/data/mysql/mysql%E6%94%AF%E6%8C%81%E7%9A%84%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<h3 id="删除表">删除表</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop table [if exists]表1[,表2,...];</span><br><span class="line"># 存在外键约束要先解除外键，才能删除表。</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型">数据类型</h2>
+<h3 id="整数类型">整数类型</h3>
+<table>
+<thead>
+<tr>
+<th>类型名称</th>
+<th>存储空间(/字节)</th>
+<th>范围（有符号）</th>
+<th>范围（无符号）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tinyint</td>
+<td>1</td>
+<td>$-2<sup>7$~$2</sup>7-1$</td>
+<td>0~$2^8-1$</td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>2</td>
+<td>$-2<sup>{15}$~$2</sup>{15}-1$</td>
+<td>0~$2^{16}-1$</td>
+</tr>
+<tr>
+<td>mediumint</td>
+<td>3</td>
+<td>$-2<sup>{23}$~$2</sup>{23}-1$</td>
+<td>0~$2^{24}-1$</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4</td>
+<td>$-2<sup>{31}$~$2</sup>{31}-1$</td>
+<td>0~$2^{32}-1$</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>8</td>
+<td>$-2<sup>{63}$~$2</sup>{63}-1$</td>
+<td>40~$2^{64}-1$</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️显示宽度只用于显示，并不能限制取值范围和占用空间。例如：<code>int(3)</code>会占用4字节的存储空间，并且允许的最大值不会是999，而是INT整型所允许的最大值。</p>
+</blockquote>
+<h3 id="浮点数和定点数类型">浮点数和定点数类型</h3>
+<table>
+<thead>
+<tr>
+<th>类型名称</th>
+<th>说明</th>
+<th>存储空间(/字节)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float</td>
+<td>单精度</td>
+<td>4</td>
+</tr>
+<tr>
+<td>double</td>
+<td>双精度</td>
+<td>8</td>
+</tr>
+<tr>
+<td>decimal(M,D),dec</td>
+<td>定点</td>
+<td>M+2</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️用户指定的精度超出精度范围，则会四舍五入。</p>
+<p>💬在MySQL中，定点数以字符串形式存储，在对精度要求比较高的时候（如货币、科学数据等）使用decimal的类型比较好，另外两个浮点数进行减法和比较运算时容易出问题，所以在使用浮点数时需要注意，并尽量避免做浮点数比较。</p>
+</blockquote>
+<h3 id="日期和时间类型">日期和时间类型</h3>
+<table>
+<thead>
+<tr>
+<th>类型名称</th>
+<th>日期格式</th>
+<th>日期范围</th>
+<th>存储空间(/字节)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>year</td>
+<td>yyy</td>
+<td>1901~2155</td>
+<td>1</td>
+</tr>
+<tr>
+<td>time</td>
+<td>hh:mm:ss</td>
+<td>-839:59:59  ~ 838:59:59</td>
+<td>3</td>
+</tr>
+<tr>
+<td>date</td>
+<td>yyy-MM-dd</td>
+<td>1001-01-01 ~ 9999-12-31</td>
+<td>3</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>yyy-MM-dd hh:mm:ss</td>
+<td>1001-01-01 00:00:00 ~ 9999-12-3 23:59:59</td>
+<td>8</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>yyy-MM-dd hh:mm:ss</td>
+<td>1970-01-01 00:00:01 utc ~ 2038-01-19 03:17:07 utc</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️</p>
+<ul>
+<li>
+<p><code>time</code>类型的输入格式为<code>d hh:mm:ss</code>，最终可以转换到<code>hh:mm:ss</code>格式。<font color="red">注意，使用<code>d hh</code>格式输入时，小时一定要是双位，小于10的在前面加0</font></p>
+</li>
+<li>
+<p><code>date</code>允许不严格语法：任何标点符号都可以用做日期部分之间的间隔符。</p>
+</li>
+<li>
+<p><code>datetime</code>在存储日期数据时，按实际输入的格式存储，即输入什么就存储什么，与时区无关；</p>
+<p><code>timestamp</code>值的存储是以UTC（世界标准时间）格式保存的，存储时对当前时区进行转换，检索时再转换回当前时区。查询时，不同时区显示的时间值是不同的。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="文本字符串类型">文本字符串类型</h3>
+<table>
+<thead>
+<tr>
+<th>类型名称</th>
+<th>说明</th>
+<th>存储空间(/字节)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char(M)</td>
+<td>固定长度</td>
+<td>$1\leq{M}\leq{255}$</td>
+</tr>
+<tr>
+<td>varchar(M)</td>
+<td>可变长度</td>
+<td>L+1，$L\leq{M}$ 和 $1\leq{M}\leq{255}$</td>
+</tr>
+<tr>
+<td>tinytext</td>
+<td></td>
+<td>L+1，$L\leq{2^8}$</td>
+</tr>
+<tr>
+<td>text</td>
+<td></td>
+<td>L+2，$L\leq{2^{16}}$</td>
+</tr>
+<tr>
+<td>mediumtext</td>
+<td></td>
+<td>L+3，$L\leq{2^{24}}$</td>
+</tr>
+<tr>
+<td>longtext</td>
+<td></td>
+<td>L+4，$L\leq{2^{32}}$</td>
+</tr>
+<tr>
+<td>enum</td>
+<td>枚举类型，只能有一个字符串值</td>
+<td>1或者2，取决于枚举值的数目（最大值为65535）</td>
+</tr>
+<tr>
+<td>set</td>
+<td>设置，字符串对象可以有零个或者多个set成员</td>
+<td>1，2，3，4或者8，取决于集合成员的数量（最多64个成员）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二进制字符串类型">二进制字符串类型</h3>
+<table>
+<thead>
+<tr>
+<th>类型名称</th>
+<th>说明</th>
+<th>存储空间(/字节)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bti(M)</td>
+<td>位字段</td>
+<td>$\frac{M+7}8$</td>
+</tr>
+<tr>
+<td>binary(M)</td>
+<td>固定长度</td>
+<td>M</td>
+</tr>
+<tr>
+<td>varbinary(M)</td>
+<td>可变长度</td>
+<td>M+1</td>
+</tr>
+<tr>
+<td>tinyblob(M)</td>
+<td>最大长度：$(2<sup>8-1)</sup>2$B</td>
+<td>L+1，$L\leq{2^8}$</td>
+</tr>
+<tr>
+<td>blob(M)</td>
+<td>最大长度：$(2<sup>{16}-1)</sup>2$B</td>
+<td>L+2，$L\leq{2^{16}}$</td>
+</tr>
+<tr>
+<td>mediumblob(M)</td>
+<td>最大长度：$(2<sup>{24}-1)</sup>2$B</td>
+<td>L+3，$L\leq{2^{24}}$</td>
+</tr>
+<tr>
+<td>longblob(M)</td>
+<td>最大长度：$(2<sup>{32}-1)</sup>2$B 或 4GB</td>
+<td>L+4，$L\leq{2^{32}}$</td>
+</tr>
+</tbody>
+</table>
+<h2 id="运算符">运算符</h2>
+<p>运算符是告诉MySQL执行特定算术或逻辑操作的符号。MySQL中的运算符逻辑与C、Java等语言的运算符逻辑相通的内容，就不过多赘述了。以下比较运算符是MySQL特有的。</p>
+<table>
+<thead>
+<tr>
+<th>比较运算符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;=&gt;</td>
+<td>安全等于。这个操作符和=操作符执行相同的比较操作，不过&lt;=&gt;可以用来判断NULL值</td>
+</tr>
+<tr>
+<td>is null</td>
+<td>判断是否为null</td>
+</tr>
+<tr>
+<td>is not null</td>
+<td>判断是否不为null</td>
+</tr>
+<tr>
+<td>least</td>
+<td>在有两个或多个参数时，返回最小值</td>
+</tr>
+<tr>
+<td>greatest</td>
+<td>当有两个或多个参数时，返回最大值</td>
+</tr>
+<tr>
+<td>between and</td>
+<td>判断一个值是否落在两个值之间</td>
+</tr>
+<tr>
+<td>isnull</td>
+<td>与is null 作用一致</td>
+</tr>
+<tr>
+<td>in</td>
+<td>判断一个值是否存在与给定的列表中</td>
+</tr>
+<tr>
+<td>not in</td>
+<td>判断一个值是否不存在与给定的列表中</td>
+</tr>
+<tr>
+<td>like</td>
+<td>通配符匹配 【<code>%</code>匹配任意数目(包括0个)的字符；<code>_</code>只能匹配一个字符】</td>
+</tr>
+<tr>
+<td>regexp</td>
+<td>正则匹配</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>regexp:</p>
+<ul>
+<li><code>^ </code>开头</li>
+<li><code>$</code>结尾</li>
+<li><code>.</code>任意一个</li>
+<li><code>*</code>匹配任意个</li>
+</ul>
+</blockquote>
+<h2 id="函数">函数</h2>
+<h3 id="数学函数">数学函数</h3>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>abs(x)</td>
+<td>绝对值</td>
+</tr>
+<tr>
+<td>pi()</td>
+<td>$\pi$，结果保留7位小数</td>
+</tr>
+<tr>
+<td>sqrt(x)</td>
+<td>$\sqrt{x}$</td>
+</tr>
+<tr>
+<td>mod(x,y)</td>
+<td>x被y除后的余数</td>
+</tr>
+<tr>
+<td>ceil(x) / ceiling(x)</td>
+<td>返回不小于x的最小整数值，返回值转化为一个BIGINT</td>
+</tr>
+<tr>
+<td>floor(x)</td>
+<td>返回不大于x的最大整数值，返回值转化为一个BIGINT</td>
+</tr>
+<tr>
+<td>rand()</td>
+<td>rand()返回一个随机浮点值v，范围在0到1之间（0 ≤ v ≤1.0）若已指定一个整数参数x<code>rand(x)</code>，则它被用作种子值，用来产生重复序列。</td>
+</tr>
+<tr>
+<td>round(x) <br>round(x,y)</td>
+<td>round(x) 返回最接近于参数x的整数，对x值进行四舍五入<br>使用round(x,y)函数对操作数进行四舍五入操作，结果保留小数点后面指定y位。y为负数时，保留的小数点左边的相应位数直接保存为0，不进行四舍五入。</td>
+</tr>
+<tr>
+<td>truncate(x,y)</td>
+<td>返回被舍去至小数点后y位的数字x。若y的值为0，则结果不带有小数点或不带有小数部分。若y设为负数，则截去（归零）x小数点左起第y位开始后面所有低位的值</td>
+</tr>
+<tr>
+<td>sign(x)</td>
+<td>返回参数的符号，x的值为负、零或正时返回结果依次为-1、0或1</td>
+</tr>
+<tr>
+<td>pow(x,y)<br>power(x,y)</td>
+<td>函数返回x的y次乘方的结果值</td>
+</tr>
+<tr>
+<td>log(x)<br>log10(x)</td>
+<td>log(x)返回x的自然对数，x相对于基数e的对数<br>log10(x)返回x的基数为10的对数</td>
+</tr>
+<tr>
+<td>radians(x)<br>degrees(x)</td>
+<td>radians(x)将参数x由角度转化为弧度<br>degrees(x)将参数x由弧度转化为角度</td>
+</tr>
+<tr>
+<td>sin \ cos \ asin \ acos \ tan \ atan \ cot</td>
+<td>正弦 \ 余弦 \ 反正弦 \ 反余弦 \ 正切 \ 反正切 \ 余切</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字符串函数">字符串函数</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char_length(str)<br>length(str)</td>
+<td>返回值为字符串str所包含的字符个数<br>返回值为字符串的字节长度[中文2 / 英文1]</td>
+</tr>
+<tr>
+<td>concat(s1,s2,…)</td>
+<td>返回结果为连接参数产生的字符串，或许有一个或多个参数。有null返回null，有二进制返回二进制</td>
+</tr>
+<tr>
+<td>concat_ws(x,s1,s2,…)</td>
+<td>参数x是其他参数的分隔符，分隔符的位置放在要连接的两个字符串之间。分隔符可以是一个字符串，也可以是其他参数。如果分隔符为NULL，则结果为NULL。函数会忽略任何分隔符参数后的NULL值。</td>
+</tr>
+<tr>
+<td>insert(s1,x,len,s2)</td>
+<td>返回字符串s1，其子字符串起始于x位置和被字符串s2取代的len字符。如果x超过字符串长度，则返回值为原始字符串。假如len的长度大于其他字符串的长度，则从位置x开始替换。若任何一个参数为NULL，则返回值为NULL</td>
+</tr>
+<tr>
+<td>lower (str)<br>lcase (str)</td>
+<td>将字符串str中的字母字符全部转换成小写字母。</td>
+</tr>
+<tr>
+<td>upper(str)<br>ucase(str)</td>
+<td>将字符串str中的字母字符全部转换成大写字母。</td>
+</tr>
+<tr>
+<td>left(s,n)<br>right(s,n)</td>
+<td>返回字符串s开始的最【左 | 右】边n个字符</td>
+</tr>
+<tr>
+<td>lpad(s1,len,s2)<br>rpad(s1,len,s2)</td>
+<td>字符串s1，其【左 | 右】边由字符串s2填补到len字符长度</td>
+</tr>
+<tr>
+<td>ltrim(s)<br>rtrim(s)<br>trim(s)</td>
+<td>返回字符串s，字符串【左 | 右 | 两】侧空格字符被删除</td>
+</tr>
+<tr>
+<td>trim(s1 from s)</td>
+<td>删除字符串s中<strong>两端</strong>所有的子字符串s1</td>
+</tr>
+<tr>
+<td>repeat(s,n)</td>
+<td>重复生成字符串</td>
+</tr>
+<tr>
+<td>space(n)</td>
+<td>返回一个由n个空格组成的字符串</td>
+</tr>
+<tr>
+<td>replace(s,s1,s2)</td>
+<td>使用字符串s2替代字符串s中所有的字符串s1。</td>
+</tr>
+<tr>
+<td>strcmp(s1,s2)</td>
+<td>若所有的字符串均相同，则返回0；若根据当前分类次序，第一个参数小于第二个，则返回-1；其他情况返回1</td>
+</tr>
+<tr>
+<td>substring(s,n,len)</td>
+<td>带有len参数的格式，从字符串s返回一个长度与len字符相同的子字符串，起始于位置n。也可能对n使用一个负值。假若这样，则子字符串的位置起始于字符串结尾的n字符，即倒数第n个字符，而不是字符串的开头位置</td>
+</tr>
+<tr>
+<td>mid(s,n,len)</td>
+<td>与上一致。len小于1，结果时空字符串。</td>
+</tr>
+<tr>
+<td>locate(str1,str)<br>position(str1 in str)<br>instr(str, str1)</td>
+<td>返回子字符串str1在字符串str中的开始位置。</td>
+</tr>
+<tr>
+<td>reverse(s)</td>
+<td>字符串反转</td>
+</tr>
+<tr>
+<td>elt(n，字符串1，字符串2，…，字符串n)</td>
+<td>若n =1，则返回值为字符串1；若n=2，则返回值为字符串2；以此类推；若n小于1或大于参数的数目，则返回值为null</td>
+</tr>
+<tr>
+<td>field(s,s1,s2,…,sn)</td>
+<td>返回字符串s在列表s1,s2,…,sn中第一次出现的位置，在找不到s的情况下，返回值为0。如果s为null，则返回值为0，原因是null不能同任何值进行同等比较。</td>
+</tr>
+<tr>
+<td>make_set(x,s1,s2,…,sn)</td>
+<td>函数按x的二进制数从s1，s2,…,sn中选取字符串。例如5的二进制是0101，这个二进制从右往左的第1位和第3位是1，所以选取s1和s3。s1,s2,…,sn中的null值不会被添加到结果中。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="日期时间函数">日期时间函数</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>curdate()<br>current_date()</td>
+<td>将当前日期按照 <code>YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td>current_timestamp()<br>localtime()<br>now()<br>sysdate()</td>
+<td>返回当前日期和时间值，格式为<code>YYYY-MM-DD HH:MM:SS</code></td>
+</tr>
+<tr>
+<td>unix_timestamp(date)<br>from_unixtime(date)</td>
+<td>时间转时间戳<br>时间戳转时间</td>
+</tr>
+<tr>
+<td>utc_date()</td>
+<td>返回当前UTC（世界标准时间）日期值，其格式为<code>YYYY-MM-DD</code></td>
+</tr>
+<tr>
+<td>month(date)<br>monthname(date)</td>
+<td>返回date对应的月份，范围值为1~12<br>返回日期date对应月份的英文全名。</td>
+</tr>
+<tr>
+<td>dayname(d)<br>dayofweek(d)<br>weekday(d)</td>
+<td>dayname(d)：返回d对应的工作日的英文名称<br>dayofweek(d)：返回d对应的一周中的索引（位置，1表示周日，2表示周一，…，7表示周六）<br>weekday(d)：返回d对应的工作日索引：0表示周一，1表示周二，…，6表示周日。</td>
+</tr>
+<tr>
+<td>week(d)<br>weekofyear(d)</td>
+<td>week(d)计算日期d是一年中的第几周<br>weekofyear(d)计算某天位于一年中的第几周，范围是1~53</td>
+</tr>
+<tr>
+<td>dayofyear(d)<br>dayofmonth(d)</td>
+<td>dayofyear(d)函数返回d是一年中的第几天，范围是1~366<br> dayofmonth(d)函数返回d是一个月中的第几天，范围是1~31。</td>
+</tr>
+<tr>
+<td>year(date)<br>quarter(date)<br>month(date)<br>day(date)<br>hour(time)<br>minute(time)<br>second(time)</td>
+<td>年份、季度、月份、日期、小时、分钟和秒钟</td>
+</tr>
+<tr>
+<td>extract(type from date)</td>
+<td>例如<code>extract(year_month from date)</code><br>其中的<code>type</code>是上栏中的类型，年月和day</td>
+</tr>
+<tr>
+<td>time_to_sec(time)<br>sec_to_time(seconds)</td>
+<td>时间转成秒数<br>秒数转成时间</td>
+</tr>
+<tr>
+<td>date_add()<br>adddate()<br>date_sub()<br>subdate()<br>addtime()<br>subtime()<br>date_diff()</td>
+<td>计算日期和时间的函数</td>
+</tr>
+<tr>
+<td>date_format(date,format)</td>
+<td>格式化日期</td>
+</tr>
+<tr>
+<td>time_format(time,format)</td>
+<td>格式化时间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="条件判断函数">条件判断函数</h3>
+<ul>
+<li>
+<p>if(expr,v1,v2)</p>
+<p>如果表达式expr是true(expr &lt;&gt; 0 and expr &lt;&gt; null)，则返回值为v1；否则返回值为v2。if()的返回值为数字值或字符串值，具体情况视其所在语境而定。</p>
+<blockquote>
+<p>如果v1或v2中只有一个明确是NULL，则if()函数的结果类型为非null表达式的结果类型。</p>
+</blockquote>
+</li>
+<li>
+<p>ifnull(v1,v2)</p>
+<p>假如v1不为null，则ifnull()的返回值为v1；否则其返回值为v2。ifnull()的返回值是数字或者字符串，具体情况取决于其所在</p>
+</li>
+<li>
+<p>case</p>
+<p><code>case expr when v1 then r1 [when v2then r2]…[else rn+1] end</code>：如果expr值等于某个vn，则返回对应位置then后面的结果；如果与所有值都不相等，则返回else后面的rn+1</p>
+</li>
+</ul>
+<h3 id="系统信息函数">系统信息函数</h3>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取版本号</td>
+<td>version()</td>
+</tr>
+<tr>
+<td>获取MySQL服务器当前连接的次数</td>
+<td>cibbectuib_id()</td>
+</tr>
+<tr>
+<td>显示有哪些线程在运行（包括当前连接数，连接状态、帮助识别）</td>
+<td>processlist</td>
+</tr>
+<tr>
+<td>获取用户名</td>
+<td>user()、current_user、current_user()、system_user()和session_user()</td>
+</tr>
+<tr>
+<td>获取字符串的字符集</td>
+<td>charset(str)</td>
+</tr>
+<tr>
+<td>返回字符串str的字符排列方式</td>
+<td>collation(str)</td>
+</tr>
+<tr>
+<td>返回最后生成的AUTO_INCREMENT值</td>
+<td>last_insert_id()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="加密函数">加密函数</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>md5(str)</td>
+<td>字符串算出一个MD5 128比特校验和。该值以32位十六进制数字的二进制字符串形式返回，若参数为NULL，则会返回NULL</td>
+</tr>
+<tr>
+<td>sha(str)</td>
+<td>从原明文密码str计算并返回加密后的密码字符串，当参数为NULL时，返回NULL。SHA加密算法比MD5更加安全。</td>
+</tr>
+<tr>
+<td>sha2(str, hash_length)</td>
+<td>使用hash_length作为长度，加密str。hash_length支持的值为224、256、384、512和0。其中，0等同于256。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="其他">其他</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>format(x,n)</td>
+<td>将数字x格式化，并以四舍五入的方式保留小数点后n位，结果以字符串的形式返回。若n为0，则返回结果函数不含小数部分。</td>
+</tr>
+<tr>
+<td>conv(n, from_base, to_base)</td>
+<td>函数进行不同进制数间的转换。返回值为数值n的字符串表示，由from_base进制转化为to_base进制。如有任意一个参数为null，则返回值为null。自变量n被理解为一个整数，但是可以被指定为一个整数或字符串。最小基数为2，最大基数为36。</td>
+</tr>
+<tr>
+<td>inet_aton(expr)</td>
+<td>给出一个作为字符串的网络地址的点地址表示，返回一个代表该地址数值的整数。地址可以是4或8bit地址。</td>
+</tr>
+<tr>
+<td>get_lock(str,timeout)<br>release_lock(str)</td>
+<td>加锁<br>解锁</td>
+</tr>
+<tr>
+<td>benchmark(count,expr)</td>
+<td>函数重复count次执行表达式expr</td>
+</tr>
+<tr>
+<td>convert(… using …)</td>
+<td>带有using的convert()函数被用来在不同的字符集之间转化数据。</td>
+</tr>
+<tr>
+<td>cast(x, as type)<br>convert(x, type)</td>
+<td>函数将一个类型的值转换为另一个类型的值，可转换的type有binary、char(n)、date、time、datetime、decimal、signed、unsigned。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="🌟数据的操作">🌟数据的操作</h2>
+<h3 id="查询语句">查询语句</h3>
+<p><img src="/2024/03/25/data/mysql/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E8%AF%AD%E6%B3%95.png" class="lazyload" data-srcset="/2024/03/25/data/mysql/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E8%AF%AD%E6%B3%95.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<blockquote>
+<ul>
+<li>
+<p><code>&#123;* | &lt;字段列表&gt;&#125;</code>包含星号通配符和字段列表，表示查询的字段。其中，字段列表至少包含一个字段名称，如果要查询多个字段，多个字段之间用逗号隔开，最后一个字段后不加逗号。</p>
+<p><font color="#8cb9c0">在字段列前添加distinct去重</font></p>
+</li>
+<li>
+<p><code>FROM &lt;表1&gt;,&lt;表2&gt;...</code>，表1和表2表示查询数据的来源，可以是单个或者多个。</p>
+</li>
+<li>
+<p><code>WHERE</code>子句是可选项，如果选择该项，将限定查询行必须满足的查询条件。</p>
+</li>
+<li>
+<p><code>GROUP BY &lt;字段&gt;</code>，该子句告诉MySQL如何显示查询出来的数据，并按照指定的字段分组。</p>
+<p><font color="#eea8ab">[HAVING &lt;条件表达式&gt;]用来筛选分组之后的数据展示</font></p>
+</li>
+<li>
+<p><code>[ORDER BY &lt;字段&gt;]</code>，该子句告诉MySQL按什么样的顺序显示查询出来的数据，可以进行的排序有升序（ASC）、降序（DESC）。</p>
+</li>
+<li>
+<p><code>[LIMIT [&lt;offset&gt;,] &lt;row count&gt;]</code>，该子句告诉MySQL每次显示查询出来的数据条数。</p>
+</li>
+<li>
+<p><code>AS</code> 用于表、列的重命名</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="聚合函数">聚合函数</h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>avg()</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>计数；<font color="#eea8ab">count(*)，会统计空值行；count(字段)会忽略空值行</font></td>
+</tr>
+<tr>
+<td>max()</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min()</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>sum()</td>
+<td>求和</td>
+</tr>
+</tbody>
+</table>
+<h3 id="连接查询">连接查询</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `a` (</span><br><span class="line">  `a_id` varchar(100) DEFAULT NULL,</span><br><span class="line">  `b_id` varchar(100) DEFAULT NULL,</span><br><span class="line">  `name` varchar(100) DEFAULT NULL</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci</span><br><span class="line">INSERT INTO `a` VALUES (&#x27;1&#x27;,&#x27;1&#x27;,&#x27;Duo&#x27;),(&#x27;2&#x27;,&#x27;1&#x27;,&#x27;Tony&#x27;),(&#x27;3&#x27;,&#x27;2&#x27;,&#x27;Lili&#x27;),(&#x27;4&#x27;,&#x27;4&#x27;,&#x27;Seri&#x27;);</span><br><span class="line"></span><br><span class="line">CREATE TABLE `b` (</span><br><span class="line">  `b_id` varchar(100) DEFAULT NULL,</span><br><span class="line">  `class_name` varchar(100) DEFAULT NULL</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci</span><br><span class="line">INSERT INTO `b` VALUES (&#x27;1&#x27;,&#x27;体育&#x27;),(&#x27;2&#x27;,&#x27;美术&#x27;),(&#x27;3&#x27;,&#x27;舞蹈&#x27;);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>表a</th>
+<th>表b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a_id</td>
+<td>b_id</td>
+</tr>
+<tr>
+<td>b_id</td>
+<td>class_name</td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 1. 使用where进行连接</span><br><span class="line">select a.name,b.class_name from a,b where a.b_id = b.b_id;</span><br><span class="line"># 2. 使用[inner] join进行连接，等价于使用where连接</span><br><span class="line">select a.name,b.class_name from a [inner] join b on a.b_id = b.b_id;</span><br><span class="line"># 3. left join</span><br><span class="line">select a.name,b.class_name from a left join b on a.b_id = b.b_id;</span><br><span class="line"># 4. right join</span><br><span class="line">select a.name,b.class_name from a right join b on a.b_id = b.b_id;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>连接方式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>where</td>
+<td>内连接，$a\cap{b}$</td>
+</tr>
+<tr>
+<td>[inner] join</td>
+<td>内连接，$a\cap{b}$</td>
+</tr>
+<tr>
+<td>left join</td>
+<td>外连接，数据展示以a为主</td>
+</tr>
+<tr>
+<td>right join</td>
+<td>外连接，数据展示以b为主</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2024/03/25/data/mysql/%E8%BF%9E%E6%8E%A5.png" class="lazyload" data-srcset="/2024/03/25/data/mysql/%E8%BF%9E%E6%8E%A5.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<h3 id="子查询">子查询</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 1. any(任意一个) / some(多个，包括一个) / all 所有</span><br><span class="line">select a_id from a where a_id &gt; any (select b_id from b);</span><br><span class="line">select a_id from a where a_id &gt; some (select b_id from b);</span><br><span class="line">select a_id from a where a_id &gt; all (select b_id from b);</span><br><span class="line"># 2. exists / not exists [系统对子查询进行运算以判断它是否返回行，如果至少返回一行，那么exists的结果为true，此时外层查询语句将进行查询；如果子查询没有返回任何行，那么exists返回的结果是false，此时外层语句将不进行查询。not exists 与之相反]</span><br><span class="line">select * from a where [not] exists (select b_id from b where b_id &gt; 12);</span><br><span class="line"># 3. in 限制某字段范围在子查询查询结果中；in 也可以替换成比较运算符</span><br><span class="line">select * from a where b_id in (select b_id from b where class_name != &#x27;体育&#x27;);</span><br><span class="line"># 4. union / union all 合并查询 [两个查询结果列数不等不能合并]</span><br><span class="line">### union all 保留重复值</span><br><span class="line">select * from a union [all] select * from b</span><br></pre></td></tr></table></figure>
+<h3 id="插入数据">插入数据</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into table_name [(column_list)] values (value_list);</span><br><span class="line">insert into table_name values (value_list1),(value_list2),...;</span><br></pre></td></tr></table></figure>
+<h3 id="更新数据">更新数据</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update table_name set column_name1 = value1,... [where 条件];</span><br></pre></td></tr></table></figure>
+<h3 id="删除数据">删除数据</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from table_name [where 条件]</span><br></pre></td></tr></table></figure>
+<h3 id="添加计算列">添加计算列</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table tb1(</span><br><span class="line">  a int(9),</span><br><span class="line">  b int(9),</span><br><span class="line">  c int(9) generated always as ((a+b)) virtual</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="索引">索引</h2>
+<p>索引是一个单独的、存储在磁盘上的数据库结构，包含着对数据表里所有记录的引用指针。</p>
+<p>索引是在存储引擎中实现的，因此，每种存储引擎的索引都不一定完全相同，并且每种存储引擎也不一定支持所有索引类型。根据存储引擎定义每个表的最大索引数和最大索引长度。所有存储引擎支持每个表至少16个索引，总索引长度至少为256字节</p>
+<h3 id="分类">分类</h3>
+<ul>
+<li>
+<p>普通索引和唯一索引</p>
+<blockquote>
+<p><code>index(column_name)</code>：普通索引是MySQL中的基本索引类型，允许在定义索引的列中插入重复值和空值。</p>
+</blockquote>
+<blockquote>
+<p><code>unique index uniquIdx(column_name)</code>：唯一索引要求索引<strong>列的值必须唯一</strong>，但允许有空值。如果是组合索引，则列值的组合必须唯一。主键索引是一种特殊的唯一索引，不允许有空值。<strong>如果是组合索引，则列值的组合必须唯一。</strong></p>
+</blockquote>
+</li>
+<li>
+<p>单列索引和组合索引</p>
+<blockquote>
+<p><code>index(c1)</code>：单列索引即一个索引只包含单个列，一个表可以有多个单列索引。</p>
+</blockquote>
+<blockquote>
+<p><code>index(c1,c2...)</code>：组合索引是指在表的多个字段组合上创建的索引，只有在查询条件中使用了这些字段的左边字段时，索引才会被使用。使用组合索引时<font color="#df4c5b"><strong>遵循最左前缀集合</strong></font>。利用索引中最左边的列集来匹配行，这样的列集称为最左前缀。例如，由id、name和age 3个字段构成的索引，索引行中按id、name、age的顺序存放，索引可以搜索（id,name, age）、（id, name）或者id字段组合。如果列不构成索引最左面的前缀，那么MySQL不能使用局部索引，如（age）或者（name,age）组合则不能使用索引查询。</p>
+</blockquote>
+</li>
+<li>
+<p>全文索引</p>
+<blockquote>
+<p><code>fulltext index(xx)</code>全文索引类型为<code>fulltext</code>，在定义索引的列上支持值的全文查找，允许在这些索引列中插入重复值和空值。全文索引可以在char、varchar或者text类型的列上创建。<strong>MySQL中只有MyISAM存储引擎支持全文索引</strong>。<font color="#f47d85">索引总是对整个列进行，不支持局部（前缀）索引。</font></p>
+</blockquote>
+</li>
+<li>
+<p>空间索引</p>
+<blockquote>
+<p><code>spatial index(xx)</code>：空间索引是对空间数据类型的字段建立的索引，MySQL中的空间数据类型有4种，分别是geometry、point、linestring和polygon。MySQL使用spatial关键字进行扩展，使得能够用创建正规索引类似的语法创建空间索引。创建空间索引的列，必须将其声明为not null，<strong>空间索引只能在存储引擎为MyISAM的表中创建</strong>。</p>
+</blockquote>
+</li>
+</ul>
+<p>🌟<font color="#df4c5b"><strong>索引的设计原则</strong>：</font></p>
+<ol>
+<li><font color="#f47d85">索引并非越多越好。</font>一张表中如果有大量的索引，不仅占用磁盘空间，还会影响<code>insert / delete / update</code>等语句的性能，因为表数据改动时，索引也会进行调整和更新。</li>
+<li><font color="#f47d85">避免对经常更新的表设置过多的索引，且索引中的列尽可能少。</font>应该经常用于查询的字段创建索引，但要避免添加不必要的字段。</li>
+<li><font color="#f47d85">数据量小的表最好不要使用索引。</font></li>
+<li><font color="#f47d85">在条件表达式中经常用到的列（且该列不同值较多）上添加索引。</font></li>
+<li><font color="#f47d85">当唯一性是某种数据本身的特征时，指定唯一索引。</font></li>
+<li><font color="#f47d85">在频繁进行排序或分组（即进行group by或order by操作）的列上建立索引。</font>如果待排序的列有多个，可以在这些列上建立组合索引。</li>
+</ol>
+<h3 id="创建索引">创建索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table table_name [col_name data_type] [unique | fulltext | spatial] [index | key] [index_name] (col_name [length]) [ASC | DESC]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>[unique | fulltext | spatial]</code>，可选参数，分别表示唯一索引、全文索引和空间索引</li>
+<li>[index | key] 两者作用相同，用来创建索引。</li>
+<li>[index_name] ，索引名称，可选参数</li>
+<li>(col_name [length]) ，MySQL默认col_name为索引值；length为索引长度，可选参数。</li>
+<li>[ASC | DESC]指定升序或者降序的索引值存储。</li>
+</ul>
+<h3 id="已有字段添加索引">已有字段添加索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name　add [unique|fulltext|spatial]　[index|key]</span><br><span class="line">[index_name] (col_name[length],…) [asc | desc]</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/25/data/mysql/showIndex.png" class="lazyload" data-srcset="/2024/03/25/data/mysql/showIndex.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<ol>
+<li>Table表示创建索引的表。</li>
+<li>Non_unique表示索引非唯一。<font color="#99d0d9">1代表是非唯一索引，0代表唯一索引。</font></li>
+<li>Key_name表示索引的名称。</li>
+<li>Seq_in_index表示该字段在索引中的位置。<font color="#99d0d9">单列索引该值为1，组合索引为每个字段在索引定义中的顺序。</font></li>
+<li>Column_name表示定义索引的列字段。</li>
+<li>Sub_part表示索引的长度。</li>
+<li>Null表示该字段是否能为空值。</li>
+<li>Index_type表示索引类型。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># create 方式添加索引</span><br><span class="line">create [unique|fulltext|spatial]　index [index_name] on table_name (col_name[length],..) [asc | desc]</span><br><span class="line">## 例子</span><br><span class="line">create index TextIdx on tb1(b);</span><br></pre></td></tr></table></figure>
+<h3 id="删除索引">删除索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 1</span><br><span class="line">alter table table_name drop index index_name;</span><br><span class="line"># 2</span><br><span class="line">drop index index_name on table_name;</span><br></pre></td></tr></table></figure>
+<p>⚠️<font color="#eea8ab">删除表中的列时，如果要删除的列为索引的组成部分，则该列也会从索引中删除。如果组成索引的所有列都被删除，则整个索引将被删除。</font></p>
+<h3 id="explain分析是否命中索引">explain分析是否命中索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain &lt;sql语句&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/03/25/data/mysql/explain.png" class="lazyload" data-srcset="/2024/03/25/data/mysql/explain.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<ol>
+<li><font color="#99d0d9">select_type表示查询类型。</font>SIMPLE代表简单的SELECT查询。其他情况有PRIMARY、UNION、SUBQUERY。</li>
+<li><font color="#99d0d9">table表示数据库读取的数据表的名字</font>，数据库读取的数据表的名字。</li>
+<li><font color="#99d0d9">type表示本数据表与其他数据表之间的关联关系，</font>可能的取值有<strong>system、const、eq_ref、ref、range、index和All</strong>。</li>
+<li><font color="#99d0d9">possible_keys表示MySQL在搜索数据记录时可选用的各个索引。</font></li>
+<li><font color="#99d0d9">key表示MySQL实际选用的索引</font></li>
+<li><font color="#99d0d9">key_len行给出索引按字节计算的长度</font>，key_len数值越小，表示越快。</li>
+<li>ref行给出了关联关系中另一个数据表里的数据列名</li>
+<li>rows行是MySQL在执行这个查询时预计会从这个数据表里读出的数据行的个数。</li>
+<li>Extra行提供了与关联操作有关的信息。</li>
+</ol>
 
   </div>
   
@@ -2501,10 +3410,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-27T10:24:18+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-11T16:51:30+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2024年3月27日</p>
+    <p>更新于：2024年4月11日</p>
   </a>
 </div>
 
@@ -2649,7 +3558,7 @@ AOP(Aspect Oriented Programming)，意为面向切面编程。最早由AOP联盟
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库的基础操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">数据表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="toc-text">创建表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F"><span class="toc-text">约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="toc-text">主键约束</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库的基础操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">数据表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="toc-text">创建表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%9F%E7%BA%A6%E6%9D%9F"><span class="toc-text">🌟约束</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%AD%90%E4%B8%BB%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="toc-text">⭐主键约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="toc-text">外键约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E7%A9%BA%E7%BA%A6%E6%9D%9F"><span class="toc-text">非空约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="toc-text">唯一性约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC%E7%BA%A6%E6%9D%9F"><span class="toc-text">默认值约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E"><span class="toc-text">自增</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">查看表结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%9F%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="toc-text">🌟修改表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="toc-text">删除表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">整数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E5%92%8C%E5%AE%9A%E7%82%B9%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-text">浮点数和定点数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B"><span class="toc-text">日期和时间类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="toc-text">文本字符串类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="toc-text">二进制字符串类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="toc-text">数学函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-text">字符串函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0"><span class="toc-text">日期时间函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0"><span class="toc-text">条件判断函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0"><span class="toc-text">系统信息函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E5%87%BD%E6%95%B0"><span class="toc-text">加密函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%9F%E6%95%B0%E6%8D%AE%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">🌟数据的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-text">查询语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-text">聚合函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-text">连接查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-text">子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-text">插入数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">删除数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%AE%A1%E7%AE%97%E5%88%97"><span class="toc-text">添加计算列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89%E5%AD%97%E6%AE%B5%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="toc-text">已有字段添加索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#explain%E5%88%86%E6%9E%90%E6%98%AF%E5%90%A6%E5%91%BD%E4%B8%AD%E7%B4%A2%E5%BC%95"><span class="toc-text">explain分析是否命中索引</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -3212,7 +4121,7 @@ AOP(Aspect Oriented Programming)，意为面向切面编程。最早由AOP联盟
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/MySQL/","name":"MySQL"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/03/25/data/mysql/","name":"MySQL|基础"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"MySQL|基础","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/03/25/data/mysql/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/03/25/data/mysql/","wordCount":0,"datePublished":"2024-03-25T08:20:00.000Z","dateModified":"2024-03-27T02:24:18.861Z","articleSection":"MySQL","keywords":"MySQL","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/MySQL/","name":"MySQL"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/03/25/data/mysql/","name":"MySQL|基础"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"MySQL|基础","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/03/25/data/mysql/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/03/25/data/mysql/","wordCount":0,"datePublished":"2024-03-25T08:20:00.000Z","dateModified":"2024-04-11T08:51:30.732Z","articleSection":"MySQL","keywords":"MySQL","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
