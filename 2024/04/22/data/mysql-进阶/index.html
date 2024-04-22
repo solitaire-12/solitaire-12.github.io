@@ -5,8 +5,8 @@
   <meta name="Volantis" content="5.8.0">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="https://solitaire-12.github.io/categories/服务器/"/>
+  
+  <link rel="canonical" href="https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -33,18 +33,21 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>分类：服务器 - 织秋个人博客</title>
-  <meta name="keywords" content="null">
+  <title>MySQL|进阶 - 织秋个人博客</title>
+  <meta name="keywords" content="MySQL,null">
   <meta desc name="description" content="座右铭 - solitaire-12 - 织秋个人博客">
   
-<meta property="og:type" content="website">
-<meta property="og:title" content="织秋个人博客">
-<meta property="og:url" content="https://solitaire-12.github.io/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL|进阶">
+<meta property="og:url" content="https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="座右铭">
+<meta property="og:description" content="索引 索引是一个单独的、存储在磁盘上的数据库结构，包含着对数据表里所有记录的引用指针。 索引是在存储引擎中实现的，因此，每种存储引擎的索引都不一定完全相同，并且每种存储引擎也不一定支持所有索引类型。根据存储引擎定义每个表的最大索引数和最大索引长度。所有存储引擎支持每个表至少16个索引，总索引长度至少为256字节 分类   普通索引和唯一索引  index(column_name)：普通索引是MyS">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2024-04-22T01:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-22T01:13:40.173Z">
 <meta property="article:author" content="solitaire-12">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2323,7 +2326,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper  search' style="display: ;">
+      <div id="half" class='cover-wrapper post search' style="display: ;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://gcore.jsdelivr.net/gh/MHG-LAB/cron@gh-pages/bing/bing.jpg"></div>
 
@@ -2359,43 +2362,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="safearea">
         <div class="body-wrapper">
           
-
 <div id="l_main" class=''>
-  
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/内网穿透/">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
   </span>
@@ -2404,735 +2373,324 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="座右铭">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"  itemprop="url">
-        内网穿透
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
     
-      
-        环境：
-
-服务端阿里云： CentOS 8.5.2111
-客户端：windows 11 / windows 10
-frp 0.42
-
-第一步
-
-官网下载frp软件
-笔者使用的版本：链接：https://pan.baidu.com/s/1cjmUiOY8iRIywx6whkhRdg 提取码：gatr
-
-第二步
-服务端：
-
-
-将 frp_0.42.0_linux_amd64.tar.gz压缩包传...
-      
     
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+      <h1 class="title" itemprop="name headline">
+        MySQL|进阶
+      </h1>
+      <div class='new-meta-box'>
         
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T17:05:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
           
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/about/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">织秋</p>
+  </a>
 </div>
 
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/MySQL/">MySQL</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/MySQL/" itemprop="url"><span itemprop="name">MySQL</span></a>
+      </span>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-04-22T09:00:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2024年4月22日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h2 id="索引">索引</h2>
+<p>索引是一个单独的、存储在磁盘上的数据库结构，包含着对数据表里所有记录的引用指针。</p>
+<p>索引是在存储引擎中实现的，因此，每种存储引擎的索引都不一定完全相同，并且每种存储引擎也不一定支持所有索引类型。根据存储引擎定义每个表的最大索引数和最大索引长度。所有存储引擎支持每个表至少16个索引，总索引长度至少为256字节</p>
+<h3 id="分类">分类</h3>
+<ul>
+<li>
+<p>普通索引和唯一索引</p>
+<blockquote>
+<p><code>index(column_name)</code>：普通索引是MySQL中的基本索引类型，允许在定义索引的列中插入重复值和空值。</p>
+</blockquote>
+<blockquote>
+<p><code>unique index uniquIdx(column_name)</code>：唯一索引要求索引<strong>列的值必须唯一</strong>，但允许有空值。如果是组合索引，则列值的组合必须唯一。主键索引是一种特殊的唯一索引，不允许有空值。<strong>如果是组合索引，则列值的组合必须唯一。</strong></p>
+</blockquote>
+</li>
+<li>
+<p>单列索引和组合索引</p>
+<blockquote>
+<p><code>index(c1)</code>：单列索引即一个索引只包含单个列，一个表可以有多个单列索引。</p>
+</blockquote>
+<blockquote>
+<p><code>index(c1,c2...)</code>：组合索引是指在表的多个字段组合上创建的索引，只有在查询条件中使用了这些字段的左边字段时，索引才会被使用。使用组合索引时<font color="#df4c5b"><strong>遵循最左前缀集合</strong></font>。利用索引中最左边的列集来匹配行，这样的列集称为最左前缀。例如，由id、name和age 3个字段构成的索引，索引行中按id、name、age的顺序存放，索引可以搜索（id,name, age）、（id, name）或者id字段组合。如果列不构成索引最左面的前缀，那么MySQL不能使用局部索引，如（age）或者（name,age）组合则不能使用索引查询。</p>
+</blockquote>
+</li>
+<li>
+<p>全文索引</p>
+<blockquote>
+<p><code>fulltext index(xx)</code>全文索引类型为<code>fulltext</code>，在定义索引的列上支持值的全文查找，允许在这些索引列中插入重复值和空值。全文索引可以在char、varchar或者text类型的列上创建。<strong>MySQL中只有MyISAM存储引擎支持全文索引</strong>。<font color="#f47d85">索引总是对整个列进行，不支持局部（前缀）索引。</font></p>
+</blockquote>
+</li>
+<li>
+<p>空间索引</p>
+<blockquote>
+<p><code>spatial index(xx)</code>：空间索引是对空间数据类型的字段建立的索引，MySQL中的空间数据类型有4种，分别是geometry、point、linestring和polygon。MySQL使用spatial关键字进行扩展，使得能够用创建正规索引类似的语法创建空间索引。创建空间索引的列，必须将其声明为not null，<strong>空间索引只能在存储引擎为MyISAM的表中创建</strong>。</p>
+</blockquote>
+</li>
+</ul>
+<p>🌟<font color="#df4c5b"><strong>索引的设计原则</strong>：</font></p>
+<ol>
+<li><font color="#f47d85">索引并非越多越好。</font>一张表中如果有大量的索引，不仅占用磁盘空间，还会影响<code>insert / delete / update</code>等语句的性能，因为表数据改动时，索引也会进行调整和更新。</li>
+<li><font color="#f47d85">避免对经常更新的表设置过多的索引，且索引中的列尽可能少。</font>应该经常用于查询的字段创建索引，但要避免添加不必要的字段。</li>
+<li><font color="#f47d85">数据量小的表最好不要使用索引。</font></li>
+<li><font color="#f47d85">在条件表达式中经常用到的列（且该列不同值较多）上添加索引。</font></li>
+<li><font color="#f47d85">当唯一性是某种数据本身的特征时，指定唯一索引。</font></li>
+<li><font color="#f47d85">在频繁进行排序或分组（即进行group by或order by操作）的列上建立索引。</font>如果待排序的列有多个，可以在这些列上建立组合索引。</li>
+</ol>
+<h3 id="创建索引">创建索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table table_name [col_name data_type] [unique | fulltext | spatial] [index | key] [index_name] (col_name [length]) [ASC | DESC]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>[unique | fulltext | spatial]</code>，可选参数，分别表示唯一索引、全文索引和空间索引</li>
+<li>[index | key] 两者作用相同，用来创建索引。</li>
+<li>[index_name] ，索引名称，可选参数</li>
+<li>(col_name [length]) ，MySQL默认col_name为索引值；length为索引长度，可选参数。</li>
+<li>[ASC | DESC]指定升序或者降序的索引值存储。</li>
+</ul>
+<h3 id="已有字段添加索引">已有字段添加索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name　add [unique|fulltext|spatial]　[index|key]</span><br><span class="line">[index_name] (col_name[length],…) [asc | desc]</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/showIndex.png" class="lazyload" data-srcset="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/showIndex.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<ol>
+<li>Table表示创建索引的表。</li>
+<li>Non_unique表示索引非唯一。<font color="#99d0d9">1代表是非唯一索引，0代表唯一索引。</font></li>
+<li>Key_name表示索引的名称。</li>
+<li>Seq_in_index表示该字段在索引中的位置。<font color="#99d0d9">单列索引该值为1，组合索引为每个字段在索引定义中的顺序。</font></li>
+<li>Column_name表示定义索引的列字段。</li>
+<li>Sub_part表示索引的长度。</li>
+<li>Null表示该字段是否能为空值。</li>
+<li>Index_type表示索引类型。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># create 方式添加索引</span><br><span class="line">create [unique|fulltext|spatial]　index [index_name] on table_name (col_name[length],..) [asc | desc]</span><br><span class="line">## 例子</span><br><span class="line">create index TextIdx on tb1(b);</span><br></pre></td></tr></table></figure>
+<h3 id="删除索引">删除索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 1</span><br><span class="line">alter table table_name drop index index_name;</span><br><span class="line"># 2</span><br><span class="line">drop index index_name on table_name;</span><br></pre></td></tr></table></figure>
+<p>⚠️<font color="#eea8ab">删除表中的列时，如果要删除的列为索引的组成部分，则该列也会从索引中删除。如果组成索引的所有列都被删除，则整个索引将被删除。</font></p>
+<h3 id="🌟explain分析是否命中索引">🌟explain分析是否命中索引</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain &lt;sql语句&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/explain.png" class="lazyload" data-srcset="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/explain.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<ol>
+<li><font color="#99d0d9">select_type表示查询类型。</font>SIMPLE代表简单的SELECT查询。其他情况有PRIMARY、UNION、SUBQUERY。</li>
+<li><font color="#99d0d9">table表示数据库读取的数据表的名字</font>，数据库读取的数据表的名字。</li>
+<li><font color="#99d0d9">type表示本数据表与其他数据表之间的关联关系，</font>可能的取值有<strong>system、const、eq_ref、ref、range、index和All</strong>。</li>
+<li><font color="#99d0d9">possible_keys表示MySQL在搜索数据记录时可选用的各个索引。</font></li>
+<li><font color="#99d0d9">key表示MySQL实际选用的索引</font></li>
+<li><font color="#99d0d9">key_len行给出索引按字节计算的长度</font>，key_len数值越小，表示越快。</li>
+<li>ref行给出了关联关系中另一个数据表里的数据列名</li>
+<li>rows行是MySQL在执行这个查询时预计会从这个数据表里读出的数据行的个数。</li>
+<li>Extra行提供了与关联操作有关的信息。</li>
+</ol>
+<h2 id="视图">视图</h2>
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+        
+          <div class='copyright'>
+            <blockquote>
+              
+                
+                  <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+                
+              
+                
+                  <p>本文永久链接是：<a href="https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/">https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/</a></p>
+                
+              
+            </blockquote>
           </div>
         
       
+      <!-- 打赏组件 -->
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/项目上线/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-22T09:13:40+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2024年4月22日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/MySQL/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>MySQL</p></a></div>
+  <span hidden itemprop="keywords">MySQL</span>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/&title=MySQL|进阶 - 织秋个人博客&summary="
+          
+          >
+          
+            <img src="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/&title=MySQL|进阶 - 织秋个人博客&summary="
+          
+          >
+          
+            <img src="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/&title=MySQL|进阶 - 织秋个人博客&summary="
+          
+          >
+          
+            <img src="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://gcore.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
   
   
+
   
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2024/03/25/data/mysql/'>
+          <p class='title'>MySQL|基础<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>安装
+
+Linux环境请点博客跳转
+Windows安装mysql详细步骤（通俗易懂，简单上手）-CSDN博客用下别人的轮子
+
+数据库的基础操作
+123456# 查看所有数据库show datab...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+      <meta itemprop="discussionUrl" content="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/index.html#comments">
     </span>
-  
-  
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/"  itemprop="url">
-        linux|项目部署
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境
-系统：Centos 8.4.2105
-docker : 24.0.5
-nginx: nginx/1.25.1
-后端
-宿主机安装
 
-后端达成jar包上传到服务器
-ps -ef | grep java查看有没有在运行的java项目，要是端口冲突的话，直接kill
-java -jar没有问题之后，nohup java -jar x.jar &gt; x.log 2&gt;&amp;1 &am...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:25:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
+    <div id="layoutHelper-comments"></div>
 
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装RabbitMQ/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/"  itemprop="url">
-        linux|docker安装RabbitMQ
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        工欲善其事必先利其器：windows下载erlang  下载RabbitMQ  下载RabbitMQ源码
-Docker安装RabbitMQ
-12345678910111213# 查找rabbitmq镜像docker search rabbitmq# pull镜像docker pull rabbitmq# 运行mq ## -p [暴露的宿主机端口]:[docker内部端口]docker run...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:23:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85RabbitMQ/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装nginx/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/"  itemprop="url">
-        linux|docker安装nginx
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        centos8.5.2111
-拉取镜像
-1docker pull nginx
-创建Nginx挂载目录
-123mkdir -p mytools/nginx/confmkdir -p mytools/nginx/logmkdir -p mytools/nginx/html
-将容器中的配置复制到宿主机
-12345678# 生成容器docker run --name nginx -p 9001:80...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:23:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85nginx/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装redis/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/"  itemprop="url">
-        linux|docker安装redis
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        centos 8.5.2111
-拉取redis镜像
-1docker pull redis
-
-准备redis的配置文件
-官网： redis 6.0.6 下载 – Redis中国用户组（CRUG）
-
-把redis.conf上传到服务器redis安装的位置
-
-配置redis.conf文件
-
-bind 127.0.0.1 #注释掉这部分，使redis可以外部访问
-daemonize no#用守护线程...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85redis/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/minio/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/minio/"  itemprop="url">
-        linux|docker安装minio
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境 centos 8.5
-创建minio文件夹
-12mkdir /mytools/miniocd /mytools/minio
-wget下载minio
-1wget https://dl.minio.io/server/minio/release/linux-amd64/minio
-
-创建日志，授权
-12touch minio.logchmod 777 minio
-
-启动minio
-12# ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:22:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/minio/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker安装mysql8/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/"  itemprop="url">
-        linux|docker安装mysql8
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        拉取镜像
-1docker pull mysql:8.0.23
-
-检查镜像
-1docker images
-
-启动镜像
-1234567891011sudo docker run -p 3306:3306 --name mysql  \-v /usr/local/docker/mysql/mysql-files:/var/lib/mysql-files \-v /usr/local/docker/...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:21:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker%E5%AE%89%E8%A3%85mysql8/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/docker/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/docker/"  itemprop="url">
-        linux|安装Docker
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        环境 ： centos 8.4.2105
-检查是否存在docker
-1docker -v
-卸载docker
-12345678910yum remove docker \           docker-client \           docker-client-latest \           docker-common \           docker-latest \  ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:20:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/docker/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/GitMaven/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/GitMaven/"  itemprop="url">
-        linux|安装Git/Maven
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        安装Git
-1yum install -y git
-校验安装结果
-1git --version
-
-安装maven
-
-
-创建存放maven的文件夹
-1mkdir -p /mytools/maven
-
-
-将maven.gz上传到该文件夹
+  </article>
 
 
 
-解压
-1tar -xvf apache-maven-3.9.4-bin.tar.gz
 
 
-配置环境变量
-1234vim /etc/profile    e...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:20:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/GitMaven/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/JDK/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="织秋个人博客">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="织秋个人博客">
-    <meta itemprop="description" content="座右铭">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/18/Server/JDK/"  itemprop="url">
-        linux|安装JDK
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        清华云下载jdk ： https://repo.huaweicloud.com/java/
-12345678910111213141516171819202122# 查看是否安装过jdkrpm -qa | grep java# ↑这里要是存在内容，执行删除rpm -qa | grep java | xargs rpm -e --nodeps# 查看java版本java -version# 创...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-03-18T16:14:07+08:00">2024-03-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/03/18/Server/JDK/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-        <p class="current">
-          1 / 2
-        </p>
-        
-          <a class="next" rel="next" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/page/2/">
-            <section class="post next white-box shadow floatable blur">
-              &nbsp;下一页&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
-
-
-    
-  
 </div>
 <aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
@@ -3141,226 +2699,56 @@ wget下载minio
     
     
       
-<section class="widget blogger desktop mobile pjax">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box circle' href='/about/'>
-          <img no-lazy src='https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/Logo-NavBar@3x.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>织秋</h2>
-        
-        
-        
-          <p><span id="jinrishici-sentence">织秋个人博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:#"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://gitee.com/twj2021"
-              class="social fa-solid fa-g flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget category desktop pjax">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Java/" href="/categories/Java/"
-            active-action="action-categoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/MySQL/" href="/categories/MySQL/"
-            active-action="action-categoriesMySQL"
-            ><div class='name'>MySQL</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Redis/" href="/categories/Redis/"
-            active-action="action-categoriesRedis"
-            ><div class='name'>Redis</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Spring/" href="/categories/Spring/"
-            active-action="action-categoriesSpring"
-            ><div class='name'>Spring</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%88%9D%E5%A7%8B/" href="/categories/%E5%88%9D%E5%A7%8B/"
-            active-action="action-categoriesE5889DE5A78B"
-            ><div class='name'>初始</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%8D%9A%E5%AE%A2/" href="/categories/%E5%8D%9A%E5%AE%A2/"
-            active-action="action-categoriesE58D9AE5AEA2"
-            ><div class='name'>博客</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"
-            active-action="action-categoriesE69C8DE58AA1E599A8"
-            ><div class='name'>服务器</div><div class='badge'>(11)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%AE%97%E6%B3%95/" href="/categories/%E7%AE%97%E6%B3%95/"
-            active-action="action-categoriesE7AE97E6B395"
-            ><div class='name'>算法</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget tagcloud desktop mobile pjax">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/DMS/" style="font-size: 14px; color: #999">DMS</a> <a href="/tags/Docker/" style="font-size: 14px; color: #999">Docker</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/IOC/" style="font-size: 14px; color: #999">IOC</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 16.5px; color: #888">Java基础</a> <a href="/tags/MySQL/" style="font-size: 19px; color: #777">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/minio/" style="font-size: 14px; color: #999">minio</a> <a href="/tags/redis/" style="font-size: 24px; color: #555">redis</a> <a href="/tags/spring/" style="font-size: 21.5px; color: #666">spring</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 14px; color: #999">内网穿透</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 16.5px; color: #888">持久化</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 16.5px; color: #888">环境</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a> <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/" style="font-size: 19px; color: #777">高可用</a>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-<section class="widget desktop pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>32 篇</div>
-        </div>
-      
-
-      
-
-
-      
-
-      
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          <div id="last-update-show">2024-04-22 日</div>
-        </div>
-      
-    </div>
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-
-<section class="widget desktop mobile pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-clock WISTERIA fa-fw" aria-hidden="true"></i><span class='name'>最近更新</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/"><div class="item"><time>2024-04-22</time><span>MySQL</span></div><span>MySQL|进阶</span></a></li><li><a class="widget-last" href="/2024/03/25/data/mysql/"><div class="item"><time>2024-04-22</time><span>MySQL</span></div><span>MySQL|基础</span></a></li><li><a class="widget-last" href="/2024/03/19/Java/%E6%B3%9B%E5%9E%8B/"><div class="item"><time>2024-03-27</time><span>Java</span></div><span>Java|泛型</span></a></li><li><a class="widget-last" href="/2024/03/25/spring/spring/"><div class="item"><time>2024-03-25</time><span>Spring</span></div><span>Spring|汇总</span></a></li><li><a class="widget-last" href="/2024/03/25/spring/%E5%9F%BA%E7%A1%80AOP/"><div class="item"><time>2024-03-25</time><span>Spring</span></div><span>Spring|基础|AOP</span></a></li></ul>
-  </div>
-</section>
-
     
   
 
 
 <div class="widget-sticky pjax">
 
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89%E5%AD%97%E6%AE%B5%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="toc-text">已有字段添加索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%9Fexplain%E5%88%86%E6%9E%90%E6%98%AF%E5%90%A6%E5%91%BD%E4%B8%AD%E7%B4%A2%E5%BC%95"><span class="toc-text">🌟explain分析是否命中索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-text">视图</span></a></li></ol>
+    </div>
+  </section>
+
+  
+
 </div>
 
 
 <!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
 
   <div class="pjax">
     <!-- pjax占位 -->
@@ -3380,13 +2768,14 @@ wget下载minio
 </aside>
 
 
+
           <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -3893,7 +3282,7 @@ wget下载minio
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/服务器/","name":"服务器"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/MySQL/","name":"MySQL"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/","name":"MySQL|进阶"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"MySQL|进阶","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/","wordCount":0,"datePublished":"2024-04-22T01:00:00.000Z","dateModified":"2024-04-22T01:13:40.173Z","articleSection":"MySQL","keywords":"MySQL","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
