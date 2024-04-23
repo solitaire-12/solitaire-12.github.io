@@ -45,7 +45,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-04-22T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-22T01:13:40.173Z">
+<meta property="article:modified_time" content="2024-04-23T04:04:26.553Z">
 <meta property="article:author" content="solitaire-12">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1713748994322),
+    lastupdate: new Date(1713845135627),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2527,7 +2527,233 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>rows行是MySQL在执行这个查询时预计会从这个数据表里读出的数据行的个数。</li>
 <li>Extra行提供了与关联操作有关的信息。</li>
 </ol>
+<h2 id="存储过程">存储过程</h2>
+<blockquote>
+<p>todo</p>
+</blockquote>
 <h2 id="视图">视图</h2>
+<blockquote>
+<p>todo</p>
+</blockquote>
+<h2 id="触发器">触发器</h2>
+<blockquote>
+<p>todo</p>
+</blockquote>
+<h2 id="权限">权限</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 登录MySQL服务器</span><br><span class="line">mysql [-h [主机ip，默认localhost]] -u&lt;username&gt; -p[password] [-P[post，默认3306]] [database_name] [-e &quot;sql语句&quot;]</span><br><span class="line"># 退出</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<h3 id="用户管理">用户管理</h3>
+<h4 id="创建普通用户">创建普通用户</h4>
+<ol>
+<li>
+<p><code>create user</code>语句创建新用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;userName&#x27;@&#x27;localhost&#x27; [identified by [PASSWORD] &#x27;password&#x27;] | [identified with auth_plugin [as &#x27;auth_string&#x27;]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>identified by</code> 表示用来设置用户的密码；<code>PASSWORD</code>表示使用哈希值设置密码，该参数可选；<code>password</code>表示用户登录时使用的普通明文密码。<strong>不需要密码就不用这段。</strong></li>
+<li><code>identified with</code>语句为用户指定一个身份验证插件；<code>auth_plugin</code>是插件的名称，插件的名称可以是一个带单引号的字符串或者带双引号的字符串；<code>auth_string</code>是可选的字符串参数，该参数将传递给身份验证插件，由该插件解释该参数的意义。</li>
+</ul>
+</li>
+<li>
+<p>直接操作<code>user</code>表 <font color="#d98481">不推荐使用，因为user表中有很多没有默认值的字段，缺失无法添加。</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into user(host,user,authentication_string) valuses(&#x27;host&#x27;,&#x27;userName&#x27;,MD5(&#x27;passward&#x27;));</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="删除普通用户">删除普通用户</h4>
+<ol>
+<li>
+<p><code>drop user</code>语句删除用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 删除某个用户</span><br><span class="line">drop user &#x27;username&#x27;@&#x27;host&#x27;;</span><br><span class="line"># 删除来自所有授权表的帐户权限记录</span><br><span class="line">drop user;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>直接操作<code>user</code>表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from user where host=&#x27;localhost&#x27; and user=&#x27;customer1&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="修改密码">修改密码</h4>
+<ol>
+<li>
+<p>root用户修改自己的密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user set authentication_string = MD5(&#x27;password&#x27;) where user = &#x27;root&#x27; and host=&#x27;localhost&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>root用户修改普通用户密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set password for &#x27;username&#x27;@&#x27;localhost&#x27; = &#x27;password&#x27;;</span><br><span class="line">update user set authentication_string=MD5(&#x27;password&#x27;) where user=&#x27;userName&#x27; and host=&#x27;hostName&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="权限管理">权限管理</h3>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>user表中对应的列</th>
+<th>权限的范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create</code></td>
+<td><code>create_priv</code></td>
+<td>数据库、表、索引</td>
+</tr>
+<tr>
+<td><code>drop</code></td>
+<td><code>drop_priv</code></td>
+<td>数据库、表、索引</td>
+</tr>
+<tr>
+<td><code>grant option</code></td>
+<td><code>grant_priv</code></td>
+<td>数据库、表、存储过程</td>
+</tr>
+<tr>
+<td><code>references</code></td>
+<td><code>references_priv</code></td>
+<td>数据库、表</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td><code>event_priv</code></td>
+<td>数据库</td>
+</tr>
+<tr>
+<td><code>alter</code></td>
+<td><code>alter_priv</code></td>
+<td>数据库</td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td><code>delete_priv</code></td>
+<td>表</td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td><code>index_priv</code></td>
+<td>表</td>
+</tr>
+<tr>
+<td><code>insert</code></td>
+<td><code>insert_priv</code></td>
+<td>表</td>
+</tr>
+<tr>
+<td><code>select</code></td>
+<td><code>select_priv</code></td>
+<td>表、列</td>
+</tr>
+<tr>
+<td><code>update</code></td>
+<td><code>update_priv</code></td>
+<td>表、列</td>
+</tr>
+<tr>
+<td><code>create temporary tables</code></td>
+<td><code>create_tmp_table_priv</code></td>
+<td>表</td>
+</tr>
+<tr>
+<td><code>lock tables</code></td>
+<td><code>lock_tables_priv</code></td>
+<td>表</td>
+</tr>
+<tr>
+<td><code>trigger</code></td>
+<td><code>tigger_priv</code></td>
+<td>表</td>
+</tr>
+<tr>
+<td><code>create view</code></td>
+<td><code>create_view_priv</code></td>
+<td>视图</td>
+</tr>
+<tr>
+<td><code>show view</code></td>
+<td><code>show_view_priv</code></td>
+<td>视图</td>
+</tr>
+<tr>
+<td><code>alter routine</code></td>
+<td><code>alter_routine_priv</code></td>
+<td>存储过程、函数</td>
+</tr>
+<tr>
+<td><code>create routine</code></td>
+<td><code>create_routine_priv</code></td>
+<td>存储过程、函数</td>
+</tr>
+<tr>
+<td><code>execute</code></td>
+<td><code>execute_priv</code></td>
+<td>存储过程、函数</td>
+</tr>
+<tr>
+<td><code>file</code></td>
+<td><code>file_priv</code></td>
+<td>访问服务器上的文件</td>
+</tr>
+<tr>
+<td><code>create tablespace</code></td>
+<td><code>create_tablespace_priv</code></td>
+<td>服务器管理</td>
+</tr>
+<tr>
+<td><code>create uesr</code></td>
+<td><code>create_user_priv</code></td>
+<td>服务器管理</td>
+</tr>
+<tr>
+<td><code>process</code></td>
+<td><code>process_priv</code></td>
+<td>存储过程、函数</td>
+</tr>
+<tr>
+<td><code>reload</code></td>
+<td><code>reload_priv</code></td>
+<td>访问服务器上的文件</td>
+</tr>
+<tr>
+<td><code>replication client</code></td>
+<td><code>repl_client_priv</code></td>
+<td>服务器管理</td>
+</tr>
+<tr>
+<td><code>replication slave</code></td>
+<td><code>repl_slave_priv</code></td>
+<td>服务器管理</td>
+</tr>
+<tr>
+<td><code>show databases</code></td>
+<td><code>show_db_priv</code></td>
+<td>服务器管理</td>
+</tr>
+<tr>
+<td><code>shutdown</code></td>
+<td><code>shutdown_priv</code></td>
+<td>服务器管理</td>
+</tr>
+<tr>
+<td><code>super</code></td>
+<td><code>super_priv</code></td>
+<td>服务器管理</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ol>
+<li>
+<p>reload命令告诉服务器将授权表重新读入内存；</p>
+<p><code>flush-hosts , flush-logs , flush-privileges , flush-status , flush-tables , flush-threads , refresh , reload</code></p>
+<p>flush-privileges是reload的同义词；refresh命令清空所有表并关闭/打开记录文件；其他flush-xxx命令执行类似refresh的功能，但是范围更有限，并且在某些情况下可能更好用。例如，如果只是想清空记录文件，flush-logs是比refresh更好的选择。</p>
+</li>
+<li>
+<p>shutdown命令关掉服务器。只能从MySQLadmin发出命令。</p>
+</li>
+<li>
+<p><code>process</code>权限拥有<code>processlist</code>命令显示在服务器内执行的线程的信息（其他账户相关的客户端执行的语句）。kill命令杀死服务器线程。用户总是能显示或杀死自己的线程，但是需要PROCESS权限来显示或杀死其他用户和SUPER权限启动的线程。</p>
+</li>
+<li>
+<p><code>spuer</code>权限拥有kill命令能用来终止其他用户或更改服务器的操作方式。</p>
+</li>
+</ol>
+</blockquote>
 
   </div>
   
@@ -2569,10 +2795,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-22T09:13:40+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-23T12:04:26+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2024年4月22日</p>
+    <p>更新于：2024年4月23日</p>
   </a>
 </div>
 
@@ -2719,7 +2945,7 @@ Windows安装mysql详细步骤（通俗易懂，简单上手）-CSDN博客用下
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89%E5%AD%97%E6%AE%B5%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="toc-text">已有字段添加索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%9Fexplain%E5%88%86%E6%9E%90%E6%98%AF%E5%90%A6%E5%91%BD%E4%B8%AD%E7%B4%A2%E5%BC%95"><span class="toc-text">🌟explain分析是否命中索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-text">视图</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89%E5%AD%97%E6%AE%B5%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="toc-text">已有字段添加索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%9Fexplain%E5%88%86%E6%9E%90%E6%98%AF%E5%90%A6%E5%91%BD%E4%B8%AD%E7%B4%A2%E5%BC%95"><span class="toc-text">🌟explain分析是否命中索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-text">视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">触发器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90"><span class="toc-text">权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="toc-text">创建普通用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="toc-text">删除普通用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-text">修改密码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-text">权限管理</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -3282,7 +3508,7 @@ Windows安装mysql详细步骤（通俗易懂，简单上手）-CSDN博客用下
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/MySQL/","name":"MySQL"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/","name":"MySQL|进阶"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"MySQL|进阶","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/","wordCount":0,"datePublished":"2024-04-22T01:00:00.000Z","dateModified":"2024-04-22T01:13:40.173Z","articleSection":"MySQL","keywords":"MySQL","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/MySQL/","name":"MySQL"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/","name":"MySQL|进阶"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"MySQL|进阶","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/","wordCount":0,"datePublished":"2024-04-22T01:00:00.000Z","dateModified":"2024-04-23T04:04:26.553Z","articleSection":"MySQL","keywords":"MySQL","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
