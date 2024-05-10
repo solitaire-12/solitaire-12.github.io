@@ -41,11 +41,11 @@
 <meta property="og:title" content="MySQL|进阶">
 <meta property="og:url" content="https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="索引 索引是一个单独的、存储在磁盘上的数据库结构，包含着对数据表里所有记录的引用指针。 索引是在存储引擎中实现的，因此，每种存储引擎的索引都不一定完全相同，并且每种存储引擎也不一定支持所有索引类型。根据存储引擎定义每个表的最大索引数和最大索引长度。所有存储引擎支持每个表至少16个索引，总索引长度至少为256字节 分类   普通索引和唯一索引  index(column_name)：普通索引是MyS">
+<meta property="og:description" content="⭐索引 索引是一个单独的、存储在磁盘上的数据库结构，包含着对数据表里所有记录的引用指针。 索引是在存储引擎中实现的，因此，每种存储引擎的索引都不一定完全相同，并且每种存储引擎也不一定支持所有索引类型。根据存储引擎定义每个表的最大索引数和最大索引长度。所有存储引擎支持每个表至少16个索引，总索引长度至少为256字节 分类   普通索引和唯一索引  index(column_name)：普通索引是My">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-04-22T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-23T04:04:26.553Z">
+<meta property="article:modified_time" content="2024-05-10T08:52:06.056Z">
 <meta property="article:author" content="solitaire-12">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -1629,7 +1629,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1713845135627),
+    lastupdate: new Date(1715331171516),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2442,7 +2442,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <h2 id="索引">索引</h2>
+    <h2 id="⭐索引">⭐索引</h2>
 <p>索引是一个单独的、存储在磁盘上的数据库结构，包含着对数据表里所有记录的引用指针。</p>
 <p>索引是在存储引擎中实现的，因此，每种存储引擎的索引都不一定完全相同，并且每种存储引擎也不一定支持所有索引类型。根据存储引擎定义每个表的最大索引数和最大索引长度。所有存储引擎支持每个表至少16个索引，总索引长度至少为256字节</p>
 <h3 id="分类">分类</h3>
@@ -2754,6 +2754,166 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </li>
 </ol>
 </blockquote>
+<h4 id="授权">授权</h4>
+<p>授权权限分级：</p>
+<ul>
+<li>
+<p>全局层级</p>
+<p>全局权限适用于一个给定服务器中的所有数据库。这些权限存储在<code>mysql.user</code>表中。<code>grant all on *.*</code>和<code>revoke all on *.*</code>只授予和撤销全局权限。</p>
+</li>
+<li>
+<p>数据库层级</p>
+<p>数据库权限适用于一个给定数据库中的所有目标。这些权限存储在<code>mysql.db</code>和<code>mysql.host</code>表中。<code>grant all on db_name.</code>和<code>revoke all on db_name.*</code>只授予和撤销数据库权限。</p>
+</li>
+<li>
+<p>表层级</p>
+<p>表权限适用于一个给定表中的所有列。这些权限存储在<code>mysql.talbes_priv</code>表中。<code>grant all on db_name.tbl_name</code>和<code>revoke all on db_name.tbl_name</code>只授予和撤销表权限。</p>
+</li>
+<li>
+<p>列层级</p>
+<p>列权限适用于一个给定表中的单一列。这些权限存储在<code>mysql.columns_priv</code>表中。当使用revoke时，必须指定与被授权列相同的列。</p>
+</li>
+<li>
+<p>子程序层级</p>
+<p><code>create routine、alter routine、execute、grant</code>权限适用于已存储的子程序。这些权限可以被授予为全局层级和数据库层级。而且，除了<code>create routine</code>外，这些权限可以被授予子程序层级，并存储在<code>mysql.procs_priv</code>表中。</p>
+</li>
+</ul>
+<p>在MySQL中，必须是拥有<code>grant</code>权限的用户才可以进行<code>grant</code>。要使用<code>grant</code>或<code>revoke</code>，必须拥有<code>grant option</code>权限，并且必须用于正在授权或撤销的权限。<code>grant</code>的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant priv_type [(coloumns)] [,priv_type [(coloums)]] ... on [object_type] table1,table2... to user [with grant option] object_type = table | function | procedure</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>priv_type</code>表示权限类型；<br><code>[(coloumns)]</code>表示权限作用于那些列上，不指定该参数，表示用于整个表。</li>
+<li><code>object_type</code>指定授权作用的对象类型包括table（表）、function（函数）和procedure（存储过程）。当旧版本升级到高版本，要使用该子句，升级权限表。</li>
+<li><code>user</code>表示用户帐户，有用户名和主机名构成，形式是<code>'username'@'hostname'</code></li>
+<li><code>identified by</code>表示设置密码</li>
+<li><code>with</code>关键字后可以跟随一个或多个<code>with_option</code>参数。<br>1. <code>grant option</code>：被授权的用户可以将这些权限赋予别的用户<br>2. <code>max_queries_per_hour count</code>：设置每个小时可以执行count次查询。<br>3. <code>max_updates_per_hour count</code>：设置每小时可执行count从更新。<br>4. <code>max_connections_per_hour count</code>：设置每小时可建立count个连接。<br>5. <code>max_user_connections count</code>：设置单个用户可以同时建立count个连接。</li>
+</ul>
+</blockquote>
+<h4 id="取消授权">取消授权</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">revoke all privileges, grant option from &#x27;user&#x27;@&#x27;host&#x27; [, &#x27;user&#x27;@&#x27;host&#x27; ...]</span><br></pre></td></tr></table></figure>
+<h4 id="查看权限">查看权限</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show grants for &#x27;user&#x27;@&#x27;host&#x27;;</span><br></pre></td></tr></table></figure>
+<h2 id="🌟性能优化">🌟性能优化</h2>
+<blockquote>
+<p>原则是减少系统的瓶颈，减少资源的占用，增加系统的反应速度。<br>1. 通过优化文件系统，提高磁盘I/O的读写速度。<br>2. 通过优化操作系统调度策略，提高MySQL在高负荷情况下的负载能力。<br>3. 优化表结构、索引、查询语句等查询响应更快。</p>
+</blockquote>
+<h3 id="性能参数">性能参数</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show status like &#x27;value&#x27;;</span><br></pre></td></tr></table></figure>
+<p><code>value</code>是要查询的参数值，一些常用的性能参数如下：</p>
+<ul>
+<li><code>connections</code>：连接MySQL服务器的次数。</li>
+<li><code>uptime</code>：MySQL服务器的上线时间。</li>
+<li><code>slow_queries</code>：慢查询的次数。</li>
+<li><code>com_select</code>：查询操作的次数。</li>
+<li><code>com_insert</code>：插入操作的次数。</li>
+<li><code>com_update</code>：更新操作的次数。</li>
+<li><code>com_delete</code>：删除操作的次数。</li>
+</ul>
+<h3 id="分析查询语句">分析查询语句</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explian select select_options</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/explain.png" class="lazyload" data-srcset="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/explain.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="explain实例"></p>
+<p>📌分析结果列解析：</p>
+<ul>
+<li>id：select查询的系列号，表示查询中执行select子句或者操作表中的顺序。<br><font color="f47d85">id的数值越大，优先级越高，越先执行</font></li>
+<li>select_type：表示语句的类型。<br>1. SIMPLE：表示简单的查询，其中不包括连接查询和子查询。<br>2. PRIMARY：表示主查询，或者最外层的查询语句。<br>3. UNION：表示连接查询的第2个或者后面的查询语句。<br>4. DEPENDENT UNION，连接查询中的第2个或后面的SELECT语句，取决于外面的查询。<br>5. UNION RESULT，连接查询的结果。<br>6. SUBQUERY，子查询中的第1个SELECT语句。<br>7. DEPENDENT SUBQUERY，子查询中的第1个SELECT，取决于外面的查询。<br>8. DERIVED，导出表的SELECT（FROM子句的子查询）。</li>
+<li>table：表示涉及的表</li>
+<li>type：表示连接类型。<br>1. ALL：全表查询<br>2. system：该表是仅一行的系统表。这是const连接类型的一个特例<br>3. const：数据表最多只能匹配一行数据。出现在主键或者索引的场合<br>4. eq_ref：当一个索引的所有部分都在查询中使用并且索引是UNIQUE或PRIMARY KEY时，即可使用这种类型<br>5. ref：可以用于使用=或&lt;=&gt;操作符带索引的列<br>6. ref_or_null：该连接类型如同ref，但是添加了MySQL可以专门搜索包含NULL值的行。在解决子查询中经常使用该连接类型的优化。<br>7.  index_merge：该连接类型表示使用了索引合并优化方法。在这种情况下，key列包含了使用的索引的清单，key_len包含了使用索引的最长关键元素。<br>8. unique_subquery：该类型替换了下面形式的IN子查询的ref：<code>value IN (SELECT primary_key FROM single_table WHERE some_expr)</code>unique_subquery是一个索引查找函数，可以完全替换子查询，效率更高。<br>9. index_subquery：该连接类型类似于unique_subquery，可以替换IN子查询，但只适合下列形式的子查询中的非唯一索引。<code>value IN (SELECT key_column FROM single_table WHERE some_expr)</code><br>10.range：只检索给定范围的行，使用一个索引来选择行。key列显示使用了哪个索引。key_len包含所使用索引的最长关键元素。当使用=、&lt;&gt;、&gt;、&gt;=、&lt;、&lt;=、IS NULL、&lt;=&gt;、BETWEEN或者IN操作符用常量比较关键字列时，类型为range。<br>11. index：该连接类型与ALL相同，除了只扫描索引树。这通常比ALL快，因为索引文件通常比数据文件小。</li>
+</ul>
+<h3 id="📌优化索引">📌优化索引</h3>
+<ol>
+<li>在使用LIKE关键字进行查询的查询语句中，如果匹配字符串的第一个字符为“%”，索引不会起作用。<font color="f47d85">只有“%”不在第一个位置，索引才会起作用。</font></li>
+<li>MySQL可以为多个字段创建索引。一个索引可以包括16个字段。对于多列索引，只有查询条件中使用了这些字段中的第1个字段时索引才会被使用。<font color="f47d85">最左匹配原则</font></li>
+<li>查询语句的查询条件中<font color="f47d85">只有OR关键字，且OR前后的两个条件中的列都是索引时，查询中才使用索引</font>；否则，查询将不使用索引。</li>
+<li>避免使用子查询。子查询会导致MySQL多次扫描表</li>
+</ol>
+<blockquote>
+<p>子查询虽然可以使查询语句很灵活，但执行效率不高。执行子查询时，MySQL需要为内层查询语句的查询结果建立一个临时表。然后外层查询语句从临时表中查询记录。查询完毕后，再撤销这些临时表。因此，子查询的速度会受到一定的影响。如果查询的数据量比较大，这种影响就会随之增大。<font color="f47d85">在MySQL中，可以使用连接（JOIN）查询来替代子查询。</font></p>
+</blockquote>
+<h3 id="📌优化表">📌优化表</h3>
+<h4 id="优化数据库结构">优化数据库结构</h4>
+<ol>
+<li>拆分水平宽表</li>
+<li>添加中间表</li>
+<li>合理添加冗余字段。<font color="#ffd253">虽然可以避开一些连接查询，但是在数据改动后会造成数据不一致问题，同时浪费里一定的磁盘空间。慎用！慎用！慎用！</font></li>
+</ol>
+<h4 id="优化插入记录的速度">优化插入记录的速度</h4>
+<ol>
+<li>禁用索引</li>
+<li>禁用唯一性检查</li>
+<li>使用批量插入</li>
+<li>使用<code>load data infile</code>批量导入</li>
+</ol>
+<h4 id="分析表">分析表</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name[,tbl_name]…</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>LOCAL关键字是NO_WRITE_TO_BINLOG关键字的别名，二者都是执行过程不写入二进制日志，tbl_name为分析表的表名，可以有一个或多个。</p>
+<p>使用ANALYZE TABLE分析表的过程中，<strong>数据库系统会自动对表加一个只读锁</strong>。在分析期间，只能读取表中的记录，不能更新和插入记录。ANALYZE TABLE语句能够分析InnoDB、BDB和MyISAM类型的表。</p>
+</blockquote>
+<p><img src="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/analyze%E5%88%86%E6%9E%90%E8%A1%A8.png" class="lazyload" data-srcset="/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/analyze%E5%88%86%E6%9E%90%E8%A1%A8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt></p>
+<ul>
+<li>Table：表示分析的表名称</li>
+<li>Op：表示执行的操作。analyze表示进行分析操作。</li>
+<li>Msg_type：表示信息类型，其值通常是状态(status)，信息(info)，注意(note)，警告(warning)和错误(error)之一。</li>
+<li>Msg_text：显示信息。</li>
+</ul>
+<h4 id="检查表">检查表</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　CHECK TABLE tbl_name [, tbl_name] ... [option] ...</span><br><span class="line">　　option = &#123;QUICK | FAST | MEDIUM | EXTENDED | CHANGED&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>QUICK：不扫描行，不检查错误的连接</li>
+<li>FAST：只检查没有被正确关闭的表</li>
+<li>MEDIUM：：扫描行，以验证被删除的连接是有效的。也可以计算各行的关键字校验和，并使用计算出的校验和验证这一点</li>
+<li>EXTENDED：对每行的所有关键字进行一个全面的关键字查找。这可以确保表是100%一致的，但是化的时间比较长。</li>
+<li>CHANGED：只检查上次检查后被更改的表和没有被正确关闭的表</li>
+</ul>
+<p><font color="#f5b8bc">option只对MyISAM类型的表有效，对InnoDB类型的表无效。</font>check table语句在执行过程中会<strong>给表上只读锁</strong>。</p>
+<h4 id="优化表">优化表</h4>
+<p>MySQL中使用OPTIMIZE TABLE语句来优化表。该语句对InnoDB和MyISAM类型的表都有效。但是，<font color="#f5b8bc">OPTILMIZE TABLE语句只能优化表中VARCHAR、BLOB或TEXT类型的字段，会给表上只读锁</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...</span><br></pre></td></tr></table></figure>
+<h3 id="📌优化MySQL服务器">📌优化MySQL服务器</h3>
+<h4 id="优化服务器配件">优化服务器配件</h4>
+<ul>
+<li>配置较大的内存。通过增加系统的缓冲区容量使数据在内存停留的时间更长，以减少磁盘I/O。</li>
+<li>配置高速磁盘，减少读盘的等待时间，提高响应速度。</li>
+<li>合理分布磁盘I/O，把磁盘I/O分散在多个设备上，以减少资源竞争，提高并行操作能力。</li>
+<li>配置多处理器。MySQL是多线程的数据库，多处理器可同时执行多线程。</li>
+</ul>
+<h4 id="优化MySQL参数">优化MySQL参数</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查看MySQL服务器参数</span><br><span class="line">show variables;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>内存缓存</p>
+<p>MySQL的性能受内存的影响很大，因此需要合理地分配内存。</p>
+<ol>
+<li>innodb_buffer_pool_size：InnoDB存储引擎的缓存池大小，建议设置为物理内存的70%~80%。</li>
+<li>key_buffer_size：MyISAM存储引擎的缓存池大小，建议设置为物理内存的25%。</li>
+<li>query_cache_size：查询缓存的大小，建议设置为物理内存的5%~10%。</li>
+</ol>
+</li>
+<li>
+<p>线程缓存</p>
+<p>MySQL使用线程处理客户端的请求，因此需要设置线程缓存的大小。</p>
+<ol>
+<li>thread_cache_size：线程缓存的大小，建议设置为100~200。</li>
+<li>max_connections：最大连接数，建议设置为500~1000。</li>
+</ol>
+</li>
+<li>
+<p>日志</p>
+<p>MySQL的性能受内存的影响很大，因此需要合理地分配内存。</p>
+<ol>
+<li>log_show_queries：慢查询日志，可以记录查询时间超过设定阈值的SQL语句。建议设置为1，即开启慢查询日志。</li>
+<li>binlog_cache_size：二进制日志缓存大小，建议设置为32M。</li>
+<li>innodb_log_file_size：InnoDB日志文件的大小，建议设置为物理内存的10%。</li>
+</ol>
+<p>可以通过MySQL配置文件<code>my.cnf</code>来调整MySQL参数。在修改之前，建议备份。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查找my.cnf 文件的位置</span><br><span class="line">mysql --help | grep cnf</span><br><span class="line"># 修改后重启生效</span><br><span class="line">service mysql resatrt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="语句超时处理">语句超时处理</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 设置服务器语句超时的限制，可以通过设置系统变量max_execution_time来实现。</span><br><span class="line">set global max_execution_time=2000;</span><br><span class="line">set session max_execution_time=2000;</span><br></pre></td></tr></table></figure>
+<h4 id="全局通用表空间">全局通用表空间</h4>
+<p>MySQL 8.0支持创建全局通用表空间，全局表空间可以被所有数据库的表共享，而且相比于独享表空间，手动创建共享表空间可以节约元数据方面的内存。可以在创建表的时候指定属于哪个表空间，也可以对已有表进行表空间修改，具体的信息可以查看官方文档。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table t1 tablespace dxy;</span><br><span class="line">drop tablespace dxy;</span><br></pre></td></tr></table></figure>
 
   </div>
   
@@ -2795,10 +2955,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-23T12:04:26+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-05-10T16:52:06+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2024年4月23日</p>
+    <p>更新于：2024年5月10日</p>
   </a>
 </div>
 
@@ -2945,7 +3105,7 @@ Windows安装mysql详细步骤（通俗易懂，简单上手）-CSDN博客用下
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89%E5%AD%97%E6%AE%B5%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="toc-text">已有字段添加索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%9Fexplain%E5%88%86%E6%9E%90%E6%98%AF%E5%90%A6%E5%91%BD%E4%B8%AD%E7%B4%A2%E5%BC%95"><span class="toc-text">🌟explain分析是否命中索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-text">视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">触发器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90"><span class="toc-text">权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="toc-text">创建普通用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="toc-text">删除普通用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-text">修改密码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-text">权限管理</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%AD%90%E7%B4%A2%E5%BC%95"><span class="toc-text">⭐索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%B2%E6%9C%89%E5%AD%97%E6%AE%B5%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="toc-text">已有字段添加索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">删除索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%9Fexplain%E5%88%86%E6%9E%90%E6%98%AF%E5%90%A6%E5%91%BD%E4%B8%AD%E7%B4%A2%E5%BC%95"><span class="toc-text">🌟explain分析是否命中索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-text">视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="toc-text">触发器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90"><span class="toc-text">权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="toc-text">创建普通用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="toc-text">删除普通用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-text">修改密码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-text">权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%88%E6%9D%83"><span class="toc-text">授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E6%B6%88%E6%8E%88%E6%9D%83"><span class="toc-text">取消授权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9D%83%E9%99%90"><span class="toc-text">查看权限</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8C%9F%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">🌟性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%8F%82%E6%95%B0"><span class="toc-text">性能参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="toc-text">分析查询语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8C%E4%BC%98%E5%8C%96%E7%B4%A2%E5%BC%95"><span class="toc-text">📌优化索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8C%E4%BC%98%E5%8C%96%E8%A1%A8"><span class="toc-text">📌优化表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84"><span class="toc-text">优化数据库结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%8F%92%E5%85%A5%E8%AE%B0%E5%BD%95%E7%9A%84%E9%80%9F%E5%BA%A6"><span class="toc-text">优化插入记录的速度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E8%A1%A8"><span class="toc-text">分析表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E8%A1%A8"><span class="toc-text">检查表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E8%A1%A8"><span class="toc-text">优化表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8C%E4%BC%98%E5%8C%96MySQL%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">📌优化MySQL服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E4%BB%B6"><span class="toc-text">优化服务器配件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96MySQL%E5%8F%82%E6%95%B0"><span class="toc-text">优化MySQL参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86"><span class="toc-text">语句超时处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%80%9A%E7%94%A8%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-text">全局通用表空间</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -3508,7 +3668,7 @@ Windows安装mysql详细步骤（通俗易懂，简单上手）-CSDN博客用下
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/MySQL/","name":"MySQL"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/","name":"MySQL|进阶"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"MySQL|进阶","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/","wordCount":0,"datePublished":"2024-04-22T01:00:00.000Z","dateModified":"2024-04-23T04:04:26.553Z","articleSection":"MySQL","keywords":"MySQL","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/MySQL/","name":"MySQL"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-进阶/","name":"MySQL|进阶"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"MySQL|进阶","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/04/22/data/mysql-%E8%BF%9B%E9%98%B6/","wordCount":0,"datePublished":"2024-04-22T01:00:00.000Z","dateModified":"2024-05-10T08:52:06.056Z","articleSection":"MySQL","keywords":"MySQL","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
