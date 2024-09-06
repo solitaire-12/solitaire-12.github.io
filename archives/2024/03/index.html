@@ -1626,7 +1626,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1723711331961),
+    lastupdate: new Date(1725616943597),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -3033,7 +3033,7 @@ Sentinel是redis的高可用性(high availability)解决方案：由一个或者
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/25/redis/RDB持久化/">
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/25/redis/AOF持久化/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
   </span>
@@ -3051,22 +3051,22 @@ Sentinel是redis的高可用性(high availability)解决方案：由一个或者
   
     
     <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/03/25/redis/RDB%E6%8C%81%E4%B9%85%E5%8C%96/"  itemprop="url">
-        Redis|RDB持久化
+      <a href="/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/"  itemprop="url">
+        Redis|AOF持久化
       </a>
     </h2>
   
   <div class='md article-desc' itemprop="articleBody">
     
       
-        RDB持久化
-RDB持久化既可以手动执行，也可以根据服务器配置选项定期执行，该功能可以将某一时刻上的数据保存到一个RDB文件中，RDB文件保存在硬盘里，所以即使redis服务器进程退出，甚至运行redis服务器的计算机宕机，只要RDB文件存在，redis服务器就能通过RDB文件还原。
-RDB文件的创建和载入
-创建
+        AOF持久化
+AOF持久化是通过保存redis服务器所执行的写命令来记录数据库状态的。
 
-
-save命令
-会阻塞redis服务器进程，直到RDB文件创建完毕为止。在服...
+写入到AOF文件的命令都是以redis的命令请求格式保存的，且redis的命令请求是纯文本格式，四亿可以直接打开AOF文件查看内容。
+具体实现
+AOF持久化功能的实现可以分为命令追加(append)、文件写入、文件同步(sync)三个步骤。
+命令追加
+当AOF持久化功能处于开启状态时，服务器在执行完一个...
       
     
   </div>
@@ -3087,7 +3087,7 @@ save命令
       </div>
       
         <div>
-          <a class='readmore' href='/2024/03/25/redis/RDB%E6%8C%81%E4%B9%85%E5%8C%96/' itemprop="url">
+          <a class='readmore' href='/2024/03/25/redis/AOF%E6%8C%81%E4%B9%85%E5%8C%96/' itemprop="url">
             阅读全文
           </a>
         </div>
@@ -3210,7 +3210,7 @@ save命令
           <li><a class="flat-box"
             title="/categories/Java/" href="/categories/Java/"
             active-action="action-categoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(4)</div></a></li>
+            ><div class='name'>Java</div><div class='badge'>(5)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/MySQL/" href="/categories/MySQL/"
@@ -3280,7 +3280,7 @@ save命令
 
 
     <div class='content'>
-      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/DMS/" style="font-size: 14px; color: #999">DMS</a> <a href="/tags/Docker/" style="font-size: 14px; color: #999">Docker</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/IOC/" style="font-size: 14px; color: #999">IOC</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 16.5px; color: #888">Java基础</a> <a href="/tags/MySQL/" style="font-size: 19px; color: #777">MySQL</a> <a href="/tags/Nginx/" style="font-size: 16.5px; color: #888">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/minio/" style="font-size: 14px; color: #999">minio</a> <a href="/tags/redis/" style="font-size: 24px; color: #555">redis</a> <a href="/tags/spring/" style="font-size: 21.5px; color: #666">spring</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 14px; color: #999">内网穿透</a> <a href="/tags/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" style="font-size: 14px; color: #999">分库分表</a> <a href="/tags/%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" style="font-size: 14px; color: #999">后台运行</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 16.5px; color: #888">持久化</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 16.5px; color: #888">环境</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 14px; color: #999">脚本</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a> <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/" style="font-size: 19px; color: #777">高可用</a>
+      <a href="/tags/AOP/" style="font-size: 14px; color: #999">AOP</a> <a href="/tags/DMS/" style="font-size: 14px; color: #999">DMS</a> <a href="/tags/Docker/" style="font-size: 14px; color: #999">Docker</a> <a href="/tags/Hexo/" style="font-size: 14px; color: #999">Hexo</a> <a href="/tags/IOC/" style="font-size: 14px; color: #999">IOC</a> <a href="/tags/JVM/" style="font-size: 14px; color: #999">JVM</a> <a href="/tags/Java8/" style="font-size: 14px; color: #999">Java8</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 16.5px; color: #888">Java基础</a> <a href="/tags/MySQL/" style="font-size: 19px; color: #777">MySQL</a> <a href="/tags/Nginx/" style="font-size: 16.5px; color: #888">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/jar/" style="font-size: 14px; color: #999">jar</a> <a href="/tags/minio/" style="font-size: 14px; color: #999">minio</a> <a href="/tags/redis/" style="font-size: 24px; color: #555">redis</a> <a href="/tags/spring/" style="font-size: 21.5px; color: #666">spring</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 14px; color: #999">内网穿透</a> <a href="/tags/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" style="font-size: 14px; color: #999">分库分表</a> <a href="/tags/%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" style="font-size: 14px; color: #999">后台运行</a> <a href="/tags/%E6%8C%81%E4%B9%85%E5%8C%96/" style="font-size: 16.5px; color: #888">持久化</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 16.5px; color: #888">环境</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 14px; color: #999">脚本</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 14px; color: #999">部署</a> <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/" style="font-size: 19px; color: #777">高可用</a>
     </div>
   </section>
 
@@ -3306,7 +3306,7 @@ save命令
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>36 篇</div>
+          <div>37 篇</div>
         </div>
       
 
@@ -3322,7 +3322,7 @@ save命令
       
         <div class="webinfo-item">
           <div>最后活动时间：</div>
-          <div id="last-update-show">2024-08-15 日</div>
+          <div id="last-update-show">2024-09-06 日</div>
         </div>
       
     </div>
@@ -3347,7 +3347,7 @@ save命令
 
 
   <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/07/16/data/sharding/"><div class="item"><time>2024-08-15</time><span>分库分表</span></div><span>Sharding-JDBC</span></a></li><li><a class="widget-last" href="/2024/03/14/hello-world/"><div class="item"><time>2024-08-15</time><span>初始</span></div><span>Hello World</span></a></li><li><a class="widget-last" href="/2024/08/07/Server/bat/"><div class="item"><time>2024-08-07</time><span>服务器</span></div><span>脚本 | bat</span></a></li><li><a class="widget-last" href="/2024/08/01/Server/%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/"><div class="item"><time>2024-08-01</time><span>服务器</span></div><span>后台运行</span></a></li><li><a class="widget-last" href="/2024/03/18/Server/dms/"><div class="item"><time>2024-08-01</time><span>服务器</span></div><span>数据管理DMS</span></a></li></ul>
+    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/09/06/Java/jar/"><div class="item"><time>2024-09-06</time><span>Java</span></div><span>Java| jar相关</span></a></li><li><a class="widget-last" href="/2024/08/07/Server/bat/"><div class="item"><time>2024-09-06</time><span>服务器</span></div><span>脚本 | bat</span></a></li><li><a class="widget-last" href="/2024/07/16/data/sharding/"><div class="item"><time>2024-08-15</time><span>分库分表</span></div><span>Sharding-JDBC</span></a></li><li><a class="widget-last" href="/2024/03/14/hello-world/"><div class="item"><time>2024-08-15</time><span>初始</span></div><span>Hello World</span></a></li><li><a class="widget-last" href="/2024/08/01/Server/%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/"><div class="item"><time>2024-08-01</time><span>服务器</span></div><span>后台运行</span></a></li></ul>
   </div>
 </section>
 

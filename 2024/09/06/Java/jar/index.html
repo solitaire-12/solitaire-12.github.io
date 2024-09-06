@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
-  <link rel="canonical" href="https://solitaire-12.github.io/2024/03/18/server/jdk/"/>
+  <link rel="canonical" href="https://solitaire-12.github.io/2024/09/06/java/jar/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -33,21 +33,21 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>linux|安装JDK - 织秋个人博客</title>
-  <meta name="keywords" content="环境,null">
+  <title>Java| jar相关 - 织秋个人博客</title>
+  <meta name="keywords" content="jar,null">
   <meta desc name="description" content="座右铭 - solitaire-12 - 织秋个人博客">
   
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux|安装JDK">
-<meta property="og:url" content="https://solitaire-12.github.io/2024/03/18/Server/JDK/index.html">
+<meta property="og:title" content="Java| jar相关">
+<meta property="og:url" content="https://solitaire-12.github.io/2024/09/06/Java/jar/index.html">
 <meta property="og:site_name" content="织秋个人博客">
-<meta property="og:description" content="清华云下载jdk ： https:&#x2F;&#x2F;repo.huaweicloud.com&#x2F;java&#x2F; 12345678910111213141516171819202122# 查看是否安装过jdkrpm -qa | grep java# ↑这里要是存在内容，执行删除rpm -qa | grep java | xargs rpm -e --nodeps# 查看java版本java -version# 创建存放">
+<meta property="og:description" content="1️⃣jar包 怎么来 以 IDEA maven项目为例，jar包由Java工程通过mvn pakage命令打包生成的。（题外话：web项目打包成war包）。 怎么运行 1java -jar xx.jar 有什么 以spring boot项目为例，包内结构如下： 12345678+- BOOT-INF	# 应用文件夹	+- classes # 编译后的classes文件	+- lib	# 第三方依">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-<meta property="article:published_time" content="2024-03-18T08:14:07.000Z">
-<meta property="article:modified_time" content="2024-03-25T03:57:18.985Z">
+<meta property="article:published_time" content="2024-09-06T07:32:55.000Z">
+<meta property="article:modified_time" content="2024-09-06T10:02:04.403Z">
 <meta property="article:author" content="solitaire-12">
-<meta property="article:tag" content="环境">
+<meta property="article:tag" content="jar">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2364,7 +2364,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 <div id="l_main" class=''>
   <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
-  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/03/18/Server/JDK/">
+  <link itemprop="mainEntityOfPage" href="https://solitaire-12.github.io/2024/09/06/Java/jar/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="织秋个人博客">
   </span>
@@ -2385,7 +2385,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title" itemprop="name headline">
-        linux|安装JDK
+        Java| jar相关
       </h1>
       <div class='new-meta-box'>
         
@@ -2404,10 +2404,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
   <div class='new-meta-item category'>
     <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-    <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+    <a class="category-link" href="/categories/Java/">Java</a>
     
       <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-        <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url"><span itemprop="name">服务器</span></a>
+        <a href="/categories/Java/" itemprop="url"><span itemprop="name">Java</span></a>
       </span>
     
   </div>
@@ -2416,10 +2416,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
         
           
-            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-03-18T16:14:07+08:00">
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-09-06T15:32:55+08:00">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2024年3月18日</p>
+    <p>发布于：2024年9月6日</p>
   </a>
 </div>
 
@@ -2442,10 +2442,47 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <p>清华云下载jdk ： <a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/">https://repo.huaweicloud.com/java/</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看是否安装过jdk</span></span><br><span class="line">rpm -qa | grep java</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">↑这里要是存在内容，执行删除</span></span><br><span class="line">rpm -qa | grep java | xargs rpm -e --nodeps</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看java版本</span></span><br><span class="line">java -version</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建存放java的文件</span></span><br><span class="line">mkdir /usr/java</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">cd</span>进入这一个文件夹</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">把下载好的jdk上传到这个文件夹下</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压</span></span><br><span class="line">tar -xvf jdk1.8.0_202ar.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置环境</span></span><br><span class="line">vi /etc/profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在文件末尾添加 【注意=附近不要有空格】</span></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_202</span><br><span class="line">export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/    </span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化配置 - 执行这条语句，可以让环境立即生效，不需要重启</span></span><br><span class="line">source /etc/profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看版本 (有信息的话，就安装成功了)</span></span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<p>如果上述中没有添加到环境中，尝试终端直接运行以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/mytools/java/jdk1.8.0_202</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+    <h2 id="1️⃣jar包">1️⃣jar包</h2>
+<h3 id="怎么来">怎么来</h3>
+<p>以 IDEA maven项目为例，jar包由Java工程通过<code>mvn pakage</code>命令打包生成的。（题外话：web项目打包成war包）。</p>
+<h3 id="怎么运行">怎么运行</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xx.jar</span><br></pre></td></tr></table></figure>
+<h3 id="有什么">有什么</h3>
+<p>以spring boot项目为例，包内结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+- BOOT-INF	# 应用文件夹</span><br><span class="line">	+- classes # 编译后的classes文件</span><br><span class="line">	+- lib	# 第三方依赖</span><br><span class="line">+- META-INF	# 打包信息</span><br><span class="line">	+- maven	# maven信息,pom文件</span><br><span class="line">	+- MANIFEST.MF(文件)</span><br><span class="line">+- org	# spring boot 相关class文件</span><br><span class="line">	+- springframework</span><br></pre></td></tr></table></figure>
+<h3 id="配置文件：MANIFEST-MF">配置文件：MANIFEST.MF</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Manifest-Version: 1.0</span><br><span class="line">Spring-Boot-Classpath-Index: BOOT-INF/classpath.idx</span><br><span class="line">Implementation-Title: demo</span><br><span class="line">Implementation-Version: 0.0.1-SNAPSHOT</span><br><span class="line">Spring-Boot-Layers-Index: BOOT-INF/layers.idx</span><br><span class="line"># 定义自己项目的启动类</span><br><span class="line">Start-Class: com.example.demo.DemoApplication</span><br><span class="line"># 定义项目文件路径</span><br><span class="line">Spring-Boot-Classes: BOOT-INF/classes/</span><br><span class="line"># 定义项目依赖路径</span><br><span class="line">Spring-Boot-Lib: BOOT-INF/lib/</span><br><span class="line">Build-Jdk-Spec: 1.8</span><br><span class="line">Spring-Boot-Version: 2.5.15</span><br><span class="line">Created-By: Maven JAR Plugin 3.2.2</span><br><span class="line"># 程序入口启动类</span><br><span class="line">Main-Class: org.springframework.boot.loader.JarLauncher</span><br></pre></td></tr></table></figure>
+<p><strong>spring boot项目jar包启动流程：</strong></p>
+<blockquote>
+<p><code>JarLauncher</code>按照<code>MANIFEST.MF</code>中<code>Spring-Boot-Classes</code>和<code>Spring-Boot-Lib</code>的配置，将类文件和依赖加载到<code>classpath</code>下，然后调用<code>Start-Class</code>配置的应用启动类。</p>
+</blockquote>
+<h2 id="2️⃣jar生成原理">2️⃣jar生成原理</h2>
+<ul>
+<li>
+<p>准备一份<code>java</code>文件，例如<code>Test.java</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello jar&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><code>javac Test.java</code>生成<code>Test.class</code>文件</p>
+</li>
+<li>
+<p><code>jar -cvf test.jar Test.class</code></p>
+<blockquote>
+<p>c 表示要创建一个新的jar包</p>
+<p>v 表示创建的过程中在控制台输出创建过程的一些信息，</p>
+<p>f 表示给生成的jar包命名</p>
+</blockquote>
+</li>
+<li>
+<p>运行 <code>test.jar</code>时报错，<code>test.jar中没有主清单属性</code></p>
+<p>原因是：<code>test.jar</code>中META-INF文件夹下的<code>MENIFEST.MF</code>文件缺少了<code>Main-Class</code>属性</p>
+</li>
+</ul>
+<p><strong>修复</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出文件清单</span></span><br><span class="line">jar -tf test.jar</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将MENIFEST.MF文件解压出来</span></span><br><span class="line">jar -xf test.jar META-INF/MANIFEST.MF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将下面代码追加到MENIFEST.MF文件中</span></span><br><span class="line">	Main-Class: Test</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将修改后的MENIFEST.MF文件写入到jar中</span> </span><br><span class="line">jar -ufm test.jar META-INF/MANIFEST.MF</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(m表示更新文件中的清单文件，不更新可以不用)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时<code>java -jar test.jar</code>就可以运行了。</li>
+</ul>
 
   </div>
   
@@ -2468,7 +2505,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                 
               
                 
-                  <p>本文永久链接是：<a href="https://solitaire-12.github.io/2024/03/18/Server/JDK/">https://solitaire-12.github.io/2024/03/18/Server/JDK/</a></p>
+                  <p>本文永久链接是：<a href="https://solitaire-12.github.io/2024/09/06/Java/jar/">https://solitaire-12.github.io/2024/09/06/Java/jar/</a></p>
                 
               
             </blockquote>
@@ -2487,10 +2524,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-25T11:57:18+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-09-06T18:02:04+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2024年3月25日</p>
+    <p>更新于：2024年9月6日</p>
   </a>
 </div>
 
@@ -2499,8 +2536,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%8E%AF%E5%A2%83/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>环境</p></a></div>
-  <span hidden itemprop="keywords">环境</span>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/jar/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>jar</p></a></div>
+  <span hidden itemprop="keywords">jar</span>
 
 
         
@@ -2513,7 +2550,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://solitaire-12.github.io/2024/03/18/Server/JDK/&title=linux|安装JDK - 织秋个人博客&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://solitaire-12.github.io/2024/09/06/Java/jar/&title=Java| jar相关 - 织秋个人博客&summary="
           
           >
           
@@ -2525,7 +2562,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://solitaire-12.github.io/2024/03/18/Server/JDK/&title=linux|安装JDK - 织秋个人博客&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://solitaire-12.github.io/2024/09/06/Java/jar/&title=Java| jar相关 - 织秋个人博客&summary="
           
           >
           
@@ -2537,7 +2574,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://solitaire-12.github.io/2024/03/18/Server/JDK/&title=linux|安装JDK - 织秋个人博客&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://solitaire-12.github.io/2024/09/06/Java/jar/&title=Java| jar相关 - 织秋个人博客&summary="
           
           >
           
@@ -2570,23 +2607,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2024/03/18/Server/docker/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>linux|安装Docker</p>
-          <p class='content'>环境 ： centos 8.4.2105
-检查是否存在docker
-1docker -v
-卸载docker
-12345678910yum remove docker \           do...</p>
-        </a>
       
-      
-        <a class='next' href='/2024/03/18/Hexo/Hexo-%E5%9B%BE%E7%89%87%E7%9B%B8%E5%85%B3/'>
-          <p class='title'>Hexo|图片相关<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>1.相对路径挂载图片【文章显示】
+        <a class='next' href='/2024/08/07/Server/bat/'>
+          <p class='title'>脚本 | bat<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>简介
+bat脚本是Windows系统默认支持的脚本语言。
+一、常用符号
+@ 、%、&amp; 、&amp;&amp; 、| 、|| 、&gt; 、 &gt;&gt;  、^ 、, 、;
 
 
-在 _config.yml文件中配置 post_asset_folder
-1234post_asset_folder: truemarked:  prepe...</p>
+@：...</p>
         </a>
       
     </div>
@@ -2602,7 +2632,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="discussionUrl" content="/2024/03/18/Server/JDK/index.html#comments">
+      <meta itemprop="discussionUrl" content="/2024/09/06/Java/jar/index.html#comments">
     </span>
     <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
@@ -2634,9 +2664,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
 
 
-  <div class="">
-    <!-- pjax占位 -->
-  </div>
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3jar%E5%8C%85"><span class="toc-text">1️⃣jar包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E6%9D%A5"><span class="toc-text">怎么来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E8%BF%90%E8%A1%8C"><span class="toc-text">怎么运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E4%BB%80%E4%B9%88"><span class="toc-text">有什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%9AMANIFEST-MF"><span class="toc-text">配置文件：MANIFEST.MF</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3jar%E7%94%9F%E6%88%90%E5%8E%9F%E7%90%86"><span class="toc-text">2️⃣jar生成原理</span></a></li></ol>
+    </div>
+  </section>
 
   
 
@@ -3197,7 +3237,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/服务器/","name":"服务器"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/03/18/Server/JDK/","name":"linux|安装JDK"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"linux|安装JDK","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/03/18/Server/JDK/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/03/18/Server/JDK/","wordCount":0,"datePublished":"2024-03-18T08:14:07.000Z","dateModified":"2024-03-25T03:57:18.985Z","articleSection":"服务器","keywords":"环境","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","sameAs":["https://github.com/volantis-x"],"description":"座右铭"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://solitaire-12.github.io/","name":"织秋个人博客"}},{"@type":"ListItem","position":2,"item":{"@id":"https://solitaire-12.github.io/categories/Java/","name":"Java"}},{"@type":"ListItem","position":3,"item":{"@id":"https://solitaire-12.github.io/2024/09/06/Java/jar/","name":"Java| jar相关"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"织秋个人博客","url":"https://solitaire-12.github.io/","keywords":null,"description":"座右铭","author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/","description":"座右铭"},"publisher":{"@type":"Organization","name":"织秋个人博客","url":"https://solitaire-12.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://solitaire-12.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Java| jar相关","description":"座右铭","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://solitaire-12.github.io/2024/09/06/Java/jar/"},"author":{"@type":"Person","name":"solitaire-12","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://solitaire-12.github.io/"},"publisher":{"@type":"Organization","name":"织秋个人博客","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://solitaire-12.github.io/2024/09/06/Java/jar/","wordCount":0,"datePublished":"2024-09-06T07:32:55.000Z","dateModified":"2024-09-06T10:02:04.403Z","articleSection":"Java","keywords":"jar","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
